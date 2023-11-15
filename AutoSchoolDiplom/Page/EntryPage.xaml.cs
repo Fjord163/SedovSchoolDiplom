@@ -1,5 +1,4 @@
-﻿using DBConnection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Npgsql;
-using NpgsqlTypes;
-using System.Collections.ObjectModel;
 
-namespace AutoSchoolDiplom
+namespace AutoSchoolDiplom.Page
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для EntryPage.xaml
+    /// </summary>
+    public partial class EntryPage : Page
     {
-
-
-        public MainWindow()
+        public EntryPage()
         {
             InitializeComponent();
-
-            Connection.Connect("localhost", "5432", "postgres", "1234", "SedovSchool");
         }
     }
 }

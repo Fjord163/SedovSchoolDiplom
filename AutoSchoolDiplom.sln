@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSchoolDiplom", "AutoSchoolDiplom\AutoSchoolDiplom.csproj", "{C9C6A7B9-2EF5-43D9-9C31-CEE486EF37BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBConnection", "DBConnection\DBConnection.csproj", "{5F8FD4B6-F499-48FF-BF2B-C7B5C9AAC70C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C9C6A7B9-2EF5-43D9-9C31-CEE486EF37BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9C6A7B9-2EF5-43D9-9C31-CEE486EF37BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9C6A7B9-2EF5-43D9-9C31-CEE486EF37BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F8FD4B6-F499-48FF-BF2B-C7B5C9AAC70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F8FD4B6-F499-48FF-BF2B-C7B5C9AAC70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F8FD4B6-F499-48FF-BF2B-C7B5C9AAC70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F8FD4B6-F499-48FF-BF2B-C7B5C9AAC70C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
