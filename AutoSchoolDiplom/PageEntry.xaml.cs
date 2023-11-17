@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBConnection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AutoSchoolDiplom.Page
+namespace AutoSchoolDiplom
 {
-    /// <summary>
-    /// Логика взаимодействия для EntryPage.xaml
-    /// </summary>
-    public partial class EntryPage : Page
+    public partial class PageEntry : Page
     {
-        public EntryPage()
+        
+        public PageEntry()
         {
             InitializeComponent();
+
         }
     }
 }
