@@ -8,7 +8,8 @@ namespace DBConnection
 {
     public class ClassLecturer
     {
-        public ClassLecturer(int id, string firstName, string lastName, string patronymic, string password, string phone, string email)
+        public ClassLecturer() { }
+        public ClassLecturer(int id, string firstName, string lastName, string patronymic, string password, string phone, string email, string login)
         {
             Id = id;
             FirstName = firstName;
@@ -17,6 +18,7 @@ namespace DBConnection
             Password = password;
             Phone = phone;
             Email = email;
+            Login = login;
         }
 
         public int Id { get; set; }
@@ -26,6 +28,7 @@ namespace DBConnection
         public string Password { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string Login { get; set; }
 
     }
 }

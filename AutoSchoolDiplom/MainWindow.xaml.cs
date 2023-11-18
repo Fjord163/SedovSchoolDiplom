@@ -21,13 +21,13 @@ namespace AutoSchoolDiplom
 {
     public partial class MainWindow : Window
     {
-
-
         public MainWindow()
         {
             InitializeComponent();
 
             Connection.Connect("localhost", "5432", "postgres", "1234", "SedovSchool");
+
+            AppFrame.Navigate(new PageEntry());
         }
     }
 }

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace DBConnection
 {
     public class ClassStudent
-    {
-        public ClassStudent(int id, string firstName, string lastName, string patronymic, string password, string phone, string email, string photo, int cours)
+    {   
+        public ClassStudent() { }
+        public ClassStudent(int id, string firstName, string lastName, string patronymic, string password, string phone, string email, string photo, int cours, string login)
         {
             Id = id;
             FirstName = firstName;
@@ -19,6 +20,7 @@ namespace DBConnection
             Email = email;
             Photo = photo;
             Cours = cours;
+            Login = login;
         }
 
         public int Id { get; set; }
@@ -30,5 +32,6 @@ namespace DBConnection
         public string Email { get; set; }
         public string Photo { get; set; }
         public int Cours { get; set; }
+        public string Login { get; set; }
     }
 }

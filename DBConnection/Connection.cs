@@ -12,6 +12,11 @@ namespace DBConnection
     public class Connection
     {
         public static NpgsqlConnection connection;
+
+        public static ClassInstructor instructor {  get; set; }
+        public static ClassLecturer lecturer {  get; set; }
+        public static ClassStudent student {  get; set; }
+
         public static void Connect(string host, string port, string user, string pass, string database)
         {
             string cs = string.Format("Server = {0}; Port = {1}; User Id = {2}; Password = {3}; Database = {4}", host, port, user, pass, database);
