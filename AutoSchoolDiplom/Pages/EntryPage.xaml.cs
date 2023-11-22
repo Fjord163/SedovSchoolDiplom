@@ -16,11 +16,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AutoSchoolDiplom
+namespace AutoSchoolDiplom.Pages
 {
-    public partial class PageEntry : Page
+    /// <summary>
+    /// Логика взаимодействия для EntryPage.xaml
+    /// </summary>
+    public partial class EntryPage : Page
     {
-        public PageEntry()
+        public EntryPage()
         {
             InitializeComponent();
 
@@ -34,7 +37,6 @@ namespace AutoSchoolDiplom
                 tbPassword.Text = "Введите пароль";
                 tbPassword.Opacity = 0.5;
             }
-
         }
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
@@ -63,14 +65,14 @@ namespace AutoSchoolDiplom
                             Email = result.GetString(6),
                             Login = result.GetString(7)
                         };
-                        MessageBox.Show("Зашел инструкотор");
+                        NavigationService.Navigate(new InstructorPage());
                         result.Close();
                     }
                     else { MessageBox.Show("не выполнено"); }
                     break;
                 case "Лектор":
-                     cmd = Connection.GetCommand("SELECT \"Id\",\"FirstName\",\"LastName\",\"Patronymic\",\"Password\",\"Phone\",\"Email\", \"Login\" FROM \"Lecturer\"" +
-                            "WHERE \"Login\" = @log AND \"Password\" = @pass");
+                    cmd = Connection.GetCommand("SELECT \"Id\",\"FirstName\",\"LastName\",\"Patronymic\",\"Password\",\"Phone\",\"Email\", \"Login\" FROM \"Lecturer\"" +
+                           "WHERE \"Login\" = @log AND \"Password\" = @pass");
                     cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
                     cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, tbPassword.Text.Trim());
                     result = cmd.ExecuteReader();
@@ -88,7 +90,7 @@ namespace AutoSchoolDiplom
                             Email = result.GetString(6),
                             Login = result.GetString(7)
                         };
-                        MessageBox.Show("Зашел лектор");
+                        NavigationService.Navigate(new LecturerPage());
                         result.Close();
                     }
                     else { MessageBox.Show("не выполнено"); }
@@ -115,7 +117,7 @@ namespace AutoSchoolDiplom
                             Cours = result.GetInt32(8),
                             Login = result.GetString(9)
                         };
-                        MessageBox.Show("Зашел Ученик");
+                        NavigationService.Navigate(new StudentPage());
                         result.Close();
                     }
                     else { MessageBox.Show("не выполнено"); }

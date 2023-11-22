@@ -13,22 +13,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Npgsql;
-using NpgsqlTypes;
-using System.Collections.ObjectModel;
-using AutoSchoolDiplom.Pages;
 
-namespace AutoSchoolDiplom
+namespace AutoSchoolDiplom.Pages
 {
-    public partial class MainWindow : Window
+
+    public partial class StudentPage : Page
     {
-        public MainWindow()
+        public StudentPage()
         {
             InitializeComponent();
 
-            Connection.Connect("localhost", "5432", "postgres", "1234", "SedovSchool");
+            BindingComBoxRole();
+        }
 
-            AppFrame.Navigate(new StudentPage());
+
+        public void BindingComBoxRole()
+        {
+            Binding binding = new Binding();
+            binding.Source = Connection.studentInstructors;
+            lvStudent.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+            Connection.Select();
         }
     }
 }

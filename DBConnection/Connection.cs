@@ -54,10 +54,9 @@ namespace DBConnection
         public static ObservableCollection<ClassStampCar> classStampCars { get; set; } = new ObservableCollection<ClassStampCar>();
         public static ObservableCollection<ClassStatusPayment> classStatusPayments { get; set; } = new ObservableCollection<ClassStatusPayment>();
         public static ObservableCollection<ClassStudent> classStudents { get; set; } = new ObservableCollection<ClassStudent>();
-        public static ObservableCollection<ClassStudentGroup> classStudentGroups { get; set; } = new ObservableCollection<ClassStudentGroup>();
-        public static ObservableCollection<ClassStudentInstructor> classStudentInstructors { get; set; } = new ObservableCollection<ClassStudentInstructor>();
         public static ObservableCollection<ClassTimetableLecture> classTimetableLectures { get; set; } = new ObservableCollection<ClassTimetableLecture>();
         public static ObservableCollection<ClassWeekday> classWeekdays { get; set; } = new ObservableCollection<ClassWeekday>();
+        public static ObservableCollection<ClassStudentInstructor> studentInstructors { get; set; } = new ObservableCollection<ClassStudentInstructor>();
 
         public void SelectTableDrivingLesson()
         {
@@ -69,6 +68,70 @@ namespace DBConnection
                 while (result.Read())
                 {
                     classDrivingLessons.Add(new ClassDrivingLesson(result.GetInt32(0), result.GetDateTime(1), result.GetInt32(2), result.GetString(3)));
+                }
+
+            }
+            result.Close();
+        }
+
+        //public static void Select()
+        //{
+        //    NpgsqlCommand cmd = GetCommand("SELECT \"Student\".\"Id\", \"Student\".\"FirstName\", \"Student\".\"LastName\" , \"Student\".\"Patronymic\" ," +
+        //        " \"Student\".\"Password\",\"Student\".\"Phone\" , \"Student\".\"Email\" , \"Student\".\"Photo\" , \"Student\".\"Cours\" , \"Student\".\"Login\"," +
+        //        "\"StudentInstructor\".\"Student\" ,\"StudentInstructor\".\"Instructor\"" +
+        //        " FROM \"Student\" JOIN \"StudentInstructor\" " +
+        //        "ON \"Student\".\"Id\" = \"StudentInstructor\".\"Student\"");
+        //    NpgsqlDataReader result = cmd.ExecuteReader();
+
+        //    if (result.HasRows)
+        //    {
+        //        while (result.Read())
+        //        {
+        //            class1s.Add(new Class1(result.GetInt32(0), 
+        //                result.GetString(1), 
+        //                result.GetString(2),
+        //                result.GetString(3),
+        //                result.GetString(4), 
+        //                result.GetString(5),
+        //                result.GetString(6),
+        //                result.GetString(7),
+        //                result.GetInt32(8),
+        //                result.GetString(9),
+        //                result.GetInt32(10),
+        //                result.GetInt32(11)
+        //                ));
+        //        }
+
+        //    }
+        //    result.Close();
+        //}
+
+        public static void Select()
+        {
+            NpgsqlCommand cmd = GetCommand("SELECT \"Student\".\"Id\", \"Student\".\"FirstName\", \"Student\".\"LastName\" , \"Student\".\"Patronymic\" ," +
+                " \"Student\".\"Password\",\"Student\".\"Phone\" , \"Student\".\"Email\" , \"Student\".\"Photo\" , \"Student\".\"Cours\" , \"Student\".\"Login\"," +
+                "\"StudentInstructor\".\"Student\" ,\"StudentInstructor\".\"Instructor\"" +
+                " FROM \"Student\", \"StudentInstructor\" " +
+                "WHERE \"Student\".\"Id\" = \"StudentInstructor\".\"Student\"");
+            NpgsqlDataReader result = cmd.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    studentInstructors.Add(new ClassStudentInstructor(result.GetInt32(0),
+                        result.GetString(1),
+                        result.GetString(2),
+                        result.GetString(3),
+                        result.GetString(4),
+                        result.GetString(5),
+                        result.GetString(6),
+                        result.GetString(7),
+                        result.GetInt32(8),
+                        result.GetString(9),
+                        result.GetInt32(10),
+                        result.GetInt32(11)
+                        ));
                 }
 
             }
