@@ -11,11 +11,9 @@ namespace DBConnection
 {
     public class Connection
     {
-        public static NpgsqlConnection connection;
 
-        public static ClassInstructor instructor {  get; set; }
-        public static ClassLecturer lecturer {  get; set; }
-        public static ClassStudent student {  get; set; }
+        public static CLassUser users;
+        public static NpgsqlConnection connection;
 
         public static void Connect(string host, string port, string user, string pass, string database)
         {
@@ -32,8 +30,7 @@ namespace DBConnection
             command.CommandText = sql;
             return command;
         }
-
-        public static ObservableCollection<ClassAdmin> classAdmins { get; set; } = new ObservableCollection<ClassAdmin>();
+        public static ObservableCollection<CLassUser> classUsers { get; set; } = new ObservableCollection<CLassUser>();
         public static ObservableCollection<ClassCar> classCars { get; set; } = new ObservableCollection<ClassCar>();
         public static ObservableCollection<ClassCategory> classCategories { get; set; } = new ObservableCollection<ClassCategory>();
         public static ObservableCollection<ClassColorCar> classColorCars { get; set; } = new ObservableCollection<ClassColorCar>();
@@ -41,8 +38,6 @@ namespace DBConnection
         public static ObservableCollection<ClassDrivingLesson> classDrivingLessons { get; set; } = new ObservableCollection<ClassDrivingLesson>();
         public static ObservableCollection<ClassExam> classExams { get; set; } = new ObservableCollection<ClassExam>();
         public static ObservableCollection<ClassGroup>  classGroups { get; set; } = new ObservableCollection<ClassGroup>();
-        public static ObservableCollection<ClassInstructor> classInstructors { get; set; } = new ObservableCollection<ClassInstructor>();
-        public static ObservableCollection<ClassLecturer> classLecturers { get; set; } = new ObservableCollection<ClassLecturer>();
         public static ObservableCollection<ClassModelCar> classModelCars { get; set; } = new ObservableCollection<ClassModelCar>();
         public static ObservableCollection<ClassNameWeek> classNameWeeks { get; set; } = new ObservableCollection<ClassNameWeek>();
         public static ObservableCollection<ClassNumberGroup> classNumberGroups { get; set; } = new ObservableCollection<ClassNumberGroup>();
@@ -53,11 +48,11 @@ namespace DBConnection
         public static ObservableCollection<ClassServices> classServices { get; set; } = new ObservableCollection<ClassServices>();
         public static ObservableCollection<ClassStampCar> classStampCars { get; set; } = new ObservableCollection<ClassStampCar>();
         public static ObservableCollection<ClassStatusPayment> classStatusPayments { get; set; } = new ObservableCollection<ClassStatusPayment>();
-        public static ObservableCollection<ClassStudent> classStudents { get; set; } = new ObservableCollection<ClassStudent>();
         public static ObservableCollection<ClassTimetableLecture> classTimetableLectures { get; set; } = new ObservableCollection<ClassTimetableLecture>();
         public static ObservableCollection<ClassWeekday> classWeekdays { get; set; } = new ObservableCollection<ClassWeekday>();
-        public static ObservableCollection<ClassStudentInstructor> studentInstructors { get; set; } = new ObservableCollection<ClassStudentInstructor>();
-
+       
+        
+        /*
         public void SelectTableDrivingLesson()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"Id\",\"DateTime\",\"Student\",\"Car\" FROM \"DrivingLesson\"");
@@ -73,38 +68,6 @@ namespace DBConnection
             }
             result.Close();
         }
-
-        //public static void Select()
-        //{
-        //    NpgsqlCommand cmd = GetCommand("SELECT \"Student\".\"Id\", \"Student\".\"FirstName\", \"Student\".\"LastName\" , \"Student\".\"Patronymic\" ," +
-        //        " \"Student\".\"Password\",\"Student\".\"Phone\" , \"Student\".\"Email\" , \"Student\".\"Photo\" , \"Student\".\"Cours\" , \"Student\".\"Login\"," +
-        //        "\"StudentInstructor\".\"Student\" ,\"StudentInstructor\".\"Instructor\"" +
-        //        " FROM \"Student\" JOIN \"StudentInstructor\" " +
-        //        "ON \"Student\".\"Id\" = \"StudentInstructor\".\"Student\"");
-        //    NpgsqlDataReader result = cmd.ExecuteReader();
-
-        //    if (result.HasRows)
-        //    {
-        //        while (result.Read())
-        //        {
-        //            class1s.Add(new Class1(result.GetInt32(0), 
-        //                result.GetString(1), 
-        //                result.GetString(2),
-        //                result.GetString(3),
-        //                result.GetString(4), 
-        //                result.GetString(5),
-        //                result.GetString(6),
-        //                result.GetString(7),
-        //                result.GetInt32(8),
-        //                result.GetString(9),
-        //                result.GetInt32(10),
-        //                result.GetInt32(11)
-        //                ));
-        //        }
-
-        //    }
-        //    result.Close();
-        //}
 
         public static void Select()
         {
@@ -137,5 +100,6 @@ namespace DBConnection
             }
             result.Close();
         }
+        */
     }
 }

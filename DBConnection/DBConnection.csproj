@@ -89,8 +89,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassStudentInstructor.cs" />
-    <Compile Include="ClassAdmin.cs" />
     <Compile Include="ClassCar.cs" />
     <Compile Include="ClassCategory.cs" />
     <Compile Include="ClassColorCar.cs" />
@@ -98,8 +96,6 @@
     <Compile Include="ClassDrivingLesson.cs" />
     <Compile Include="ClassExam.cs" />
     <Compile Include="ClassGroup.cs" />
-    <Compile Include="ClassInstructor.cs" />
-    <Compile Include="ClassLecturer.cs" />
     <Compile Include="ClassModelCar.cs" />
     <Compile Include="ClassNameWeek.cs" />
     <Compile Include="ClassNumberGroup.cs" />
@@ -110,8 +106,8 @@
     <Compile Include="ClassServices.cs" />
     <Compile Include="ClassStampCar.cs" />
     <Compile Include="ClassStatusPayment.cs" />
-    <Compile Include="ClassStudent.cs" />
     <Compile Include="ClassTimetableLecture.cs" />
+    <Compile Include="CLassUser.cs" />
     <Compile Include="ClassWeekday.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

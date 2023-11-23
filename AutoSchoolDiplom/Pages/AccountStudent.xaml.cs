@@ -1,5 +1,4 @@
-﻿using DBConnection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,23 +15,14 @@ using System.Windows.Shapes;
 
 namespace AutoSchoolDiplom.Pages
 {
-
-    public partial class StudentPage : Page
+    /// <summary>
+    /// Логика взаимодействия для AccountStudent.xaml
+    /// </summary>
+    public partial class AccountStudent : Page
     {
-        public StudentPage()
+        public AccountStudent()
         {
             InitializeComponent();
-
-            BindingComBoxRole();
-        }
-
-
-        public void BindingComBoxRole()
-        {
-            Binding binding = new Binding();
-            binding.Source = Connection.studentInstructors;
-            lvStudent.SetBinding(ItemsControl.ItemsSourceProperty, binding);
-            Connection.Select();
         }
     }
 }

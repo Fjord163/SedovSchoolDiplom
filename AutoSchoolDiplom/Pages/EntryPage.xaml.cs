@@ -3,6 +3,7 @@ using Npgsql;
 using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,89 +42,47 @@ namespace AutoSchoolDiplom.Pages
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            var role = cbRole.Text.Trim();
+            NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"Login\", \"Password\", \"FirstName\",\"LastName\",\"Patronymic\",\"Phone\",\"Email\", \"DateBirth\", \"Role\" FROM \"User\"" +
+                    "WHERE \"Login\" = @log AND \"Password\" = @pass");
+            cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
+            cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, tbPassword.Text.Trim());
+            NpgsqlDataReader result = cmd.ExecuteReader();
 
-            switch (role)
+            if (result.HasRows)
             {
-                case "Инструктор":
-                    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\",\"FirstName\",\"LastName\",\"Patronymic\",\"Password\",\"Phone\",\"Email\", \"Login\" FROM \"Instructor\"" +
-                            "WHERE \"Login\" = @log AND \"Password\" = @pass");
-                    cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
-                    cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, tbPassword.Text.Trim());
-                    NpgsqlDataReader result = cmd.ExecuteReader();
+                result.Read();
 
-                    if (result.HasRows)
-                    {
-                        result.Read();
-                        Connection.instructor = new ClassInstructor()
-                        {
-                            FirstName = result.GetString(1),
-                            LastName = result.GetString(2),
-                            Patronymic = result.GetString(3),
-                            Password = result.GetString(4),
-                            Phone = result.GetString(5),
-                            Email = result.GetString(6),
-                            Login = result.GetString(7)
-                        };
+                Connection.users = new CLassUser()
+                {
+                    Login = result.GetString(1),
+                    Password = result.GetString(2),
+                    FirstName = result.GetString(3),
+                    LastName = result.GetString(4),
+                    Patronymic = result.GetString(5),
+                    Phone = result.GetString(6),
+                    Email = result.GetString(7),
+                    DateBirth = result.GetDateTime(8),
+                    Role = result.GetString(9)
+                };
+                result.Close();
+
+                switch(Connection.users.Role) 
+                {
+                    case "Ученик":
                         NavigationService.Navigate(new InstructorPage());
-                        result.Close();
-                    }
-                    else { MessageBox.Show("не выполнено"); }
-                    break;
-                case "Лектор":
-                    cmd = Connection.GetCommand("SELECT \"Id\",\"FirstName\",\"LastName\",\"Patronymic\",\"Password\",\"Phone\",\"Email\", \"Login\" FROM \"Lecturer\"" +
-                           "WHERE \"Login\" = @log AND \"Password\" = @pass");
-                    cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
-                    cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, tbPassword.Text.Trim());
-                    result = cmd.ExecuteReader();
-
-                    if (result.HasRows)
-                    {
-                        result.Read();
-                        Connection.lecturer = new ClassLecturer()
-                        {
-                            FirstName = result.GetString(1),
-                            LastName = result.GetString(2),
-                            Patronymic = result.GetString(3),
-                            Password = result.GetString(4),
-                            Phone = result.GetString(5),
-                            Email = result.GetString(6),
-                            Login = result.GetString(7)
-                        };
+                        break;
+                    case "Инструктор":
+                        NavigationService.Navigate(new InstructorPage());
+                        break;
+                    case "Лектор":
                         NavigationService.Navigate(new LecturerPage());
-                        result.Close();
-                    }
-                    else { MessageBox.Show("не выполнено"); }
-                    break;
-                case "Ученик":
-                    cmd = Connection.GetCommand("SELECT \"Id\",\"FirstName\",\"LastName\",\"Patronymic\",\"Password\",\"Phone\",\"Email\",\"Photo\",\"Cours\", \"Login\" FROM \"Student\"" +
-                           "WHERE \"Login\" = @log AND \"Password\" = @pass");
-                    cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
-                    cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, tbPassword.Text.Trim());
-                    result = cmd.ExecuteReader();
-
-                    if (result.HasRows)
-                    {
-                        result.Read();
-                        Connection.student = new ClassStudent()
-                        {
-                            FirstName = result.GetString(1),
-                            LastName = result.GetString(2),
-                            Patronymic = result.GetString(3),
-                            Password = result.GetString(4),
-                            Phone = result.GetString(5),
-                            Email = result.GetString(6),
-                            Photo = result.GetString(7),
-                            Cours = result.GetInt32(8),
-                            Login = result.GetString(9)
-                        };
-                        NavigationService.Navigate(new StudentPage());
-                        result.Close();
-                    }
-                    else { MessageBox.Show("не выполнено"); }
-                    break;
+                        break;
+                    case "Админ":
+                        NavigationService.Navigate(new AdminPage());
+                        break;
+                } 
             }
-
+            
             if (tbLogin.Text.Trim() == "")
             {
                 tbLogin.Text = "Введите логин";
