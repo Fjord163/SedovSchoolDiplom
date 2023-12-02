@@ -9,6 +9,48 @@
       Title="AccountStudent">
 
     <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.20*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <Image  HorizontalAlignment="Left" Margin="10 0" Source="/Image/Logo_Sedov_School.jpg" />
+
+        <StackPanel Grid.Row="1">
+            
+        </StackPanel>
+
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" 
+                BorderBrush="Black" BorderThickness="2" CornerRadius="20" Background="Black"
+                Margin="5" Opacity="0.45"></Border>
+
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+        BorderThickness="2" CornerRadius="20" Background="White"
+        Margin="25 25 12.5 25" >
+            <StackPanel>
+                
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
+        BorderThickness="2" CornerRadius="20" Background="White"
+        Margin="12.5 25 25 25" >
+            <StackPanel></StackPanel>
+        </Border>
+
+        <Ellipse Margin="10" Stroke="Black" Height="auto" Width="auto" Grid.Column="4">
+            <Ellipse.Fill>
+                <ImageBrush x:Name="PhotoAccount" Stretch="UniformToFill" />
+            </Ellipse.Fill>
+        </Ellipse>
+
     </Grid>
 </Page>

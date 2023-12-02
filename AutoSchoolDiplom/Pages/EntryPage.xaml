@@ -11,7 +11,7 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
@@ -23,7 +23,6 @@
 
                 <TextBox Name="tbLogin" Margin="5"
                   Height="25" VerticalContentAlignment="Center"
-                  GotFocus="tbLogin_GotFocus"
                   BorderThickness="1">
                     <TextBox.Resources>
                         <Style TargetType="Border">
@@ -32,16 +31,11 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox Name="tbPassword" Margin="5"
+                <PasswordBox Style="{DynamicResource PasswordBoxStyle1}" Name="pbPassword" Margin="5"
                   Height="25" VerticalContentAlignment="Center"
-                  GotFocus="tbPassword_GotFocus"
                   BorderThickness="1">
-                    <TextBox.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="2"></Setter>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
+                    
+                </PasswordBox>
 
                 <Button Name="btnSignIn" Content="Войти" 
                         Margin="5" Height="25" VerticalContentAlignment ="Center"
@@ -54,8 +48,6 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-
             </StackPanel>
-            
         </Grid>
 </Page>

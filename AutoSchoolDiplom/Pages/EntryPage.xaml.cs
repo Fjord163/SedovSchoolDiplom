@@ -28,16 +28,16 @@ namespace AutoSchoolDiplom.Pages
         {
             InitializeComponent();
 
-            if (tbLogin.Text.Trim() == "")
-            {
-                tbLogin.Text = "Введите логин";
-                tbLogin.Opacity = 0.5;
-            }
-            if (tbPassword.Text.Trim() == "")
-            {
-                tbPassword.Text = "Введите пароль";
-                tbPassword.Opacity = 0.5;
-            }
+            //if (tbLogin.Text.Trim() == "")
+            //{
+            //    tbLogin.Text = "Введите логин";
+            //    tbLogin.Opacity = 0.5;
+            //}
+            //if (pbPassword.Password.Trim() == "")
+            //{
+            //    pbPassword.Password = "Введите пароль";
+            //    pbPassword.Opacity = 0.5;
+            //}
         }
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
@@ -45,7 +45,7 @@ namespace AutoSchoolDiplom.Pages
             NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"Login\", \"Password\", \"FirstName\",\"LastName\",\"Patronymic\",\"Phone\",\"Email\", \"DateBirth\", \"Role\" FROM \"User\"" +
                     "WHERE \"Login\" = @log AND \"Password\" = @pass");
             cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
-            cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, tbPassword.Text.Trim());
+            cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, pbPassword.Password.Trim());
             NpgsqlDataReader result = cmd.ExecuteReader();
 
             if (result.HasRows)
@@ -83,46 +83,6 @@ namespace AutoSchoolDiplom.Pages
                 } 
             }
             
-            if (tbLogin.Text.Trim() == "")
-            {
-                tbLogin.Text = "Введите логин";
-                tbLogin.Opacity = 0.5;
-            }
-            if (tbPassword.Text.Trim() == "")
-            {
-                tbPassword.Text = "Введите пароль";
-                tbPassword.Opacity = 0.5;
-            }
-        }
-
-        private void tbLogin_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (tbLogin.Text.Trim() == "Введите логин")
-            {
-                tbLogin.Clear();
-                tbLogin.Opacity = 1;
-            }
-
-            if (tbPassword.Text.Trim() == "")
-            {
-                tbPassword.Text = "Введите пароль";
-                tbPassword.Opacity = 0.5;
-            }
-        }
-
-        private void tbPassword_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (tbPassword.Text.Trim() == "Введите пароль")
-            {
-                tbPassword.Clear();
-                tbPassword.Opacity = 1;
-            }
-
-            if (tbLogin.Text.Trim() == "")
-            {
-                tbLogin.Text = "Введите логин";
-                tbLogin.Opacity = 0.5;
-            }
         }
     }
 }

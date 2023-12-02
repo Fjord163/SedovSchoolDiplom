@@ -23,6 +23,14 @@ namespace AutoSchoolDiplom.Pages
         public AccountStudent()
         {
             InitializeComponent();
+
+            Uri path = new Uri("https://gas-kvas.com/grafic/uploads/posts/2023-09/1695869715_gas-kvas-com-p-kartinki-bez-13.png");
+            if(PhotoAccount.ImageSource == null)
+            {
+                PhotoAccount.ImageSource = new BitmapImage(path);
+            }
         }
+
+
     }
 }
