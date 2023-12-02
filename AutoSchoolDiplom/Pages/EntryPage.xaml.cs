@@ -28,16 +28,7 @@ namespace AutoSchoolDiplom.Pages
         {
             InitializeComponent();
 
-            //if (tbLogin.Text.Trim() == "")
-            //{
-            //    tbLogin.Text = "Введите логин";
-            //    tbLogin.Opacity = 0.5;
-            //}
-            //if (pbPassword.Password.Trim() == "")
-            //{
-            //    pbPassword.Password = "Введите пароль";
-            //    pbPassword.Opacity = 0.5;
-            //}
+
         }
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
@@ -78,7 +69,7 @@ namespace AutoSchoolDiplom.Pages
                         NavigationService.Navigate(new LecturerPage());
                         break;
                     case "Админ":
-                        NavigationService.Navigate(new AdminPage());
+                        NavigationService.Navigate(new AdminCRUDPage());
                         break;
                 } 
             }

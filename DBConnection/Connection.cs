@@ -30,6 +30,8 @@ namespace DBConnection
             command.CommandText = sql;
             return command;
         }
+        public static ObservableCollection<FullInfoUser> Users { get; set; } = new ObservableCollection<FullInfoUser>();
+
         public static ObservableCollection<CLassUser> classUsers { get; set; } = new ObservableCollection<CLassUser>();
         public static ObservableCollection<ClassCar> classCars { get; set; } = new ObservableCollection<ClassCar>();
         public static ObservableCollection<ClassCategory> classCategories { get; set; } = new ObservableCollection<ClassCategory>();
@@ -50,56 +52,43 @@ namespace DBConnection
         public static ObservableCollection<ClassStatusPayment> classStatusPayments { get; set; } = new ObservableCollection<ClassStatusPayment>();
         public static ObservableCollection<ClassTimetableLecture> classTimetableLectures { get; set; } = new ObservableCollection<ClassTimetableLecture>();
         public static ObservableCollection<ClassWeekday> classWeekdays { get; set; } = new ObservableCollection<ClassWeekday>();
-       
-        
-        /*
-        public void SelectTableDrivingLesson()
-        {
-            NpgsqlCommand cmd = GetCommand("SELECT \"Id\",\"DateTime\",\"Student\",\"Car\" FROM \"DrivingLesson\"");
-            NpgsqlDataReader result = cmd.ExecuteReader();
-
-            if (result.HasRows)
-            {
-                while (result.Read())
-                {
-                    classDrivingLessons.Add(new ClassDrivingLesson(result.GetInt32(0), result.GetDateTime(1), result.GetInt32(2), result.GetString(3)));
-                }
-
-            }
-            result.Close();
-        }
 
         public static void Select()
         {
-            NpgsqlCommand cmd = GetCommand("SELECT \"Student\".\"Id\", \"Student\".\"FirstName\", \"Student\".\"LastName\" , \"Student\".\"Patronymic\" ," +
-                " \"Student\".\"Password\",\"Student\".\"Phone\" , \"Student\".\"Email\" , \"Student\".\"Photo\" , \"Student\".\"Cours\" , \"Student\".\"Login\"," +
-                "\"StudentInstructor\".\"Student\" ,\"StudentInstructor\".\"Instructor\"" +
-                " FROM \"Student\", \"StudentInstructor\" " +
-                "WHERE \"Student\".\"Id\" = \"StudentInstructor\".\"Student\"");
+            NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
+                "\"User\".\"LastName\" , \"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\"," +
+                "\"Student\".\"Photo\" ,\"Cours\".\"Category\" ,\"Cours\".\"TheoryHours\" ,\"Cours\".\"DrivingHours\" ,\"Group\".\"NumberGroup\"" +
+                "FROM \"User\", \"Student\", \"Cours\", \"StudentGroup\",\"Group\"" +
+                "WHERE \"User\".\"Id\" = \"Student\".\"Id\" AND \"Student\".\"Cours\" = \"Cours\".\"Id\" AND \"Student\".\"Id\" = \"StudentGroup\".\"Student\"" +
+                "AND \"StudentGroup\".\"Group\" = \"Group\".\"Id\"");
             NpgsqlDataReader result = cmd.ExecuteReader();
 
             if (result.HasRows)
             {
                 while (result.Read())
                 {
-                    studentInstructors.Add(new ClassStudentInstructor(result.GetInt32(0),
-                        result.GetString(1),
-                        result.GetString(2),
-                        result.GetString(3),
-                        result.GetString(4),
-                        result.GetString(5),
-                        result.GetString(6),
-                        result.GetString(7),
-                        result.GetInt32(8),
-                        result.GetString(9),
-                        result.GetInt32(10),
-                        result.GetInt32(11)
+                    Users.Add(new FullInfoUser(
+                            result.GetInt32(0),
+                            result.GetString(1),
+                            result.GetString(2),
+                            result.GetString(3),
+                            result.GetString(4),
+                            result.GetString(5),
+                            result.GetString(6),
+                            result.GetString(7),
+                            result.GetDateTime(8),
+                            result.GetString(9),
+                            result.GetString(10),
+                            result.GetString(11),
+                            result.GetString(12),
+                            result.GetString(13),
+                            result.GetString(14)
                         ));
                 }
 
             }
             result.Close();
         }
-        */
+
     }
 }

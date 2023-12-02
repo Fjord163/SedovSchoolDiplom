@@ -8,46 +8,42 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EntryPage">
 
-    <Grid Background="White">
+    <Grid Background="#84a5bf">
         <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="400"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+        <Border Grid.Column="1" VerticalAlignment="Center"  BorderThickness="1" Background="#88FCFCEE"  CornerRadius="10">
+            <StackPanel VerticalAlignment="Center">
 
-                <Label Content="Вход" 
-                HorizontalAlignment="Center" 
-                FontSize="20" FontWeight="Medium"></Label>
+                <Border  Background="#88FCFCEE" CornerRadius="10 10 0 0">
+                    <Label Content="Вход" HorizontalAlignment="Center" FontSize="20" FontWeight="Medium" Margin="5"></Label>
+                </Border>
 
-                <TextBox Name="tbLogin" Margin="5"
-                  Height="25" VerticalContentAlignment="Center"
-                  BorderThickness="1">
+                <Label Content="Логин:" Margin="10 5 0 0"></Label>
+
+                <TextBox Name="tbLogin" Margin="10 0 10 0" Height="30" VerticalContentAlignment="Center" BorderThickness="1">
                     <TextBox.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="2"></Setter>
+                            <Setter Property="CornerRadius" Value="5"></Setter>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
 
-                <PasswordBox Style="{DynamicResource PasswordBoxStyle1}" Name="pbPassword" Margin="5"
-                  Height="25" VerticalContentAlignment="Center"
-                  BorderThickness="1">
-                    
-                </PasswordBox>
+                <Label Content="Пароль:" Margin="10 0 0 0"></Label>
+                
+                <PasswordBox Style="{DynamicResource PasswordBoxStyle1}" Name="pbPassword" Margin="10 0 10 10" Height="30" VerticalContentAlignment="Center" BorderThickness="1"></PasswordBox>
 
-                <Button Name="btnSignIn" Content="Войти" 
-                        Margin="5" Height="25" VerticalContentAlignment ="Center"
-                        FontSize="14"
-                        Background="White"
-                        Click="btnSignIn_Click">
+                <Button Name="btnSignIn" Content="Войти" Margin="10 10 10 20" Height="30" VerticalContentAlignment ="Center" FontSize="14" Background="White" Click="btnSignIn_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="2"></Setter>
+                            <Setter Property="CornerRadius" Value="5"></Setter>
                         </Style>
                     </Button.Resources>
                 </Button>
             </StackPanel>
+        </Border>
         </Grid>
 </Page>
