@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBConnection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,22 @@ using System.Windows.Shapes;
 
 namespace AutoSchoolDiplom.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для InstructorPage.xaml
-    /// </summary>
-    public partial class InstructorPage : Page
+
+    public partial class AdminCRUDLecturer : Page
     {
-        public InstructorPage()
+        public AdminCRUDLecturer()
         {
             InitializeComponent();
+
+            BindingLvLecturers();
+        }
+
+        public void BindingLvLecturers()
+        {
+            Binding binding = new Binding();
+            binding.Source = Connection.infoLecturers;
+            lvLecturer.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+            Connection.SelectInfoLecturers();
         }
     }
 }

@@ -60,13 +60,13 @@ namespace AutoSchoolDiplom.Pages
                 switch(Connection.users.Role) 
                 {
                     case "Ученик":
-                        NavigationService.Navigate(new InstructorPage());
+                        NavigationService.Navigate(new AccountStudent());
                         break;
                     case "Инструктор":
-                        NavigationService.Navigate(new InstructorPage());
+                        NavigationService.Navigate(new AdminCRUDPage());
                         break;
                     case "Лектор":
-                        NavigationService.Navigate(new LecturerPage());
+                        NavigationService.Navigate(new AdminCRUDPage());
                         break;
                     case "Админ":
                         NavigationService.Navigate(new AdminCRUDPage());

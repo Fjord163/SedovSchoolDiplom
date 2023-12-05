@@ -119,6 +119,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdminCRUDInctructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminCRUDLecturer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdminCRUDPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,18 +139,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\InstructorPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\LecturerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\AccountStudent.xaml.cs">
       <DependentUpon>AccountStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminCRUDInctructor.xaml.cs">
+      <DependentUpon>AdminCRUDInctructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminCRUDLecturer.xaml.cs">
+      <DependentUpon>AdminCRUDLecturer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminCRUDPage.xaml.cs">
       <DependentUpon>AdminCRUDPage.xaml</DependentUpon>
@@ -152,12 +158,6 @@
     </Compile>
     <Compile Include="Pages\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\InstructorPage.xaml.cs">
-      <DependentUpon>InstructorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\LecturerPage.xaml.cs">
-      <DependentUpon>LecturerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

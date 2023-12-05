@@ -4,7 +4,37 @@
              xmlns:local="clr-namespace:AutoSchoolDiplom"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <DataTemplate x:Key="ListStudents">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="5" >
+                    <Image Source="{Binding Photo}" Height="70" Width="70"></Image>
+                </TextBlock>
+
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10 5 0 5">
+                    <Run Text="ФИО:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding FirstName}"></Run>
+                    <Run Text="{Binding LastName}"></Run>
+                    <Run Text="{Binding Patronymic}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Дата рождения: "  FontWeight="Bold"></Run>
+                    <Run Text="{Binding DateBirth, StringFormat=dd.MM.yyyy}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Номер телефона:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding Phone}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Группа:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding NumberGroup}"></Run>
+                </TextBlock>
+
+            </Grid>
+        </DataTemplate>
+        
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>

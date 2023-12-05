@@ -9,6 +9,29 @@
       Title="AdminCRUDPage">
 
     <Grid Background="White">
-        <ListView Name="lv"></ListView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Image  HorizontalAlignment="Left"  Source="/Image/Logo_Sedov_School.jpg" />
+
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="Редактирование:" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+            <StackPanel Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Инструкторов"></Button>
+                <Button Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Лекторов"></Button>
+                <Button Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Учеников"></Button>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView Name="lvStudents" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListStudents}"></ListView>
     </Grid>
 </Page>

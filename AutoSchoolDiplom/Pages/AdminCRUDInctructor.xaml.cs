@@ -17,23 +17,23 @@ using System.Windows.Shapes;
 namespace AutoSchoolDiplom.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AdminCRUDPage.xaml
+    /// Логика взаимодействия для AdminCRUDInctructor.xaml
     /// </summary>
-    public partial class AdminCRUDPage : Page
+    public partial class AdminCRUDInctructor : Page
     {
-        public AdminCRUDPage()
+        public AdminCRUDInctructor()
         {
             InitializeComponent();
 
-            BindingLvStudents();
+            BindingLvInstructors();
         }
 
-        public void BindingLvStudents()
+        public void BindingLvInstructors()
         {
             Binding binding = new Binding();
-            binding.Source = Connection.infoStudents;
-            lvStudents.SetBinding(ItemsControl.ItemsSourceProperty, binding);
-            Connection.SelectInfoStudent();
+            binding.Source = Connection.infoInstructors;
+            lvInstructor.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+            Connection.SelectInfoInstructors();
         }
     }
 }

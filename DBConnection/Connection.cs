@@ -30,30 +30,12 @@ namespace DBConnection
             command.CommandText = sql;
             return command;
         }
-        public static ObservableCollection<FullInfoUser> Users { get; set; } = new ObservableCollection<FullInfoUser>();
-
+        public static ObservableCollection<FullInfoStudent> infoStudents { get; set; } = new ObservableCollection<FullInfoStudent>();
+        public static ObservableCollection<FullInfoLecturer> infoLecturers { get; set; } = new ObservableCollection<FullInfoLecturer>();
+        public static ObservableCollection<FullInfoInstructor> infoInstructors { get; set; } = new ObservableCollection<FullInfoInstructor>();
         public static ObservableCollection<CLassUser> classUsers { get; set; } = new ObservableCollection<CLassUser>();
-        public static ObservableCollection<ClassCar> classCars { get; set; } = new ObservableCollection<ClassCar>();
-        public static ObservableCollection<ClassCategory> classCategories { get; set; } = new ObservableCollection<ClassCategory>();
-        public static ObservableCollection<ClassColorCar> classColorCars { get; set; } = new ObservableCollection<ClassColorCar>();
-        public static ObservableCollection<CLassCours> classCours { get; set; } = new ObservableCollection<CLassCours>();
-        public static ObservableCollection<ClassDrivingLesson> classDrivingLessons { get; set; } = new ObservableCollection<ClassDrivingLesson>();
-        public static ObservableCollection<ClassExam> classExams { get; set; } = new ObservableCollection<ClassExam>();
-        public static ObservableCollection<ClassGroup>  classGroups { get; set; } = new ObservableCollection<ClassGroup>();
-        public static ObservableCollection<ClassModelCar> classModelCars { get; set; } = new ObservableCollection<ClassModelCar>();
-        public static ObservableCollection<ClassNameWeek> classNameWeeks { get; set; } = new ObservableCollection<ClassNameWeek>();
-        public static ObservableCollection<ClassNumberGroup> classNumberGroups { get; set; } = new ObservableCollection<ClassNumberGroup>();
-        public static ObservableCollection<ClassNumberWeek> classNumberWeeks { get; set; } = new ObservableCollection<ClassNumberWeek>();
-        public static ObservableCollection<ClassOrder>  classOrders { get; set; } = new ObservableCollection<ClassOrder>();
-        public static ObservableCollection<ClassResultExam> classResultExams { get; set; } = new ObservableCollection<ClassResultExam>();
-        public static ObservableCollection<ClassService> classService { get; set; } = new ObservableCollection<ClassService>();
-        public static ObservableCollection<ClassServices> classServices { get; set; } = new ObservableCollection<ClassServices>();
-        public static ObservableCollection<ClassStampCar> classStampCars { get; set; } = new ObservableCollection<ClassStampCar>();
-        public static ObservableCollection<ClassStatusPayment> classStatusPayments { get; set; } = new ObservableCollection<ClassStatusPayment>();
-        public static ObservableCollection<ClassTimetableLecture> classTimetableLectures { get; set; } = new ObservableCollection<ClassTimetableLecture>();
-        public static ObservableCollection<ClassWeekday> classWeekdays { get; set; } = new ObservableCollection<ClassWeekday>();
 
-        public static void Select()
+        public static void SelectInfoStudent()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
                 "\"User\".\"LastName\" , \"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\"," +
@@ -67,7 +49,7 @@ namespace DBConnection
             {
                 while (result.Read())
                 {
-                    Users.Add(new FullInfoUser(
+                    infoStudents.Add(new FullInfoStudent(
                             result.GetInt32(0),
                             result.GetString(1),
                             result.GetString(2),
@@ -83,6 +65,69 @@ namespace DBConnection
                             result.GetString(12),
                             result.GetString(13),
                             result.GetString(14)
+                        ));
+                }
+
+            }
+            result.Close();
+        }
+
+        public static void SelectInfoLecturers()
+        {
+            NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", \"User\".\"LastName\"," +
+                "\"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\", \"Lecturer\".\"DateEmployment\"" +
+                "FROM \"User\", \"Lecturer\"" +
+                "WHERE \"User\".\"Id\" = \"Lecturer\".\"Id\"");
+            NpgsqlDataReader result = cmd.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    infoLecturers.Add(new FullInfoLecturer(
+                            result.GetInt32(0),
+                            result.GetString(1),
+                            result.GetString(2),
+                            result.GetString(3),
+                            result.GetString(4),
+                            result.GetString(5),
+                            result.GetString(6),
+                            result.GetString(7),
+                            result.GetDateTime(8),
+                            result.GetString(9),
+                            result.GetDateTime(10)
+                        ));
+                }
+
+            }
+            result.Close();
+        }
+
+        public static void SelectInfoInstructors()
+        {
+            NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", \"User\".\"LastName\"," +
+                "\"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\", \"Instructor\".\"DateEmployment\", \"Instructor\".\"DrivingExperience\"" +
+                "FROM \"User\", \"Instructor\"" +
+                "WHERE \"User\".\"Id\" = \"Instructor\".\"Id\"");
+            NpgsqlDataReader result = cmd.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    infoInstructors.Add(new FullInfoInstructor(
+                            result.GetInt32(0),
+                            result.GetString(1),
+                            result.GetString(2),
+                            result.GetString(3),
+                            result.GetString(4),
+                            result.GetString(5),
+                            result.GetString(6),
+                            result.GetString(7),
+                            result.GetDateTime(8),
+                            result.GetString(9),
+                            result.GetDateTime(10),
+                            result.GetString(11)
                         ));
                 }
 

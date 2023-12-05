@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DBConnection
 {
-    public class FullInfoUser
+    public class FullInfoLecturer
     {
-        public FullInfoUser(int id, string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, string photo, string category, string theoryHours, string drivingHours, string numberGroup)
+        public FullInfoLecturer(int id, string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, DateTime dateEmployment)
         {
             Id = id;
             Login = login;
@@ -20,11 +20,7 @@ namespace DBConnection
             Email = email;
             DateBirth = dateBirth;
             Role = role;
-            Photo = photo;
-            Category = category;
-            TheoryHours = theoryHours;
-            DrivingHours = drivingHours;
-            NumberGroup = numberGroup;
+            DateEmployment = dateEmployment;
         }
 
         public int Id { get; set; }
@@ -37,11 +33,6 @@ namespace DBConnection
         public string Email { get; set; }
         public DateTime DateBirth { get; set; }
         public string Role { get; set; }
-        public string Photo { get; set; }
-        public string Category { get; set; }
-        public string TheoryHours { get; set; }
-        public string DrivingHours { get; set; }
-        public string NumberGroup { get; set; }
-
+        public DateTime DateEmployment { get; set; }
     }
 }
