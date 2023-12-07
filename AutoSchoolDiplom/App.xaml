@@ -34,7 +34,70 @@
 
             </Grid>
         </DataTemplate>
-        
+
+        <DataTemplate x:Key="ListLecturer">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                    <Run Text="{Binding Id}" FontWeight="Bold"></Run>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10 5 0 5">
+                    <Run Text="ФИО:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding FirstName}"></Run>
+                    <Run Text="{Binding LastName}"></Run>
+                    <Run Text="{Binding Patronymic}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Дата рождения: "  FontWeight="Bold"></Run>
+                    <Run Text="{Binding DateBirth, StringFormat=dd.MM.yyyy}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Номер телефона:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding Phone}"></Run>
+                    <LineBreak></LineBreak>S
+                    <Run Text="Дата приема на работу:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding DateEmployment, StringFormat=dd.MM.yyyy}"></Run>
+                </TextBlock>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ListInstructor">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                    <Run Text="{Binding Id}" FontWeight="Bold"></Run>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10 5 0 5">
+                    <Run Text="ФИО:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding FirstName}"></Run>
+                    <Run Text="{Binding LastName}"></Run>
+                    <Run Text="{Binding Patronymic}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Дата рождения: "  FontWeight="Bold"></Run>
+                    <Run Text="{Binding DateBirth, StringFormat=dd.MM.yyyy}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Номер телефона:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding Phone}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Дата приема на работу:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding DateEmployment, StringFormat=dd.MM.yyyy}"></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Стаж вождения:" FontWeight="Bold"></Run>
+                    <Run Text="{Binding DrivingExperience}"></Run>
+                </TextBlock>
+
+            </Grid>
+        </DataTemplate>
+
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>

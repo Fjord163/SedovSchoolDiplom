@@ -67,7 +67,6 @@ namespace DBConnection
                             result.GetString(14)
                         ));
                 }
-
             }
             result.Close();
         }

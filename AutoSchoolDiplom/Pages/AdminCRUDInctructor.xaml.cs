@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace AutoSchoolDiplom.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminCRUDInctructor.xaml
-    /// </summary>
+
     public partial class AdminCRUDInctructor : Page
     {
         public AdminCRUDInctructor()
@@ -26,6 +24,9 @@ namespace AutoSchoolDiplom.Pages
             InitializeComponent();
 
             BindingLvInstructors();
+
+            NameUser.Text = Connection.users.FirstName + " " + Connection.users.LastName + " " + Connection.users.Patronymic;
+
         }
 
         public void BindingLvInstructors()
@@ -34,6 +35,29 @@ namespace AutoSchoolDiplom.Pages
             binding.Source = Connection.infoInstructors;
             lvInstructor.SetBinding(ItemsControl.ItemsSourceProperty, binding);
             Connection.SelectInfoInstructors();
+        }
+
+        private void btnTransitionInstructor_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Вы уже находитесь на данной странице");
+        }
+
+        private void btnTransitionLecturer_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminCRUDLecturer());
+            Connection.infoInstructors.Clear();
+        }
+
+        private void btnTransitionStudent_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminCRUDPage());
+            Connection.infoInstructors.Clear();
+        }
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EntryPage());
+            Connection.infoInstructors.Clear();
         }
     }
 }

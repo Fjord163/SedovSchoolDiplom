@@ -21,17 +21,26 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" >
+            <TextBlock TextWrapping="Wrap" Name="NameUser" TextDecorations="Underline"></TextBlock>
+            <Button Name="btnSignOut" Margin="10" Content="Выйти" Padding="2" Background="White" Click="btnSignOut_Click"></Button>
+        </StackPanel>
+
         <Image  HorizontalAlignment="Left"  Source="/Image/Logo_Sedov_School.jpg" />
 
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="Редактирование:" HorizontalAlignment="Center" FontWeight="Bold"></Label>
             <StackPanel Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Инструкторов"></Button>
-                <Button Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Лекторов"></Button>
-                <Button Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Учеников"></Button>
+                <Button Name="btnTransitionInstructor" Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Инструкторов" Click="btnTransitionInstructor_Click"></Button>
+                <Button Name="btnTransitionLecturer" Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Лекторов" Click="btnTransitionLecturer_Click"></Button>
+                <Button Name="btnTransitionStudent"  Height="25" Margin="5" BorderBrush="Transparent" Background="Transparent" Content="Учеников" Click="btnTransitionStudent_Click"></Button>
             </StackPanel>
         </StackPanel>
 
         <ListView Name="lvStudents" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListStudents}"></ListView>
+
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1">
+            <TextBox Name="Search" TextChanged="Search_TextChanged" Margin="5 0 0 0"></TextBox>
+        </StackPanel>
     </Grid>
 </Page>

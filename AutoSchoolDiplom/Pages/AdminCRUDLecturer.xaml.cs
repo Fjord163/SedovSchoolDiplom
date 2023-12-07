@@ -24,6 +24,7 @@ namespace AutoSchoolDiplom.Pages
             InitializeComponent();
 
             BindingLvLecturers();
+            NameUser.Text = Connection.users.FirstName + " " + Connection.users.LastName + " " + Connection.users.Patronymic;
         }
 
         public void BindingLvLecturers()
@@ -32,6 +33,29 @@ namespace AutoSchoolDiplom.Pages
             binding.Source = Connection.infoLecturers;
             lvLecturer.SetBinding(ItemsControl.ItemsSourceProperty, binding);
             Connection.SelectInfoLecturers();
+        }
+
+        private void btnTransitionInstructor_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminCRUDInctructor());
+            Connection.infoLecturers.Clear();
+        }
+
+        private void btnTransitionLecturer_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Вы уже находитесь на данной странице");
+        }
+
+        private void btnTransitionStudent_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminCRUDPage());
+            Connection.infoLecturers.Clear();
+        }
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EntryPage());
+            Connection.infoLecturers.Clear();
         }
     }
 }
