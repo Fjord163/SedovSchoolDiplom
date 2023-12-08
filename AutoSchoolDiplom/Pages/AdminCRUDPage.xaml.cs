@@ -1,5 +1,6 @@
 ﻿using DBConnection;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace AutoSchoolDiplom.Pages
 
             NameUser.Text = Connection.users.FirstName + " " + Connection.users.LastName + " " + Connection.users.Patronymic;
 
+
         }
 
         public void BindingLvStudents()
@@ -41,23 +43,22 @@ namespace AutoSchoolDiplom.Pages
 
         private void Filter()
         {
-            string searchString = Search.Text.Trim();
+            string searchString = tbSearch.Text.Trim();
 
             var view = CollectionViewSource.GetDefaultView(lvStudents.ItemsSource);
             view.Filter = new Predicate<object>(o =>
             {
-                FullInfoStudent product = o as FullInfoStudent;
-                if (product == null) { return false; }
+                FullInfoStudent student = o as FullInfoStudent;
+                if (student == null) { return false; }
 
                 bool isVisible = true;
                 if (searchString.Length > 0)
                 {
-                    isVisible = product.FirstName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1 ||
-                        product.LastName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1;
+                    isVisible = student.FirstName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1 ||
+                        student.LastName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1 ||
+                        student.Patronymic.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1 ||
+                        student.NumberGroup.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1;
                 }
-
-                //isVisible = isVisible && category == product.Category;
-
                 return isVisible;
             });
         }
@@ -88,6 +89,13 @@ namespace AutoSchoolDiplom.Pages
         {
             NavigationService.Navigate(new EntryPage());
             Connection.infoStudents.Clear();
+        }
+
+        private void DeleteStudent_Click(object sender, RoutedEventArgs e)
+        {
+            FullInfoStudent studentInfo = lvStudents.SelectedItem as FullInfoStudent;
+
+           
         }
     }
 }

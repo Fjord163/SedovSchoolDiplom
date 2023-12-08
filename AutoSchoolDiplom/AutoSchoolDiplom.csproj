@@ -197,6 +197,9 @@
   <ItemGroup>
     <Resource Include="Image\Logo_Sedov_School.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\magnifier-1_icon-icons.com_56924.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -29,6 +29,27 @@ namespace AutoSchoolDiplom.Pages
 
         }
 
+        private void Filter()
+        {
+            string searchString = tbSearch.Text.Trim();
+
+            var view = CollectionViewSource.GetDefaultView(lvInstructor.ItemsSource);
+            view.Filter = new Predicate<object>(o =>
+            {
+                FullInfoInstructor instructor = o as FullInfoInstructor;
+                if (instructor == null) { return false; }
+
+                bool isVisible = true;
+                if (searchString.Length > 0)
+                {
+                    isVisible = instructor.FirstName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1 ||
+                        instructor.LastName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1 ||
+                        instructor.Patronymic.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1;
+                }
+                return isVisible;
+            });
+        }
+
         public void BindingLvInstructors()
         {
             Binding binding = new Binding();
@@ -58,6 +79,16 @@ namespace AutoSchoolDiplom.Pages
         {
             NavigationService.Navigate(new EntryPage());
             Connection.infoInstructors.Clear();
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void DeleteInstructor_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
