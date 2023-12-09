@@ -6,6 +6,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace DBConnection
 {
@@ -34,6 +35,8 @@ namespace DBConnection
         public static ObservableCollection<FullInfoLecturer> infoLecturers { get; set; } = new ObservableCollection<FullInfoLecturer>();
         public static ObservableCollection<FullInfoInstructor> infoInstructors { get; set; } = new ObservableCollection<FullInfoInstructor>();
         public static ObservableCollection<CLassUser> classUsers { get; set; } = new ObservableCollection<CLassUser>();
+        public static ObservableCollection<User> lecturers1 { get; set; } = new ObservableCollection<User>();
+
 
         public static void SelectInfoStudent()
         {
@@ -132,6 +135,22 @@ namespace DBConnection
 
             }
             result.Close();
+        }
+
+        public static void InsertUsers(User users)
+        {
+            NpgsqlCommand cmd = GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
+                "values (@login, @password, @firstName, @lastName, @patronymic, @phone, @email, @dateBirth, @role)");
+            cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, users.Login);
+            cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, users.Password);
+            cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, users.FirstName);
+            cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, users.LastName);
+            cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, users.Patronymic);
+            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, users.Phone);
+            cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, users.Email);
+            cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, users.DateBirth);
+            cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, users.Role);
+            cmd.ExecuteNonQuery();
         }
 
     }

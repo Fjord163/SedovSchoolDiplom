@@ -44,10 +44,102 @@
                 <Image Width="15" Height="15" Margin="5" Source="/Image/magnifier-1_icon-icons.com_56924.png" />
                 <TextBox  Name="tbSearch" TextChanged="tbSearch_TextChanged" Margin="5"></TextBox>
             </DockPanel>
+            <StackPanel>
+
+                <DockPanel>
+                    <Label Content="Логин" Width="100"></Label>
+                    <TextBox Name="tbLogin" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Пароль" Width="100"></Label>
+                    <TextBox Name="tbPass" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Имя" Width="100"></Label>
+                    <TextBox Name="tbFirstName" Margin="5" >
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Фамилия" Width="100"></Label>
+                    <TextBox Name="tbLastName" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Отчество" Width="100"></Label>
+                    <TextBox Name="tbPatronymic" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Пароль" Width="100"></Label>
+                    <TextBox Name="tbPhone" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Email" Width="100"></Label>
+                    <TextBox Name="tbEmail" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+
+                <DockPanel>
+                    <Label Content="Дата рождения" Width="100"></Label>
+                    <DatePicker Name="tbDateBirth" Margin="5">
+
+    
+                    </DatePicker>
+                </DockPanel>
+
+              
+
+
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="5">
-                <Button Name="AddInstructor" Content="Добавить" Margin="5" Padding="2" Width="100"></Button>
-                <Button Name="DeleteInstructor" Content="Удалить" Margin="5" Padding="2" Width="100" Click="DeleteInstructor_Click"></Button>
-                <Button Name="UpdateInstructor" Content="Редактировать" Margin="5" Padding="2" Width="100"></Button>
+                <Button Name="AddInstructor" Background="White" Content="Добавить" Margin="5" Padding="2" Width="100" Click="AddInstructor_Click"></Button>
+                <Button Name="DeleteInstructor" Background="White" Content="Удалить" Margin="5" Padding="2" Width="100" Click="DeleteInstructor_Click"></Button>
+                <Button Name="UpdateInstructor" Background="White" Content="Редактировать" Margin="5" Padding="2" Width="100"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -97,5 +97,21 @@ namespace AutoSchoolDiplom.Pages
 
            
         }
+
+        private void AddStudent_Click(object sender, RoutedEventArgs e)
+        {
+            var login = tbLogin.Text.Trim();
+            var password = tbPass.Text.Trim();
+            var firstName = tbFirstName.Text.Trim();
+            var lastName = tbLastName.Text.Trim();
+            var patronymic = tbPatronymic.Text.Trim();
+            var phone = tbPhone.Text.Trim();
+            var email = tbEmail.Text.Trim();
+            var birth = tbDateBirth.SelectedDate;
+            string role = "Ученик";
+
+            Connection.InsertUsers(new User(login, password, firstName, lastName, patronymic, phone, email, birth, role));
+
+        }
     }
 }

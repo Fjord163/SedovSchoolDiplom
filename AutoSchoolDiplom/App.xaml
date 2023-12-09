@@ -57,7 +57,7 @@
                     <LineBreak></LineBreak>
                     <Run Text="Номер телефона:" FontWeight="Bold"></Run>
                     <Run Text="{Binding Phone}"></Run>
-                    <LineBreak></LineBreak>S
+                    <LineBreak></LineBreak>
                     <Run Text="Дата приема на работу:" FontWeight="Bold"></Run>
                     <Run Text="{Binding DateEmployment, StringFormat=dd.MM.yyyy}"></Run>
                 </TextBlock>
