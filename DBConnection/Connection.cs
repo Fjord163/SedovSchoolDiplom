@@ -150,7 +150,7 @@ namespace DBConnection
             cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, users.Email);
             cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, users.DateBirth);
             cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, users.Role);
-            cmd.ExecuteNonQuery();
+            var result = cmd.ExecuteNonQuery();
         }
 
     }

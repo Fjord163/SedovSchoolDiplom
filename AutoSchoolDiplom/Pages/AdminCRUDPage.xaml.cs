@@ -110,7 +110,6 @@ namespace AutoSchoolDiplom.Pages
             var birth = tbDateBirth.SelectedDate;
             string role = "Ученик";
 
-            Connection.InsertUsers(new User(login, password, firstName, lastName, patronymic, phone, email, birth, role));
 
         }
     }

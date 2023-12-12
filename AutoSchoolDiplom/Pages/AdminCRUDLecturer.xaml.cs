@@ -25,9 +25,8 @@ namespace AutoSchoolDiplom.Pages
         {
             InitializeComponent();
 
-            DataContext = this;
-
             BindingLvLecturers();
+
             NameUser.Text = Connection.users.FirstName + " " + Connection.users.LastName + " " + Connection.users.Patronymic;
         }
 
@@ -88,13 +87,8 @@ namespace AutoSchoolDiplom.Pages
             Filter();
         }
 
-        private void DeleteLecturer_Click(object sender, RoutedEventArgs e)
-        {
-            
-           
-        }
 
-        private void AddLecturer_Click(object sender, RoutedEventArgs e)
+        public void InsertLecturerInfo(User user)
         {
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -104,12 +98,52 @@ namespace AutoSchoolDiplom.Pages
             var phone = tbPhone.Text.Trim();
             var email = tbEmail.Text.Trim();
             var birth = tbDateBirth.SelectedDate;
+            var dateEmployment = tbDateEmployment.SelectedDate;
             string role = "Лектор";
-            
 
-            Connection.InsertUsers(new User(login, password, firstName, lastName, patronymic, phone, email, birth, role));
+            NpgsqlCommand cmd = Connection.GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
+                 "values (@login, @password, @firstName, @lastName, @patronymic, @phone, @email, @dateBirth, @role) returning \"Id\"");
+            cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
+            cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+            cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
+            cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
+            cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, patronymic);
+            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, phone);
+            cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, email);
+            cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, birth);
+            cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, role);
+            var result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                int IdLecturer = user.Id = (int)result;
+
+                cmd = Connection.GetCommand("insert into \"Lecturer\" (\"Id\", \"DateEmployment\")" +
+                 "values (@id, @dateEmployment)");
+                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdLecturer);
+                cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
+                cmd.ExecuteNonQuery();
+            }
+            if (result == null)
+            {
+                MessageBox.Show("Данные не добавлены");
+            }
+            else
+            {
+                MessageBox.Show("Данные добавлены");
+            }
+        }
+
+        private void AddLecturer_Click(object sender, RoutedEventArgs e)
+        {
+            User user = new User();
+            InsertLecturerInfo(user);
             Connection.infoLecturers.Clear();
             BindingLvLecturers();
+        }
+
+        private void DeleteLecturer_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

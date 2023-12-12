@@ -38,7 +38,8 @@ namespace AutoSchoolDiplom.Pages
             cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
             cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, pbPassword.Password.Trim());
             NpgsqlDataReader result = cmd.ExecuteReader();
-
+          
+            
             if (result.HasRows)
             {
                 result.Read();
@@ -57,7 +58,8 @@ namespace AutoSchoolDiplom.Pages
                 };
                 result.Close();
 
-                switch(Connection.users.Role) 
+
+                switch (Connection.users.Role) 
                 {
                     case "Ученик":
                         NavigationService.Navigate(new AccountStudent());

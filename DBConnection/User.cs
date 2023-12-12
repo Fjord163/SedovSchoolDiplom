@@ -10,7 +10,8 @@ namespace DBConnection
     {
         private DateTime? birth;
 
-        public User( string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role)
+        public User() { }
+        public User( string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, int id)
         {
             
             Login = login;
@@ -22,9 +23,10 @@ namespace DBConnection
             Email = email;
             DateBirth = dateBirth;
             Role = role;
+            Id = id;
         }
 
-        public User(string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime? birth, string role)
+        public User(string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime? birth, string role, int id)
         {
             Login = login;
             Password = password;
@@ -35,8 +37,10 @@ namespace DBConnection
             Email = email;
             this.birth = birth;
             Role = role;
+            Id = id;
         }
 
+        public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

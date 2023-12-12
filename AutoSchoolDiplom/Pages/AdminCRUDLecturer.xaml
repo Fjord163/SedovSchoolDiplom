@@ -125,13 +125,14 @@
 
                 <DockPanel>
                     <Label Content="Дата рождения" Width="100"></Label>
-                    <DatePicker Name="tbDateBirth" Margin="5">
-                        
-                       
-                    </DatePicker>
+                    <DatePicker Name="tbDateBirth" Margin="5"></DatePicker>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Дата Приема на работу" ></Label>
+                    <DatePicker Name="tbDateEmployment" Margin="5"></DatePicker>
                 </DockPanel>
 
-                
+
 
 
             </StackPanel>

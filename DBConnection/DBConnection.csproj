@@ -96,6 +96,7 @@
     <Compile Include="ClassDrivingLesson.cs" />
     <Compile Include="ClassExam.cs" />
     <Compile Include="ClassGroup.cs" />
+    <Compile Include="ClassLecturer.cs" />
     <Compile Include="ClassModelCar.cs" />
     <Compile Include="ClassNameWeek.cs" />
     <Compile Include="ClassNumberGroup.cs" />
