@@ -37,7 +37,7 @@
 
         <Image  HorizontalAlignment="Left"  Source="/Image/Logo_Sedov_School.jpg" />
 
-        <ListView Name="lvLecturer" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListLecturer}"></ListView>
+        <ListView Name="lvLecturer" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListLecturer}" SelectionChanged="lvLecturer_SelectionChanged"></ListView>
 
         <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Name="spDisplayInfoLecturer">
             <DockPanel>
@@ -139,7 +139,7 @@
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="5">
                 <Button Name="AddLecturer" Background="White" Content="Добавить" Margin="5" Padding="2" Width="100" Click="AddLecturer_Click"></Button>
                 <Button Name="DeleteLecturer" Background="White" Content="Удалить" Margin="5" Padding="2" Width="100" Click="DeleteLecturer_Click"></Button>
-                <Button Name="UpdateLecturer" Background="White" Content="Редактировать" Margin="5" Padding="2" Width="100"></Button>
+                <Button Name="UpdateLecturer" Background="White" Content="Изменить" Margin="5" Padding="2" Width="100" Click="UpdateLecturer_Click"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>
