@@ -87,8 +87,20 @@ namespace AutoSchoolDiplom.Pages
             Filter();
         }
 
-
-        public void InsertLecturerInfo(User user)
+        public void ClearingInformationElements()
+        {
+            lvLecturer.SelectedItem = null;
+            tbLogin.Clear();
+            tbPass.Clear();
+            tbFirstName.Clear();
+            tbLastName.Clear();
+            tbPatronymic.Clear();
+            tbPhone.Clear();
+            tbEmail.Clear();
+            dpDateBirth.Text = null;
+            dpDateEmployment.Text = null;
+        }
+        public void InsertLecturerInfo(FullInfoLecturer lecturer)
         {
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -97,8 +109,8 @@ namespace AutoSchoolDiplom.Pages
             var patronymic = tbPatronymic.Text.Trim();
             var phone = tbPhone.Text.Trim();
             var email = tbEmail.Text.Trim();
-            var birth = tbDateBirth.SelectedDate;
-            var dateEmployment = tbDateEmployment.SelectedDate;
+            var birth = dpDateBirth.SelectedDate;
+            var dateEmployment = dpDateEmployment.SelectedDate;
             string role = "Лектор";
 
             NpgsqlCommand cmd = Connection.GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
@@ -115,7 +127,7 @@ namespace AutoSchoolDiplom.Pages
             var result = cmd.ExecuteScalar();
             if (result != null)
             {
-                int IdLecturer = user.Id = (int)result;
+                int IdLecturer = lecturer.Id = (int)result;
 
                 cmd = Connection.GetCommand("insert into \"Lecturer\" (\"Id\", \"DateEmployment\")" +
                  "values (@id, @dateEmployment)");
@@ -135,8 +147,9 @@ namespace AutoSchoolDiplom.Pages
 
         private void AddLecturer_Click(object sender, RoutedEventArgs e)
         {
-            User user = new User();
-            InsertLecturerInfo(user);
+            FullInfoLecturer lecturer = new FullInfoLecturer();
+            InsertLecturerInfo(lecturer);
+            ClearingInformationElements();
             Connection.infoLecturers.Clear();
             BindingLvLecturers();
         }
@@ -169,7 +182,16 @@ namespace AutoSchoolDiplom.Pages
                 {
                     Connection.infoLecturers.Remove(lvLecturer.SelectedItem as FullInfoLecturer);
                     Connection.infoLecturers.Clear();
+                    ClearingInformationElements();
                     BindingLvLecturers();
+                } 
+                if (result == null)
+                {
+                    MessageBox.Show("Данные не удалены");
+                } 
+                else
+                {
+                    MessageBox.Show("Данные удалены");
                 }
             }
         }
@@ -185,8 +207,8 @@ namespace AutoSchoolDiplom.Pages
                 tbPatronymic.Text = (lvLecturer.SelectedItem as FullInfoLecturer).Patronymic.ToString();
                 tbPhone.Text = (lvLecturer.SelectedItem as FullInfoLecturer).Phone.ToString();
                 tbEmail.Text = (lvLecturer.SelectedItem as FullInfoLecturer).Email.ToString();
-                tbDateBirth.Text = (lvLecturer.SelectedItem as FullInfoLecturer).DateBirth.ToString();
-                tbDateEmployment.Text = (lvLecturer.SelectedItem as FullInfoLecturer).DateEmployment.ToString();
+                dpDateBirth.Text = (lvLecturer.SelectedItem as FullInfoLecturer).DateBirth.ToString();
+                dpDateEmployment.Text = (lvLecturer.SelectedItem as FullInfoLecturer).DateEmployment.ToString();
             }
         }
 
@@ -201,8 +223,8 @@ namespace AutoSchoolDiplom.Pages
             string patronymic = tbPatronymic.Text.Trim();
             string phone = tbPhone.Text.Trim();
             string email = tbEmail.Text.Trim();
-            var birth = tbDateBirth.SelectedDate;
-            var dateEmployment = tbDateEmployment.SelectedDate;
+            var birth = dpDateBirth.SelectedDate;
+            var dateEmployment = dpDateEmployment.SelectedDate;
 
             NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"Lecturer\" SET \"DateEmployment\"= @dateEmployment where \"Id\" = @id");
             cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, LecturerId);
@@ -232,17 +254,14 @@ namespace AutoSchoolDiplom.Pages
                 MessageBox.Show("Данные не обновлены");
             }
 
-            tbLogin.Clear();
-            tbPass.Clear();
-            tbFirstName.Clear();
-            tbLastName.Clear();
-            tbPatronymic.Clear();
-            tbPhone.Clear();
-            tbEmail.Clear();
-            tbDateBirth.Text = null;
-            tbDateEmployment.Text = null;
+            ClearingInformationElements();
             Connection.infoLecturers.Clear();
             BindingLvLecturers();
+        }
+
+        private void DeselectSelection_Click(object sender, RoutedEventArgs e)
+        {
+            ClearingInformationElements();
         }
     }
 }

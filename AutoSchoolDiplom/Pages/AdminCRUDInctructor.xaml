@@ -37,7 +37,7 @@
 
         <Image  HorizontalAlignment="Left"  Source="/Image/Logo_Sedov_School.jpg" />
 
-        <ListView Name="lvInstructor" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListInstructor}"></ListView>
+        <ListView Name="lvInstructor" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListInstructor}" SelectionChanged="lvInstructor_SelectionChanged"></ListView>
 
         <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" >
             <DockPanel>
@@ -47,7 +47,7 @@
             <StackPanel>
 
                 <DockPanel>
-                    <Label Content="Логин" Width="100"></Label>
+                    <Label Content="Логин" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbLogin" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -58,7 +58,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Пароль" Width="100"></Label>
+                    <Label Content="Пароль" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbPass" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -69,7 +69,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Имя" Width="100"></Label>
+                    <Label Content="Имя" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbFirstName" Margin="5" >
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -80,7 +80,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Фамилия" Width="100"></Label>
+                    <Label Content="Фамилия" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbLastName" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -91,7 +91,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Отчество" Width="100"></Label>
+                    <Label Content="Отчество" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbPatronymic" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -102,7 +102,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Пароль" Width="100"></Label>
+                    <Label Content="Пароль" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbPhone" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -113,7 +113,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Email" Width="100"></Label>
+                    <Label Content="Email" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbEmail" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -124,23 +124,48 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Дата рождения" Width="100"></Label>
-                    <DatePicker Name="tbDateBirth" Margin="5">
-
-    
-                    </DatePicker>
+                    <Label Content="Стаж вождения" Width="100" Margin="5 0 0 0"></Label>
+                    <TextBox Name="tbDrivingExperience" Margin="5">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
                 </DockPanel>
-
-              
-
+                
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel>
+                        <Label Content="Дата рождения"></Label>
+                        <DatePicker Name="dpDateBirth" Margin="5"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Дата Приема на работу"></Label>
+                        <DatePicker Name="dpDateEmployment" Margin="5"></DatePicker>
+                    </StackPanel>
+                </Grid>
+                
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="5">
-                <Button Name="AddInstructor" Background="White" Content="Добавить" Margin="5" Padding="2" Width="100" Click="AddInstructor_Click"></Button>
-                <Button Name="DeleteInstructor" Background="White" Content="Удалить" Margin="5" Padding="2" Width="100" Click="DeleteInstructor_Click"></Button>
-                <Button Name="UpdateInstructor" Background="White" Content="Редактировать" Margin="5" Padding="2" Width="100"></Button>
-            </StackPanel>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Button Name="AddInstructor" Grid.Column="0" Background="White" Content="Добавить" Margin="2" Padding="2" Click="AddInstructor_Click"></Button>
+                <Button Name="DeleteInstructor" Grid.Column="1" Background="White" Content="Удалить" Margin="2" Padding="2" Click="DeleteInstructor_Click"></Button>
+                <Button Name="UpdateInstructor" Grid.Column="2" Background="White" Content="Изменить" Margin="2" Padding="2" Click="UpdateInstructor_Click"></Button>
+                <Button Name="DeselectSelection" Grid.Column="3" Background="White" Content="Очистить" Margin="2" Padding="2" Click="DeselectSelection_Click"></Button>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

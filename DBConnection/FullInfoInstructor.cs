@@ -8,6 +8,7 @@ namespace DBConnection
 {
     public class FullInfoInstructor
     {
+        public FullInfoInstructor() { }
         public FullInfoInstructor(int id, string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, DateTime dateEmployment, string drivingExperience)
         {
             Id = id;

@@ -47,7 +47,7 @@
             <StackPanel>
                
                 <DockPanel>
-                    <Label Content="Логин" Width="100"></Label>
+                    <Label Content="Логин" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbLogin" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -58,7 +58,7 @@
                 </DockPanel>
                 
                 <DockPanel>
-                    <Label Content="Пароль" Width="100"></Label>
+                    <Label Content="Пароль" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbPass" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -69,7 +69,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Имя" Width="100"></Label>
+                    <Label Content="Имя" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbFirstName" Margin="5" >
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -80,7 +80,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Фамилия" Width="100"></Label>
+                    <Label Content="Фамилия" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbLastName" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -91,7 +91,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Отчество" Width="100"></Label>
+                    <Label Content="Отчество" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbPatronymic" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -102,7 +102,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Пароль" Width="100"></Label>
+                    <Label Content="Пароль" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbPhone" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -113,7 +113,7 @@
                 </DockPanel>
 
                 <DockPanel>
-                    <Label Content="Email" Width="100"></Label>
+                    <Label Content="Email" Width="100" Margin="5 0 0 0"></Label>
                     <TextBox Name="tbEmail" Margin="5">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -123,24 +123,36 @@
                     </TextBox>
                 </DockPanel>
 
-                <DockPanel>
-                    <Label Content="Дата рождения" Width="100"></Label>
-                    <DatePicker Name="tbDateBirth" Margin="5"></DatePicker>
-                </DockPanel>
-                <DockPanel>
-                    <Label Content="Дата Приема на работу" ></Label>
-                    <DatePicker Name="tbDateEmployment" Margin="5"></DatePicker>
-                </DockPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-
-
-
+                    <StackPanel Margin="5">
+                        <Label Content="Дата рождения"></Label>
+                        <DatePicker Name="dpDateBirth" Margin="5"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="5">
+                        <Label Content="Дата Приема на работу" ></Label>
+                        <DatePicker Name="dpDateEmployment" Margin="5"></DatePicker>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
-            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="5">
-                <Button Name="AddLecturer" Background="White" Content="Добавить" Margin="5" Padding="2" Width="100" Click="AddLecturer_Click"></Button>
-                <Button Name="DeleteLecturer" Background="White" Content="Удалить" Margin="5" Padding="2" Width="100" Click="DeleteLecturer_Click"></Button>
-                <Button Name="UpdateLecturer" Background="White" Content="Изменить" Margin="5" Padding="2" Width="100" Click="UpdateLecturer_Click"></Button>
-            </StackPanel>
+            
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="AddLecturer" Grid.Column="0" Background="White" Content="Добавить" Margin="2" Padding="2"  Click="AddLecturer_Click"></Button>
+                <Button Name="DeleteLecturer" Grid.Column="1" Background="White" Content="Удалить" Margin="2" Padding="2"  Click="DeleteLecturer_Click"></Button>
+                <Button Name="UpdateLecturer" Grid.Column="2" Background="White" Content="Изменить" Margin="2" Padding="2"  Click="UpdateLecturer_Click"></Button>
+                <Button Name="DeselectSelection" Grid.Column="3" Background="White" Content="Очистить" Margin="2" Padding="2" Click="DeselectSelection_Click"></Button>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

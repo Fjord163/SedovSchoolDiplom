@@ -35,7 +35,7 @@ namespace DBConnection
         public static ObservableCollection<FullInfoLecturer> infoLecturers { get; set; } = new ObservableCollection<FullInfoLecturer>();
         public static ObservableCollection<FullInfoInstructor> infoInstructors { get; set; } = new ObservableCollection<FullInfoInstructor>();
         public static ObservableCollection<CLassUser> classUsers { get; set; } = new ObservableCollection<CLassUser>();
-        public static ObservableCollection<User> lecturers1 { get; set; } = new ObservableCollection<User>();
+        public static ObservableCollection<User> user { get; set; } = new ObservableCollection<User>();
 
 
         public static void SelectInfoStudent()

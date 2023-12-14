@@ -108,7 +108,7 @@ namespace AutoSchoolDiplom.Pages
             var phone = tbPhone.Text.Trim();
             var email = tbEmail.Text.Trim();
             var birth = tbDateBirth.SelectedDate;
-            string role = "Ученик";
+            //string role = "Ученик";
 
 
         }

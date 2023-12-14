@@ -88,12 +88,22 @@ namespace AutoSchoolDiplom.Pages
             Filter();
         }
 
-        private void DeleteInstructor_Click(object sender, RoutedEventArgs e)
+        public void ClearingInformationElements()
         {
-
+            lvInstructor.SelectedItem = null;
+            tbLogin.Clear();
+            tbPass.Clear();
+            tbFirstName.Clear();
+            tbLastName.Clear();
+            tbPatronymic.Clear();
+            tbPhone.Clear();
+            tbEmail.Clear();
+            tbDrivingExperience.Clear();
+            dpDateBirth.Text = null;
+            dpDateEmployment.Text = null;
         }
 
-        private void AddInstructor_Click(object sender, RoutedEventArgs e)
+        public void InsertInstructorInfo(FullInfoInstructor instructor)
         {
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -102,11 +112,166 @@ namespace AutoSchoolDiplom.Pages
             var patronymic = tbPatronymic.Text.Trim();
             var phone = tbPhone.Text.Trim();
             var email = tbEmail.Text.Trim();
-            var birth = tbDateBirth.SelectedDate;
+            var drivingExperience = tbDrivingExperience.Text.Trim();
+            var birth = dpDateBirth.SelectedDate;
+            var dateEmployment = dpDateBirth.SelectedDate;
             string role = "Инструктор";
 
+            NpgsqlCommand cmd = Connection.GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
+                 "values (@login, @password, @firstName, @lastName, @patronymic, @phone, @email, @dateBirth, @role) returning \"Id\"");
+            cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
+            cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+            cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
+            cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
+            cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, patronymic);
+            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, phone);
+            cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, email);
+            cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, birth);
+            cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, role);
+            var result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                int instructorId = instructor.Id = (int)result;
+
+                cmd = Connection.GetCommand("insert into \"Instructor\" (\"Id\", \"DateEmployment\", \"DrivingExperience\") " +
+                    "values (@id, @dateEmployment, @drivingExperience)");
+                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, instructorId);
+                cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
+                cmd.Parameters.AddWithValue("@drivingExperience", NpgsqlDbType.Varchar, drivingExperience);
+                result = cmd.ExecuteNonQuery();
+
+                if (result == null)
+                {
+                    MessageBox.Show("Данные не добавлены");
+                }
+                else
+                {
+                    MessageBox.Show("Данные добавлены");
+                }
+            }
+        }
+
+        private void DeleteInstructor_Click(object sender, RoutedEventArgs e)
+        {
+            FullInfoInstructor instructor = lvInstructor.SelectedItem as FullInfoInstructor;
+
+            NpgsqlCommand cmd = Connection.GetCommand("delete from \"Instructor\" where \"Id\" = @id returning \"Id\"");
+            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, instructor.Id);
+            cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, instructor.DateEmployment);
+            cmd.Parameters.AddWithValue("@drivingExperience", NpgsqlDbType.Varchar, instructor.DrivingExperience);
+            var result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                int instructorId = instructor.Id = (int)result;
+
+                cmd = Connection.GetCommand("DELETE FROM \"User\" WHERE \"Id\" = @id");
+                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, instructorId);
+                cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, instructor.Login);
+                cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, instructor.Password);
+                cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, instructor.FirstName);
+                cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, instructor.LastName);
+                cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, instructor.Patronymic);
+                cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, instructor.Phone);
+                cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, instructor.Email);
+                cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, instructor.DateBirth);
+                cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, instructor.Role);
+                result = cmd.ExecuteNonQuery();
+                if (result != null)
+                {
+                    Connection.infoInstructors.Remove(lvInstructor.SelectedItem as FullInfoInstructor);
+                    Connection.infoInstructors.Clear();
+                    ClearingInformationElements();
+                    BindingLvInstructors();
+                }
+                if (result == null)
+                {
+                    MessageBox.Show("Данные не удалены");
+                }
+                else
+                {
+                    MessageBox.Show("Данные удалены");
+                }
+            }
+        }
+
+        private void AddInstructor_Click(object sender, RoutedEventArgs e)
+        {
+            FullInfoInstructor infoInstructor = new FullInfoInstructor();
+            InsertInstructorInfo(infoInstructor);
+            ClearingInformationElements();
             Connection.infoInstructors.Clear();
             BindingLvInstructors();
+        }
+
+        private void UpdateInstructor_Click(object sender, RoutedEventArgs e)
+        {
+            int InstructorId = (lvInstructor.SelectedItem as FullInfoInstructor).Id;
+
+            string login = tbLogin.Text.Trim();
+            string password = tbPass.Text.Trim();
+            string firstName = tbFirstName.Text.Trim();
+            string lastName = tbLastName.Text.Trim();
+            string patronymic = tbPatronymic.Text.Trim();
+            string phone = tbPhone.Text.Trim();
+            string email = tbEmail.Text.Trim();
+            string drivingExperience = tbDrivingExperience.Text.Trim();
+            var birth = dpDateBirth.SelectedDate;
+            var dateEmployment = dpDateBirth.SelectedDate;
+
+            NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"Instructor\" SET \"DateEmployment\"= @dateEmployment, \"DrivingExperience\" = @drivingExperience where \"Id\" = @id");
+            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, InstructorId);
+            cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
+            cmd.Parameters.AddWithValue("@drivingExperience", NpgsqlDbType.Varchar, drivingExperience);
+            var result = cmd.ExecuteNonQuery();
+            if (result != 0)
+            {
+                cmd = Connection.GetCommand("UPDATE \"User\" SET \"Login\"= @login, \"Password\"= @password, \"FirstName\"= @firstName, \"LastName\"= @lastName," +
+                    "\"Patronymic\"= @patronymic, \"Phone\"= @phone, \"Email\"= @email, \"DateBirth\"= @birth where \"Id\" = @id");
+                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, InstructorId);
+                cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
+                cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+                cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
+                cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
+                cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, patronymic);
+                cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, phone);
+                cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, email);
+                cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
+                result = cmd.ExecuteNonQuery();
+            }
+            if (result != 0)
+            {
+                MessageBox.Show("Данные обновлены");
+            }
+            else
+            {
+                MessageBox.Show("Данные не обновлены");
+            }
+
+            ClearingInformationElements();
+            Connection.infoInstructors.Clear();
+            BindingLvInstructors();
+        }
+
+        private void DeselectSelection_Click(object sender, RoutedEventArgs e)
+        {
+            ClearingInformationElements();
+        }
+
+        private void lvInstructor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvInstructor.SelectedItem != null)
+            {
+                tbLogin.Text = (lvInstructor.SelectedItem as FullInfoInstructor).Login.ToString();
+                tbPass.Text = (lvInstructor.SelectedItem as FullInfoInstructor).Password.ToString();
+                tbFirstName.Text = (lvInstructor.SelectedItem as FullInfoInstructor).FirstName.ToString();
+                tbLastName.Text = (lvInstructor.SelectedItem as FullInfoInstructor).LastName.ToString();
+                tbPatronymic.Text = (lvInstructor.SelectedItem as FullInfoInstructor).Patronymic.ToString();
+                tbPhone.Text = (lvInstructor.SelectedItem as FullInfoInstructor).Phone.ToString();
+                tbEmail.Text = (lvInstructor.SelectedItem as FullInfoInstructor).Email.ToString();
+                tbDrivingExperience.Text = (lvInstructor.SelectedItem as FullInfoInstructor).DrivingExperience.ToString();
+                dpDateBirth.Text = (lvInstructor.SelectedItem as FullInfoInstructor).DateBirth.ToString();
+                dpDateEmployment.Text = (lvInstructor.SelectedItem as FullInfoInstructor).DateEmployment.ToString();
+            }
         }
     }
 }
