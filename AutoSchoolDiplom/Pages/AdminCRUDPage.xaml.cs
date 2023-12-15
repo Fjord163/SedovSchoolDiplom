@@ -194,41 +194,48 @@ namespace AutoSchoolDiplom.Pages
         {
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
 
-            NpgsqlCommand cmd = Connection.GetCommand("DELETE FROM \"StudentGroup\" WHERE \"Student\" = @id returning \"Id\"");
-            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
-            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, );
+            NpgsqlCommand cmd = Connection.GetCommand("DELETE FROM \"StudentGroup\" WHERE \"Student\" = @id returning \"Student\"");
+            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Student);
+            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, student.Group);
             var result = cmd.ExecuteScalar();
             if (result != null)
             {
-                //int IdStudent = student.Id = (int)result;
-
-                //cmd = Connection.GetCommand("DELETE FROM \"User\" WHERE \"Id\" = @id");
-                //cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdStudent);
-                //cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, student.Login);
-                //cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, student.Password);
-                //cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, student.FirstName);
-                //cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, student.LastName);
-                //cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, student.Patronymic);
-                //cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, student.Phone);
-                //cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, student.Email);
-                //cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, student.DateBirth);
-                //cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, student.Role);
-                //result = cmd.ExecuteNonQuery();
-                //if (result != null)
-                //{
-                //    Connection.infoStudents.Remove(lvStudents.SelectedItem as FullInfoStudent);
-                //    Connection.infoStudents.Clear();
-                //    ClearingInformationElements();
-                //    BindingLvStudents();
-                //}
-                //if (result == null)
-                //{
-                //    MessageBox.Show("Данные не удалены");
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Данные удалены");
-                //}
+                int IdStudent = student.Student = (int)result;
+                cmd = Connection.GetCommand("DELETE FROM \"Student\" WHERE \"Id\" = @id returning \"Id\"");
+                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Student);
+                cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, student.Photo);
+                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, student.Cours);
+                result = cmd.ExecuteNonQuery();
+                if (result != null)
+                {
+                    cmd = Connection.GetCommand("DELETE FROM \"User\" WHERE \"Id\" = @id");
+                    cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdStudent);
+                    cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, student.Login);
+                    cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, student.Password);
+                    cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, student.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, student.LastName);
+                    cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, student.Patronymic);
+                    cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, student.Phone);
+                    cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, student.Email);
+                    cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, student.DateBirth);
+                    cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, student.Role);
+                    result = cmd.ExecuteNonQuery();
+                }
+                if (result != null)
+                {
+                    Connection.infoStudents.Remove(lvStudents.SelectedItem as FullInfoStudent);
+                    Connection.infoStudents.Clear();
+                    ClearingInformationElements();
+                    BindingLvStudents();
+                }
+                if (result == null)
+                {
+                    MessageBox.Show("Данные не удалены");
+                }
+                else
+                {
+                    MessageBox.Show("Данные удалены");
+                }
             }
         }
 
@@ -237,11 +244,6 @@ namespace AutoSchoolDiplom.Pages
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
 
             int StudentId = (lvStudents.SelectedItem as FullInfoStudent).Id;
-            if (lvCoursStudent.SelectedItem == null) { return; }
-            int coursId = (lvCoursStudent.SelectedItem as CLassCours).Id;
-            if (lvGroupStudent.SelectedItem == null) { return; }
-            int groupId = (lvGroupStudent.SelectedItem as ClassGroup).Id;
-            
 
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -255,14 +257,14 @@ namespace AutoSchoolDiplom.Pages
 
             NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
             cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, StudentId);
-            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, groupId);
+            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, student.Group);
             var result = cmd.ExecuteNonQuery();
             if (result != 0)
             {
                 cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, StudentId);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, photo);
-                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, coursId);
+                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, student.Cours);
                 result = cmd.ExecuteNonQuery();
                 if(result != 0)
                 {
@@ -284,11 +286,14 @@ namespace AutoSchoolDiplom.Pages
             {
                 Connection.infoStudents.Clear();
                 BindingLvStudents();
-                MessageBox.Show("Данные обновлены");
+            }
+            if (result == 0)
+            {
+                MessageBox.Show("Данные не обновлены");
             }
             else
             {
-                MessageBox.Show("Данные не обновлены");
+                MessageBox.Show("Данные обновлены");
             }
 
 

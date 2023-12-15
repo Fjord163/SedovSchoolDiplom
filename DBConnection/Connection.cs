@@ -47,7 +47,7 @@ namespace DBConnection
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
                 "\"User\".\"LastName\" , \"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\"," +
-                "\"Student\".\"Photo\" ,\"Cours\".\"Category\" ,\"Cours\".\"TheoryHours\" ,\"Cours\".\"DrivingHours\" ,\"Group\".\"NumberGroup\"" +
+                "\"Student\".\"Photo\" ,\"Cours\".\"Category\" ,\"Cours\".\"TheoryHours\" ,\"Cours\".\"DrivingHours\" ,\"Group\".\"NumberGroup\", \"StudentGroup\".\"Student\",  \"StudentGroup\".\"Group\", \"Student\".\"Cours\"" +
                 "FROM \"User\", \"Student\", \"Cours\", \"StudentGroup\",\"Group\"" +
                 "WHERE \"User\".\"Id\" = \"Student\".\"Id\" AND \"Student\".\"Cours\" = \"Cours\".\"Id\" AND \"Student\".\"Id\" = \"StudentGroup\".\"Student\"" +
                 "AND \"StudentGroup\".\"Group\" = \"Group\".\"Id\"");
@@ -72,7 +72,10 @@ namespace DBConnection
                             result.GetString(11),
                             result.GetString(12),
                             result.GetString(13),
-                            result.GetString(14)
+                            result.GetString(14),
+                            result.GetInt32(15),
+                            result.GetInt32(16),
+                            result.GetInt32(17)
                         ));
                 }
             }

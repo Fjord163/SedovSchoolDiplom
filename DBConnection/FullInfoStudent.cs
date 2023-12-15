@@ -9,7 +9,7 @@ namespace DBConnection
     public class FullInfoStudent
     {
         public FullInfoStudent() { }
-        public FullInfoStudent(int id, string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, string photo, string category, string theoryHours, string drivingHours, string numberGroup)
+        public FullInfoStudent(int id, string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, string photo, string category, string theoryHours, string drivingHours, string numberGroup, int student, int group, int cours)
         {
             Id = id;
             Login = login;
@@ -26,6 +26,9 @@ namespace DBConnection
             TheoryHours = theoryHours;
             DrivingHours = drivingHours;
             NumberGroup = numberGroup;
+            Student = student;
+            Group = group;
+            Cours = cours;
         }
 
         public int Id { get; set; }
@@ -43,6 +46,10 @@ namespace DBConnection
         public string TheoryHours { get; set; }
         public string DrivingHours { get; set; }
         public string NumberGroup { get; set; }
+        public int Student { get; set; }
+        public int Group { get; set; }
+        public int Cours { get; set; }
+
 
     }
 }
