@@ -88,12 +88,16 @@ namespace AutoSchoolDiplom.Pages
         {
             NavigationService.Navigate(new AdminCRUDInctructor());
             Connection.infoStudents.Clear();
+            Connection.classGroups.Clear();
+            Connection.cours.Clear();
         }
 
         private void btnTransitionLecturer_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AdminCRUDLecturer());
             Connection.infoStudents.Clear();
+            Connection.classGroups.Clear();
+            Connection.cours.Clear();
         }
 
         private void btnTransitionStudent_Click(object sender, RoutedEventArgs e)
