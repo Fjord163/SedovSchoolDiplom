@@ -8,6 +8,7 @@ namespace DBConnection
 {
     public class FullInfoStudent
     {
+        public FullInfoStudent() { }
         public FullInfoStudent(int id, string login, string password, string firstName, string lastName, string patronymic, string phone, string email, DateTime dateBirth, string role, string photo, string category, string theoryHours, string drivingHours, string numberGroup)
         {
             Id = id;

@@ -107,6 +107,7 @@
     <Compile Include="ClassServices.cs" />
     <Compile Include="ClassStampCar.cs" />
     <Compile Include="ClassStatusPayment.cs" />
+    <Compile Include="ClassStudentGroup.cs" />
     <Compile Include="ClassTimetableLecture.cs" />
     <Compile Include="CLassUser.cs" />
     <Compile Include="ClassWeekday.cs" />

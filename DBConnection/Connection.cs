@@ -31,11 +31,16 @@ namespace DBConnection
             command.CommandText = sql;
             return command;
         }
+
+        public static ObservableCollection<CLassCours> cours { get; set; } = new ObservableCollection<CLassCours>(); 
         public static ObservableCollection<FullInfoStudent> infoStudents { get; set; } = new ObservableCollection<FullInfoStudent>();
         public static ObservableCollection<FullInfoLecturer> infoLecturers { get; set; } = new ObservableCollection<FullInfoLecturer>();
         public static ObservableCollection<FullInfoInstructor> infoInstructors { get; set; } = new ObservableCollection<FullInfoInstructor>();
         public static ObservableCollection<CLassUser> classUsers { get; set; } = new ObservableCollection<CLassUser>();
         public static ObservableCollection<User> user { get; set; } = new ObservableCollection<User>();
+        public static ObservableCollection<ClassGroup> classGroups { get; set; } = new ObservableCollection<ClassGroup>();
+        public static ObservableCollection<ClassStudentGroup> studentGroups { get; set; } = new ObservableCollection<ClassStudentGroup>();
+
 
 
         public static void SelectInfoStudent()
@@ -68,6 +73,48 @@ namespace DBConnection
                             result.GetString(12),
                             result.GetString(13),
                             result.GetString(14)
+                        ));
+                }
+            }
+            result.Close();
+        }
+        public static void SelectGroupStudent()
+        {
+            NpgsqlCommand cmd = GetCommand("SELECT \"Student\", \"Group\" FROM \"StudentGroup\"");
+            NpgsqlDataReader result = cmd.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    studentGroups.Add(new ClassStudentGroup(
+                            result.GetInt32(0),
+                            result.GetInt32(1)
+                        ));
+                }
+            }
+            result.Close();
+        }
+
+        public static void SelectGroup()
+        {
+            NpgsqlCommand cmd = GetCommand("SELECT \"Group\".\"Id\", \"Group\".\"NumberGroup\", \"Group\".\"Lecturer\"," +
+                "\"User\".\"FirstName\", \"User\".\"LastName\" , \"User\".\"Patronymic\"" +
+                "FROM \"User\", \"Lecturer\", \"Group\"" +
+                "WHERE \"User\".\"Id\" = \"Lecturer\".\"Id\" AND \"Group\".\"Lecturer\" = \"Lecturer\".\"Id\"");
+            NpgsqlDataReader result = cmd.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    classGroups.Add(new ClassGroup(
+                            result.GetInt32(0),
+                            result.GetString(1),
+                            result.GetInt32(2),
+                            result.GetString(3),
+                            result.GetString(4),
+                            result.GetString(5)
                         ));
                 }
             }
@@ -133,6 +180,20 @@ namespace DBConnection
                         ));
                 }
 
+            }
+            result.Close();
+        }
+        public static void SelectCoursStudent()
+        {
+            NpgsqlCommand cmd = GetCommand("SELECT \"Id\", \"Category\", \"TheoryHours\", \"DrivingHours\" FROM \"Cours\"");
+            NpgsqlDataReader result = cmd.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    cours.Add(new CLassCours(result.GetInt32(0), result.GetString(1), result.GetString(2), result.GetString(3)));
+                }
             }
             result.Close();
         }
