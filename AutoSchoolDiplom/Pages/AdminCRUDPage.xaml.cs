@@ -22,9 +22,9 @@ namespace AutoSchoolDiplom.Pages
 {
 
 
-    public partial class AdminCRUDPage : Page
+    public partial class AdminCRUDStudent : Page
     {
-        public AdminCRUDPage()
+        public AdminCRUDStudent()
         {
             InitializeComponent();
 

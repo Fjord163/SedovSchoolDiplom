@@ -72,7 +72,7 @@ namespace AutoSchoolDiplom.Pages
 
         private void btnTransitionStudent_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AdminCRUDPage());
+            NavigationService.Navigate(new AdminCRUDStudent());
             Connection.infoLecturers.Clear();
         }
 

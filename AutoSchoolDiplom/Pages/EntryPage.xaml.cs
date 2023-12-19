@@ -65,13 +65,13 @@ namespace AutoSchoolDiplom.Pages
                         NavigationService.Navigate(new AccountStudent());
                         break;
                     case "Инструктор":
-                        NavigationService.Navigate(new AdminCRUDPage());
+                        NavigationService.Navigate(new AdminCRUDStudent());
                         break;
                     case "Лектор":
-                        NavigationService.Navigate(new AdminCRUDPage());
+                        NavigationService.Navigate(new AdminCRUDStudent());
                         break;
                     case "Админ":
-                        NavigationService.Navigate(new AdminCRUDPage());
+                        NavigationService.Navigate(new AdminCRUDStudent());
                         break;
                 } 
             }
