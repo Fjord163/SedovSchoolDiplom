@@ -197,9 +197,9 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Name="AddLecturer" Grid.Column="0" FontSize="15" Background="White" Content="Добавить" Margin="2" Padding="5"  Click="AddLecturer_Click"></Button>
-                <Button Name="DeleteLecturer" Grid.Column="1" FontSize="15" Background="White" Content="Удалить" Margin="2" Padding="5"  Click="DeleteLecturer_Click"></Button>
-                <Button Name="UpdateLecturer" Grid.Column="2" FontSize="15" Background="White" Content="Изменить" Margin="2" Padding="5"  Click="UpdateLecturer_Click"></Button>
+                <Button Name="AddStudent" Grid.Column="0" FontSize="15" Background="White" Content="Добавить" Margin="2" Padding="5"  Click="AddStudent_Click"></Button>
+                <Button Name="DeleteStudent" Grid.Column="1" FontSize="15" Background="White" Content="Удалить" Margin="2" Padding="5"  Click="DeleteStudent_Click"></Button>
+                <Button Name="UpdateStudent" Grid.Column="2" FontSize="15" Background="White" Content="Изменить" Margin="2" Padding="5"  Click="UpdateStudent_Click"></Button>
                 <Button Name="DeselectSelection" Grid.Column="3" FontSize="15" Background="White" Content="Очистить" Margin="2" Padding="5" Click="DeselectSelection_Click"></Button>
             </Grid>
         </StackPanel>

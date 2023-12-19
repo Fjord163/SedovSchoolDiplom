@@ -146,12 +146,8 @@ namespace AutoSchoolDiplom.Pages
             var phone = tbPhone.Text.Trim();
             var email = tbEmail.Text.Trim();
             var birth = dpDateBirth.SelectedDate;
-            var cours1 = tbCours.Text.Trim();
-            var group1 = tbGroup.Text.Trim();
-            var photo = tbImage.Text.Trim();
             string icon = "C:\\Users\\cloze\\source\\repos\\AutoSchoolDiplom\\AutoSchoolDiplom\\Image\\Icon.png";
             string role = "Студент";
-
 
             NpgsqlCommand cmd = Connection.GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
                  "values (@login, @password, @firstName, @lastName, @patronymic, @phone, @email, @dateBirth, @role) returning \"Id\"");
@@ -169,33 +165,24 @@ namespace AutoSchoolDiplom.Pages
             {
                 int IdStudent = student.Id = (int)result;
 
-                cmd = Connection.GetCommand("insert into \"Student\" (\"Id\", \"Photo\", \"Cours\")" +
-                 "values (@id, @photo, @cours)");
+                cmd = Connection.GetCommand("insert into \"Student\" (\"Id\", \"Photo\", \"Cours\") values (@id, @photo, @cours)");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdStudent);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, icon);
                 cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours.Id);
                 result = cmd.ExecuteNonQuery();
                 if(result != null)
                 {
-                    cmd = Connection.GetCommand("insert into \"StudentGroup\" (\"Student\", \"Group\")" +
-                                    "values (@student, @group)");
+                    cmd = Connection.GetCommand("insert into \"StudentGroup\" (\"Student\", \"Group\") values (@student, @group)");
                     cmd.Parameters.AddWithValue("@student", NpgsqlDbType.Integer, IdStudent);
                     cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group.Id);
                     result = cmd.ExecuteNonQuery();
                 }
             }
-
-            if (result == null)
-            {
-                MessageBox.Show("Данные не добавлены");
-            }
-            else
-            {
-                MessageBox.Show("Данные добавлены");
-            }
+            if (result == null) { MessageBox.Show("Данные не добавлены"); }
+            else { MessageBox.Show("Данные добавлены"); }
         }
 
-        private void AddLecturer_Click(object sender, RoutedEventArgs e)
+        private void AddStudent_Click(object sender, RoutedEventArgs e)
         {
             FullInfoStudent student = new FullInfoStudent();
             InsertStudentInfo(student);
@@ -203,7 +190,7 @@ namespace AutoSchoolDiplom.Pages
             BindingLvStudents();
         }
 
-        private void DeleteLecturer_Click(object sender, RoutedEventArgs e)
+        private void DeleteStudent_Click(object sender, RoutedEventArgs e)
         {
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
 
@@ -214,6 +201,7 @@ namespace AutoSchoolDiplom.Pages
             if (result != null)
             {
                 int IdStudent = student.Student = (int)result;
+
                 cmd = Connection.GetCommand("DELETE FROM \"Student\" WHERE \"Id\" = @id returning \"Id\"");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Student);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, student.Photo);
@@ -241,18 +229,12 @@ namespace AutoSchoolDiplom.Pages
                     ClearingInformationElements();
                     BindingLvStudents();
                 }
-                if (result == null)
-                {
-                    MessageBox.Show("Данные не удалены");
-                }
-                else
-                {
-                    MessageBox.Show("Данные удалены");
-                }
+                if (result == null) { MessageBox.Show("Данные не удалены"); }
+                else { MessageBox.Show("Данные удалены"); }
             }
         }
 
-        private void UpdateLecturer_Click(object sender, RoutedEventArgs e)
+        private void UpdateStudent_Click(object sender, RoutedEventArgs e)
         {
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
 
@@ -305,14 +287,8 @@ namespace AutoSchoolDiplom.Pages
                 BindingLvStudents();
                 ClearingInformationElements();
             }
-            if (result == 0)
-            {
-                MessageBox.Show("Данные не обновлены");
-            }
-            else
-            {
-                MessageBox.Show("Данные обновлены");
-            }
+            if (result == 0) { MessageBox.Show("Данные не обновлены"); }
+            else { MessageBox.Show("Данные обновлены"); }
         }
 
         private void DeselectSelection_Click(object sender, RoutedEventArgs e)
