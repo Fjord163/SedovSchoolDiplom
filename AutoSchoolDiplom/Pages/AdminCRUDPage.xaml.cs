@@ -128,8 +128,8 @@ namespace AutoSchoolDiplom.Pages
 
         public void InsertStudentInfo(FullInfoStudent student)
         {
-            int coursId = (lvCoursStudent.SelectedItem as CLassCours).Id;
-            int groupId = (lvGroupStudent.SelectedItem as ClassGroup).Id;
+            CLassCours cours = lvCoursStudent.SelectedItem as CLassCours;
+            ClassGroup group = lvGroupStudent.SelectedItem as ClassGroup;
 
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -164,14 +164,14 @@ namespace AutoSchoolDiplom.Pages
                  "values (@id, @photo, @cours)");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdStudent);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, icon);
-                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, coursId);
+                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours.Id);
                 result = cmd.ExecuteNonQuery();
                 if(result != null)
                 {
                     cmd = Connection.GetCommand("insert into \"StudentGroup\" (\"Student\", \"Group\")" +
                                     "values (@student, @group)");
                     cmd.Parameters.AddWithValue("@student", NpgsqlDbType.Integer, IdStudent);
-                    cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, groupId);
+                    cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group.Id);
                     result = cmd.ExecuteNonQuery();
                 }
             }
@@ -247,8 +247,6 @@ namespace AutoSchoolDiplom.Pages
         {
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
 
-            int StudentId = (lvStudents.SelectedItem as FullInfoStudent).Id;
-
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
             var firstName = tbFirstName.Text.Trim();
@@ -260,13 +258,13 @@ namespace AutoSchoolDiplom.Pages
             var photo = tbImage.Text.Trim();
 
             NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
-            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, StudentId);
+            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
             cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, student.Group);
             var result = cmd.ExecuteNonQuery();
             if (result != 0)
             {
                 cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
-                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, StudentId);
+                cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, photo);
                 cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, student.Cours);
                 result = cmd.ExecuteNonQuery();
@@ -274,7 +272,7 @@ namespace AutoSchoolDiplom.Pages
                 {
                     cmd = Connection.GetCommand("UPDATE \"User\" SET \"Login\"= @login, \"Password\"= @password, \"FirstName\"= @firstName, \"LastName\"= @lastName," +
                    "\"Patronymic\"= @patronymic, \"Phone\"= @phone, \"Email\"= @email, \"DateBirth\"= @birth where \"Id\" = @id");
-                    cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, StudentId);
+                    cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
                     cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
                     cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
                     cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
