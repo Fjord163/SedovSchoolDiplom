@@ -57,7 +57,6 @@ namespace AutoSchoolDiplom.Pages
             Connection.SelectCoursStudent();
         }
 
-
         private void Filter()
         {
             string searchString = tbSearch.Text.Trim();
