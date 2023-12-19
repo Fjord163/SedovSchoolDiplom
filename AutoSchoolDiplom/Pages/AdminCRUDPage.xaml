@@ -146,7 +146,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel>
-                        <TextBox Name="tbCours" GotFocus="tbCours_GotFocus" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите курс обучения 🠗" FontSize="14" Opacity="0.6">
+                        <TextBox Name="tbCours" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите курс обучения 🠗" FontSize="14" Opacity="0.6">
                             <TextBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="3"/>
@@ -167,7 +167,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                        <TextBox Name="tbGroup" GotFocus="tbGroup_GotFocus" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите группу ученика 🠗" FontSize="14" Opacity="0.6">
+                        <TextBox Name="tbGroup" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите группу ученика 🠗" FontSize="14" Opacity="0.6">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>

@@ -146,6 +146,8 @@ namespace AutoSchoolDiplom.Pages
             var phone = tbPhone.Text.Trim();
             var email = tbEmail.Text.Trim();
             var birth = dpDateBirth.SelectedDate;
+            var cours1 = tbCours.Text.Trim();
+            var group1 = tbGroup.Text.Trim();
             var photo = tbImage.Text.Trim();
             string icon = "C:\\Users\\cloze\\source\\repos\\AutoSchoolDiplom\\AutoSchoolDiplom\\Image\\Icon.png";
             string role = "Студент";
@@ -253,8 +255,6 @@ namespace AutoSchoolDiplom.Pages
         private void UpdateLecturer_Click(object sender, RoutedEventArgs e)
         {
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
-            ClassGroup group = lvGroupStudent.SelectedItem as ClassGroup;
-            CLassCours cours = lvCoursStudent.SelectedItem as CLassCours;
 
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -266,16 +266,22 @@ namespace AutoSchoolDiplom.Pages
             var birth = dpDateBirth.SelectedDate;
             var photo = tbImage.Text.Trim();
 
+            int group = Convert.ToInt32(tbGroup.Text);
+            group = int.Parse(tbGroup.Text);
+
+            int cours = Convert.ToInt32(tbCours.Text);
+            cours = int.Parse(tbCours.Text);
+
             NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
             cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
-            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group.Id);
+            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group);
             var result = cmd.ExecuteNonQuery();
             if (result != 0)
             {
                 cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, photo);
-                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours.Id);
+                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours);
                 result = cmd.ExecuteNonQuery();
                 if(result != 0)
                 {
@@ -297,6 +303,7 @@ namespace AutoSchoolDiplom.Pages
             {
                 Connection.infoStudents.Clear();
                 BindingLvStudents();
+                ClearingInformationElements();
             }
             if (result == 0)
             {
@@ -306,8 +313,6 @@ namespace AutoSchoolDiplom.Pages
             {
                 MessageBox.Show("Данные обновлены");
             }
-
-
         }
 
         private void DeselectSelection_Click(object sender, RoutedEventArgs e)
@@ -352,24 +357,6 @@ namespace AutoSchoolDiplom.Pages
                 tbGroup.Clear();
                 tbGroup.Opacity = 1;
                 tbGroup.Text = (lvGroupStudent.SelectedItem as ClassGroup).Id.ToString();
-            }
-        }
-
-        private void tbCours_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (tbCours.Text.Trim() == "Выберите курс обучения 🠗")
-            {
-                tbCours.Clear();
-                tbCours.Opacity = 1;
-            } 
-        }
-
-        private void tbGroup_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (tbGroup.Text.Trim() == "Выберите группу ученика 🠗")
-            {
-                tbGroup.Clear();
-                tbGroup.Opacity = 1;
             }
         }
     }
