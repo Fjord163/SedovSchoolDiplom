@@ -129,20 +129,13 @@ namespace AutoSchoolDiplom.Pages
             {
                 int IdLecturer = lecturer.Id = (int)result;
 
-                cmd = Connection.GetCommand("insert into \"Lecturer\" (\"Id\", \"DateEmployment\")" +
-                 "values (@id, @dateEmployment)");
+                cmd = Connection.GetCommand("insert into \"Lecturer\" (\"Id\", \"DateEmployment\") values (@id, @dateEmployment)");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdLecturer);
                 cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
                 cmd.ExecuteNonQuery();
             }
-            if (result == null)
-            {
-                MessageBox.Show("Данные не добавлены");
-            }
-            else
-            {
-                MessageBox.Show("Данные добавлены");
-            }
+            if (result == null) { MessageBox.Show("Данные не добавлены"); }
+            else { MessageBox.Show("Данные добавлены"); }
         }
 
         private void AddLecturer_Click(object sender, RoutedEventArgs e)
@@ -185,14 +178,8 @@ namespace AutoSchoolDiplom.Pages
                     ClearingInformationElements();
                     BindingLvLecturers();
                 } 
-                if (result == null)
-                {
-                    MessageBox.Show("Данные не удалены");
-                } 
-                else
-                {
-                    MessageBox.Show("Данные удалены");
-                }
+                if (result == null) { MessageBox.Show("Данные не удалены"); } 
+                else { MessageBox.Show("Данные удалены"); }
             }
         }
 
@@ -245,14 +232,8 @@ namespace AutoSchoolDiplom.Pages
                 cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
                 result = cmd.ExecuteNonQuery();
             }
-            if (result != 0)
-            {
-                MessageBox.Show("Данные обновлены");
-            }
-            else
-            {
-                MessageBox.Show("Данные не обновлены");
-            }
+            if (result != 0) { MessageBox.Show("Данные обновлены"); }
+            else { MessageBox.Show("Данные не обновлены"); }
 
             ClearingInformationElements();
             Connection.infoLecturers.Clear();

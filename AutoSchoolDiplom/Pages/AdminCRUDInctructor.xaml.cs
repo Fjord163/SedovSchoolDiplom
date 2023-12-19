@@ -28,7 +28,6 @@ namespace AutoSchoolDiplom.Pages
             BindingLvInstructors();
 
             NameUser.Text = Connection.users.FirstName + " " + Connection.users.LastName + " " + Connection.users.Patronymic;
-
         }
 
         private void Filter()
@@ -133,21 +132,14 @@ namespace AutoSchoolDiplom.Pages
             {
                 int instructorId = instructor.Id = (int)result;
 
-                cmd = Connection.GetCommand("insert into \"Instructor\" (\"Id\", \"DateEmployment\", \"DrivingExperience\") " +
-                    "values (@id, @dateEmployment, @drivingExperience)");
+                cmd = Connection.GetCommand("insert into \"Instructor\" (\"Id\", \"DateEmployment\", \"DrivingExperience\") values (@id, @dateEmployment, @drivingExperience)");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, instructorId);
                 cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
                 cmd.Parameters.AddWithValue("@drivingExperience", NpgsqlDbType.Varchar, drivingExperience);
                 result = cmd.ExecuteNonQuery();
 
-                if (result == null)
-                {
-                    MessageBox.Show("Данные не добавлены");
-                }
-                else
-                {
-                    MessageBox.Show("Данные добавлены");
-                }
+                if (result == null) { MessageBox.Show("Данные не добавлены"); }
+                else { MessageBox.Show("Данные добавлены"); }
             }
         }
 
@@ -183,14 +175,9 @@ namespace AutoSchoolDiplom.Pages
                     ClearingInformationElements();
                     BindingLvInstructors();
                 }
-                if (result == null)
-                {
-                    MessageBox.Show("Данные не удалены");
-                }
-                else
-                {
-                    MessageBox.Show("Данные удалены");
-                }
+
+                if (result == null) { MessageBox.Show("Данные не удалены"); }
+                else { MessageBox.Show("Данные удалены"); }
             }
         }
 
@@ -238,14 +225,8 @@ namespace AutoSchoolDiplom.Pages
                 cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
                 result = cmd.ExecuteNonQuery();
             }
-            if (result != 0)
-            {
-                MessageBox.Show("Данные обновлены");
-            }
-            else
-            {
-                MessageBox.Show("Данные не обновлены");
-            }
+            if (result != 0) { MessageBox.Show("Данные обновлены"); }
+            else { MessageBox.Show("Данные не обновлены"); }
 
             ClearingInformationElements();
             Connection.infoInstructors.Clear();

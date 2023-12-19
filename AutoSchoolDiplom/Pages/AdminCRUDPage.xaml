@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="85"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" >
@@ -37,171 +38,172 @@
             </StackPanel>
         </StackPanel>
 
-        <ListView Name="lvStudents" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListStudents}" SelectionChanged="lvStudents_SelectionChanged"></ListView>
+        <ListView Name="lvStudents" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListStudents}" SelectionChanged="lvStudents_SelectionChanged"></ListView>
+        <ScrollViewer Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1">
+            <StackPanel >
+                <DockPanel>
+                    <Image Width="15" Height="15" Margin="5" Source="/Image/magnifier-1_icon-icons.com_56924.png" />
+                    <TextBox  Name="tbSearch" TextChanged="Search_TextChanged" Margin="5" Padding="5" VerticalContentAlignment="Center"></TextBox>
+                </DockPanel>
 
-        <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" >
-            <DockPanel>
-                <Image Width="15" Height="15" Margin="5" Source="/Image/magnifier-1_icon-icons.com_56924.png" />
-                <TextBox  Name="tbSearch" TextChanged="Search_TextChanged" Margin="5" Padding="5" VerticalContentAlignment="Center"></TextBox>
-            </DockPanel>
-
-                <StackPanel >
-                    <DockPanel>
-                        <Label Content="Логин" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbLogin" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Пароль" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbPass" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Имя" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbFirstName" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Фамилия" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbLastName" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Отчество" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbPatronymic" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Пароль" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbPhone" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Email" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbEmail" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Дата рождения" Width="110" FontSize="14" Margin="5"></Label>
-                        <DatePicker Name="dpDateBirth" Margin="5" VerticalContentAlignment="Center"></DatePicker>
-                    </DockPanel>
-
-                    <DockPanel>
-                        <Label Content="Фотография" Width="110" FontSize="14" Margin="5"></Label>
-                        <TextBox Name="tbImage" Margin="5" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </DockPanel>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel>
-                        <TextBox Name="tbCours" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите курс обучения 🠗" FontSize="14" Opacity="0.6">
-                            <TextBox.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="3"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-
-                        <ListView Name="lvCoursStudent" Margin="5" Height="110" SelectionChanged="lvCoursStudent_SelectionChanged">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="30"></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Категория" Width="80"></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=TheoryHours}" Header="Теория (ч.)" Width="90"></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=DrivingHours}" Header="Вождение (ч.)" Width="90"></GridViewColumn>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1">
-                        <TextBox Name="tbGroup" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите группу ученика 🠗" FontSize="14" Opacity="0.6">
+                    <StackPanel >
+                        <DockPanel>
+                            <Label Content="Логин" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbLogin" Margin="5" VerticalContentAlignment="Center">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
                                     </Style>
                                 </TextBox.Resources>
                             </TextBox>
-                            <ListView Name="lvGroupStudent" Margin="5" Height="110" SelectionChanged="lvGroupStudent_SelectionChanged">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="30"></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=NumberGroup}" Header="Номер" Width="90"></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Лектор" ></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" ></GridViewColumn>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Patronymic}"  ></GridViewColumn>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+                        </DockPanel>
 
-                <Button Name="AddStudent" Grid.Column="0" FontSize="15" Background="White" Content="Добавить" Margin="2" Padding="5"  Click="AddStudent_Click"></Button>
-                <Button Name="DeleteStudent" Grid.Column="1" FontSize="15" Background="White" Content="Удалить" Margin="2" Padding="5"  Click="DeleteStudent_Click"></Button>
-                <Button Name="UpdateStudent" Grid.Column="2" FontSize="15" Background="White" Content="Изменить" Margin="2" Padding="5"  Click="UpdateStudent_Click"></Button>
-                <Button Name="DeselectSelection" Grid.Column="3" FontSize="15" Background="White" Content="Очистить" Margin="2" Padding="5" Click="DeselectSelection_Click"></Button>
-            </Grid>
-        </StackPanel>
+                        <DockPanel>
+                            <Label Content="Пароль" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbPass" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Имя" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbFirstName" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Фамилия" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbLastName" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Отчество" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbPatronymic" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Телефон" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbPhone" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Email" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbEmail" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Дата рождения" Width="110" FontSize="14" Margin="5"></Label>
+                            <DatePicker Name="dpDateBirth" Margin="5" VerticalContentAlignment="Center"></DatePicker>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Фотография" Width="110" FontSize="14" Margin="5"></Label>
+                            <TextBox Name="tbImage" Margin="5" VerticalContentAlignment="Center">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </DockPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+                            <TextBox Name="tbCours" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите курс обучения 🠗" FontSize="14" Opacity="0.6">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+
+                            <ListView Name="lvCoursStudent" Margin="5" Height="110" SelectionChanged="lvCoursStudent_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="30"></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Категория" Width="80"></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=TheoryHours}" Header="Теория (ч.)" Width="90"></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=DrivingHours}" Header="Вождение (ч.)" Width="90"></GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                            <TextBox Name="tbGroup" Height="30" Margin="5 5 5 0" IsReadOnly="True" VerticalContentAlignment="Center" Text="Выберите группу ученика 🠗" FontSize="14" Opacity="0.6">
+                                    <TextBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                                <ListView Name="lvGroupStudent" Margin="5" Height="110" SelectionChanged="lvGroupStudent_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="30"></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=NumberGroup}" Header="Номер" Width="90"></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Лектор" ></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" ></GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=Patronymic}"  ></GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Grid Margin="5" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Bottom" > 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Name="AddStudent" Grid.Column="0" FontSize="15" Background="White" Content="Добавить" Margin="2" Padding="5"  Click="AddStudent_Click"></Button>
+            <Button Name="DeleteStudent" Grid.Column="1" FontSize="15" Background="White" Content="Удалить" Margin="2" Padding="5"  Click="DeleteStudent_Click"></Button>
+            <Button Name="UpdateStudent" Grid.Column="2" FontSize="15" Background="White" Content="Изменить" Margin="2" Padding="5"  Click="UpdateStudent_Click"></Button>
+            <Button Name="DeselectSelection" Grid.Column="3" FontSize="15" Background="White" Content="Очистить" Margin="2" Padding="5" Click="DeselectSelection_Click"></Button>
+        </Grid>
     </Grid>
 </Page>

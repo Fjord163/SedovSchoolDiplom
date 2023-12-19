@@ -41,8 +41,6 @@ namespace DBConnection
         public static ObservableCollection<ClassGroup> classGroups { get; set; } = new ObservableCollection<ClassGroup>();
         public static ObservableCollection<ClassStudentGroup> studentGroups { get; set; } = new ObservableCollection<ClassStudentGroup>();
 
-
-
         public static void SelectInfoStudent()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
@@ -98,7 +96,6 @@ namespace DBConnection
             }
             result.Close();
         }
-
         public static void SelectGroup()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"Group\".\"Id\", \"Group\".\"NumberGroup\", \"Group\".\"Lecturer\"," +
@@ -123,7 +120,6 @@ namespace DBConnection
             }
             result.Close();
         }
-
         public static void SelectInfoLecturers()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", \"User\".\"LastName\"," +
@@ -154,7 +150,6 @@ namespace DBConnection
             }
             result.Close();
         }
-
         public static void SelectInfoInstructors()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", \"User\".\"LastName\"," +
@@ -200,7 +195,6 @@ namespace DBConnection
             }
             result.Close();
         }
-
         public static void InsertUsers(User users)
         {
             NpgsqlCommand cmd = GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
@@ -216,6 +210,5 @@ namespace DBConnection
             cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, users.Role);
             var result = cmd.ExecuteNonQuery();
         }
-
     }
 }
