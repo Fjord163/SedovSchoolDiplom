@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -124,6 +125,12 @@ namespace AutoSchoolDiplom.Pages
             dpDateBirth.Text = null;
             tbImage.Clear();
             lvCoursStudent.SelectedItem= null;
+            tbGroup.Clear();
+            tbCours.Clear();
+            tbCours.Text = "Выберите курс обучения 🠗";
+            tbCours.Opacity = 0.6;
+            tbGroup.Text = "Выберите группу ученика 🠗";
+            tbGroup.Opacity = 0.6;
         }
 
         public void InsertStudentInfo(FullInfoStudent student)
@@ -246,6 +253,8 @@ namespace AutoSchoolDiplom.Pages
         private void UpdateLecturer_Click(object sender, RoutedEventArgs e)
         {
             FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
+            ClassGroup group = lvGroupStudent.SelectedItem as ClassGroup;
+            CLassCours cours = lvCoursStudent.SelectedItem as CLassCours;
 
             var login = tbLogin.Text.Trim();
             var password = tbPass.Text.Trim();
@@ -259,14 +268,14 @@ namespace AutoSchoolDiplom.Pages
 
             NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
             cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
-            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, student.Group);
+            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group.Id);
             var result = cmd.ExecuteNonQuery();
             if (result != 0)
             {
                 cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
                 cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, photo);
-                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, student.Cours);
+                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours.Id);
                 result = cmd.ExecuteNonQuery();
                 if(result != 0)
                 {
@@ -319,6 +328,48 @@ namespace AutoSchoolDiplom.Pages
                 tbEmail.Text = (lvStudents.SelectedItem as FullInfoStudent).Email.ToString();
                 dpDateBirth.Text = (lvStudents.SelectedItem as FullInfoStudent).DateBirth.ToString();
                 tbImage.Text = (lvStudents.SelectedItem as FullInfoStudent).Photo.ToString();
+                tbGroup.Text = (lvStudents.SelectedItem as FullInfoStudent).Group.ToString();
+                tbGroup.Opacity = 1;
+                tbCours.Text = (lvStudents.SelectedItem as FullInfoStudent).Cours.ToString();
+                tbCours.Opacity = 1;
+            }
+        }
+
+        private void lvCoursStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvCoursStudent.SelectedItem != null)
+            {
+                tbCours.Clear();
+                tbCours.Opacity = 1;
+                tbCours.Text = (lvCoursStudent.SelectedItem as CLassCours).Id.ToString();
+            }
+        }
+
+        private void lvGroupStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvGroupStudent.SelectedItem != null)
+            {
+                tbGroup.Clear();
+                tbGroup.Opacity = 1;
+                tbGroup.Text = (lvGroupStudent.SelectedItem as ClassGroup).Id.ToString();
+            }
+        }
+
+        private void tbCours_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbCours.Text.Trim() == "Выберите курс обучения 🠗")
+            {
+                tbCours.Clear();
+                tbCours.Opacity = 1;
+            } 
+        }
+
+        private void tbGroup_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbGroup.Text.Trim() == "Выберите группу ученика 🠗")
+            {
+                tbGroup.Clear();
+                tbGroup.Opacity = 1;
             }
         }
     }
