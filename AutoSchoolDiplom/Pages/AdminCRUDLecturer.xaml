@@ -18,29 +18,49 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" >
-            <TextBlock TextWrapping="Wrap" Name="NameUser" TextDecorations="Underline" FontSize="15"></TextBlock>
-            <Button Name="btnSignOut" Margin="10" Content="Выйти" Padding="2" Background="White" Click="btnSignOut_Click" FontSize="15"></Button>
-        </StackPanel>
+        <Grid Grid.Column="4"  VerticalAlignment="Center" Margin="10" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Label Content="Пользователь:" HorizontalAlignment="Center" FontSize="15"></Label>
+                <TextBlock TextWrapping="Wrap" Name="NameUser" TextDecorations="Underline" FontSize="15"></TextBlock>
+            </StackPanel>
+
+            <Button Name="btnSignOut" Grid.Column="1" Margin="10" Padding="2" FontSize="15" BorderBrush="Transparent" Background="White" Click="btnSignOut_Click">
+                <Image Source="/Image/IconExit.png" />
+            </Button>
+        </Grid>
 
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label Content="Редактирование:" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></Label>
-            <StackPanel Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Name="btnTransitionInstructor" Height="25" Margin="5" FontSize="15" BorderBrush="Transparent" Background="Transparent" Content="Инструкторов" Click="btnTransitionInstructor_Click"></Button>
-                <Button Name="btnTransitionLecturer" Height="25" Margin="5" FontSize="15" BorderBrush="Transparent" Background="Transparent" Content="Лекторов" Click="btnTransitionLecturer_Click"></Button>
-                <Button Name="btnTransitionStudent"  Height="25" Margin="5" FontSize="15" BorderBrush="Transparent" Background="Transparent" Content="Учеников" Click="btnTransitionStudent_Click"></Button>
-            </StackPanel>
+            <Label Content="Страница редактирования" HorizontalAlignment="Center" FontWeight="Bold" FontSize="22"></Label>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Border BorderBrush="Black" BorderThickness="1 1 1 0" CornerRadius="10 10 0 0" Margin="5">
+                <Button Name="btnTransitionInstructor" MinWidth="120" Height="25" Margin="5" FontSize="15" BorderBrush="Transparent" Background="Transparent" Content="Инструкторов" Click="btnTransitionInstructor_Click"></Button>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1 1 1 0" CornerRadius="10 10 0 0" Margin="5">
+                <Button Name="btnTransitionLecturer" MinWidth="120" Height="25" Margin="5" FontSize="15" BorderBrush="Transparent" Background="Transparent" Content="Лекторов" Click="btnTransitionLecturer_Click"></Button>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1 1 1 0" CornerRadius="10 10 0 0" Margin="5">
+                <Button Name="btnTransitionStudent" MinWidth="120" Height="25" Margin="5" FontSize="15" BorderBrush="Transparent" Background="Transparent" Content="Учеников" Click="btnTransitionStudent_Click"></Button>
+            </Border>
         </StackPanel>
 
         <Image  HorizontalAlignment="Left"  Source="/Image/Logo_Sedov_School.jpg" />
 
-        <ListView Name="lvLecturer" HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListLecturer}" SelectionChanged="lvLecturer_SelectionChanged"></ListView>
+        <ListView Name="lvLecturer" HorizontalContentAlignment="Stretch" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemTemplate="{StaticResource ListLecturer}" SelectionChanged="lvLecturer_SelectionChanged"></ListView>
 
-        <ScrollViewer Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1">
+        <ScrollViewer Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2">
             <StackPanel>
                 <DockPanel>
                     <Image Width="15" Height="15" Margin="5" Source="/Image/magnifier-1_icon-icons.com_56924.png" />
@@ -143,7 +163,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Grid Margin="5" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
+        <Grid Margin="5" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
