@@ -27,55 +27,71 @@ namespace AutoSchoolDiplom.Pages
         public EntryPage()
         {
             InitializeComponent();
-
-
         }
 
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"Login\", \"Password\", \"FirstName\",\"LastName\",\"Patronymic\",\"Phone\",\"Email\", \"DateBirth\", \"Role\" FROM \"User\"" +
-                    "WHERE \"Login\" = @log AND \"Password\" = @pass");
-            cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
-            cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, pbPassword.Password.Trim());
-            NpgsqlDataReader result = cmd.ExecuteReader();
-          
+           Application.Current.MainWindow.WindowState = WindowState.Minimized;
             
-            if (result.HasRows)
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                result.Read();
+                NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"Login\", \"Password\", \"FirstName\",\"LastName\",\"Patronymic\",\"Phone\",\"Email\", \"DateBirth\", \"Role\" FROM \"User\"" +
+                        "WHERE \"Login\" = @log AND \"Password\" = @pass");
+                cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
+                cmd.Parameters.AddWithValue("@pass", NpgsqlDbType.Varchar, pbPassword.Password.Trim());
+                NpgsqlDataReader result = cmd.ExecuteReader();
 
-                Connection.users = new CLassUser()
+
+                if (result.HasRows)
                 {
-                    Login = result.GetString(1),
-                    Password = result.GetString(2),
-                    FirstName = result.GetString(3),
-                    LastName = result.GetString(4),
-                    Patronymic = result.GetString(5),
-                    Phone = result.GetString(6),
-                    Email = result.GetString(7),
-                    DateBirth = result.GetDateTime(8),
-                    Role = result.GetString(9)
-                };
-                result.Close();
+                    result.Read();
+
+                    Connection.users = new CLassUser()
+                    {
+                        Login = result.GetString(1),
+                        Password = result.GetString(2),
+                        FirstName = result.GetString(3),
+                        LastName = result.GetString(4),
+                        Patronymic = result.GetString(5),
+                        Phone = result.GetString(6),
+                        Email = result.GetString(7),
+                        DateBirth = result.GetDateTime(8),
+                        Role = result.GetString(9)
+                    };
+                    result.Close();
 
 
-                switch (Connection.users.Role) 
-                {
-                    case "Ученик":
-                        NavigationService.Navigate(new AccountStudent());
-                        break;
-                    case "Инструктор":
-                        NavigationService.Navigate(new AdminCRUDStudent());
-                        break;
-                    case "Лектор":
-                        NavigationService.Navigate(new AdminCRUDStudent());
-                        break;
-                    case "Админ":
-                        NavigationService.Navigate(new AdminCRUDStudent());
-                        break;
-                } 
+                    switch (Connection.users.Role)
+                    {
+                        case "Ученик":
+                            NavigationService.Navigate(new AccountStudent());
+                            break;
+                        case "Инструктор":
+                            NavigationService.Navigate(new AdminCRUDStudent());
+                            break;
+                        case "Лектор":
+                            NavigationService.Navigate(new AdminCRUDStudent());
+                            break;
+                        case "Админ":
+                            NavigationService.Navigate(new AdminCRUDStudent());
+                            break;
+                    }
+                }
             }
-            
+            catch
+            {
+                MessageBox.Show("Заполните поля");
+                return;
+            }   
         }
     }
 }

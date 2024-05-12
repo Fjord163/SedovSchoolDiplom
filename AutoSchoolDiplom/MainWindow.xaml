@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:AutoSchoolDiplom"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
-        WindowState="Maximized">
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        Background="Transparent"
+        AllowsTransparency="True"
+        >
     <Grid>
         <Frame Name="AppFrame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>

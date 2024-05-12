@@ -30,5 +30,13 @@ namespace AutoSchoolDiplom
 
             AppFrame.Navigate(new EntryPage());
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
     }
 }

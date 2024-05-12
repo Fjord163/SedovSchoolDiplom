@@ -134,7 +134,9 @@ namespace AutoSchoolDiplom.Pages
 
         public void InsertStudentInfo(FullInfoStudent student)
         {
-            CLassCours cours = lvCoursStudent.SelectedItem as CLassCours;
+            try
+            {
+                CLassCours cours = lvCoursStudent.SelectedItem as CLassCours;
             ClassGroup group = lvGroupStudent.SelectedItem as ClassGroup;
 
             var login = tbLogin.Text.Trim();
@@ -179,14 +181,20 @@ namespace AutoSchoolDiplom.Pages
             }
             if (result == null) { MessageBox.Show("Данные не добавлены"); }
             else { MessageBox.Show("Данные добавлены"); }
+            }
+            catch
+            {
+                MessageBox.Show("Введите данные");
+                return;
+            }
         }
 
         private void AddStudent_Click(object sender, RoutedEventArgs e)
         {
-            FullInfoStudent student = new FullInfoStudent();
-            InsertStudentInfo(student);
-            Connection.infoStudents.Clear();
-            BindingLvStudents();
+                FullInfoStudent student = new FullInfoStudent();
+                InsertStudentInfo(student);
+                Connection.infoStudents.Clear();
+                BindingLvStudents();
         }
 
         private void DeleteStudent_Click(object sender, RoutedEventArgs e)
@@ -235,59 +243,66 @@ namespace AutoSchoolDiplom.Pages
 
         private void UpdateStudent_Click(object sender, RoutedEventArgs e)
         {
-            FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
-
-            var login = tbLogin.Text.Trim();
-            var password = tbPass.Text.Trim();
-            var firstName = tbFirstName.Text.Trim();
-            var lastName = tbLastName.Text.Trim();
-            var patronymic = tbPatronymic.Text.Trim();
-            var phone = tbPhone.Text.Trim();
-            var email = tbEmail.Text.Trim();
-            var birth = dpDateBirth.SelectedDate;
-            var photo = tbImage.Text.Trim();
-
-            int group = Convert.ToInt32(tbGroup.Text);
-            group = int.Parse(tbGroup.Text);
-
-            int cours = Convert.ToInt32(tbCours.Text);
-            cours = int.Parse(tbCours.Text);
-
-            NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
-            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
-            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group);
-            var result = cmd.ExecuteNonQuery();
-            if (result != 0)
+            try
             {
-                cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
+                FullInfoStudent student = lvStudents.SelectedItem as FullInfoStudent;
+
+                var login = tbLogin.Text.Trim();
+                var password = tbPass.Text.Trim();
+                var firstName = tbFirstName.Text.Trim();
+                var lastName = tbLastName.Text.Trim();
+                var patronymic = tbPatronymic.Text.Trim();
+                var phone = tbPhone.Text.Trim();
+                var email = tbEmail.Text.Trim();
+                var birth = dpDateBirth.SelectedDate;
+                var photo = tbImage.Text.Trim();
+
+                int group = Convert.ToInt32(tbGroup.Text);
+                group = int.Parse(tbGroup.Text);
+
+                int cours = Convert.ToInt32(tbCours.Text);
+                cours = int.Parse(tbCours.Text);
+
+                NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
-                cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, photo);
-                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours);
-                result = cmd.ExecuteNonQuery();
-                if(result != 0)
+                cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group);
+                var result = cmd.ExecuteNonQuery();
+                if (result != 0)
                 {
-                    cmd = Connection.GetCommand("UPDATE \"User\" SET \"Login\"= @login, \"Password\"= @password, \"FirstName\"= @firstName, \"LastName\"= @lastName," +
-                   "\"Patronymic\"= @patronymic, \"Phone\"= @phone, \"Email\"= @email, \"DateBirth\"= @birth where \"Id\" = @id");
+                    cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
                     cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
-                    cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
-                    cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
-                    cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
-                    cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
-                    cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, patronymic);
-                    cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, phone);
-                    cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, email);
-                    cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
+                    cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, photo);
+                    cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours);
                     result = cmd.ExecuteNonQuery();
+                    if (result != 0)
+                    {
+                        cmd = Connection.GetCommand("UPDATE \"User\" SET \"Login\"= @login, \"Password\"= @password, \"FirstName\"= @firstName, \"LastName\"= @lastName," +
+                       "\"Patronymic\"= @patronymic, \"Phone\"= @phone, \"Email\"= @email, \"DateBirth\"= @birth where \"Id\" = @id");
+                        cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
+                        cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
+                        cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+                        cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
+                        cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
+                        cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, patronymic);
+                        cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, phone);
+                        cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, email);
+                        cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
+                        result = cmd.ExecuteNonQuery();
+                    }
+                }
+                if (result != 0)
+                {
+                    Connection.infoStudents.Clear();
+                    BindingLvStudents();
+                    ClearingInformationElements();
+                    MessageBox.Show("Данные обновлены");
                 }
             }
-            if (result != 0)
+            catch
             {
-                Connection.infoStudents.Clear();
-                BindingLvStudents();
-                ClearingInformationElements();
+                MessageBox.Show("Выберите элемент списка");
+                return;
             }
-            if (result == 0) { MessageBox.Show("Данные не обновлены"); }
-            else { MessageBox.Show("Данные обновлены"); }
         }
 
         private void DeselectSelection_Click(object sender, RoutedEventArgs e)
