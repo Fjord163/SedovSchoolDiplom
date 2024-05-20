@@ -214,7 +214,7 @@
                             <DatePicker Name="dpDateBirth" 
                                 Margin="5" Padding="5" 
                                 VerticalContentAlignment="Center"
-                                Text="{Binding DateBirth}"/>
+                                SelectedDate="{Binding DateBirth}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="5">
                             <Label Content="Дата Приема на работу" 
@@ -223,7 +223,7 @@
                                         Margin="5" 
                                         Padding="5" 
                                         VerticalContentAlignment="Center"
-                                        Text="{Binding DateEmployment}"/>
+                                        SelectedDate="{Binding DateEmployment}"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

@@ -36,9 +36,12 @@ namespace AutoSchoolDiplom.ModalWindow
         {
             try
             {
+                var birth = dpDateBirth.SelectedDate;
+                var dateEmployment = dpDateEmployment.SelectedDate;
+
                 NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"Instructor\" SET \"DateEmployment\"= @dateEmployment, \"DrivingExperience\" = @drivingExperience where \"Id\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, _fullinfoInstructor.Id);
-                cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, _fullinfoInstructor.DateEmployment);
+                cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
                 cmd.Parameters.AddWithValue("@drivingExperience", NpgsqlDbType.Varchar, _fullinfoInstructor.DrivingExperience);
                 var result = cmd.ExecuteNonQuery();
                 if (result != 0)
@@ -53,7 +56,7 @@ namespace AutoSchoolDiplom.ModalWindow
                     cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, _fullinfoInstructor.Patronymic);
                     cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, _fullinfoInstructor.Phone);
                     cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, _fullinfoInstructor.Email);
-                    cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, _fullinfoInstructor.DateBirth);
+                    cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
                     result = cmd.ExecuteNonQuery();
                 }
                 if (result != 0) { MessageBox.Show("Данные обновлены"); }

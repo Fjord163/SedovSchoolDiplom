@@ -286,7 +286,7 @@
                                     <GridViewColumn Header="Отчество" Width="auto" DisplayMemberBinding="{Binding Patronymic}"/>
                                     <GridViewColumn Header="Телефон" Width="auto" DisplayMemberBinding="{Binding Phone}"/>
                                     <GridViewColumn Header="Почта" Width="auto" DisplayMemberBinding="{Binding Email}"/>
-                                    <GridViewColumn Header="Дата рождения" Width="auto" DisplayMemberBinding="{Binding DateBirth, StringFormat={}{0:dd-MM-yyyy}}"/>
+                                    <GridViewColumn Header="Дата рождения" Width="auto" DisplayMemberBinding="{Binding DateBirth, StringFormat=dd.MM.yyyy}"/>
                                     <GridViewColumn Header="№ Группы" Width="auto" DisplayMemberBinding="{Binding NumberGroup}"/>
                                     <GridViewColumn Header="Программа обуч." Width="auto">
                                         <GridViewColumn.CellTemplate>

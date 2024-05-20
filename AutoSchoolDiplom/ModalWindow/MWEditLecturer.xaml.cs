@@ -35,9 +35,12 @@ namespace AutoSchoolDiplom.ModalWindow
         {
             try
             {
+
+                var birth = dpDateBirth.SelectedDate;
+                var dateEmployment = dpDateEmployment.SelectedDate;
                 NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"Lecturer\" SET \"DateEmployment\"= @dateEmployment where \"Id\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, _fullinfoLecturer.Id);
-                cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, _fullinfoLecturer.DateEmployment);
+                cmd.Parameters.AddWithValue("@dateEmployment", NpgsqlDbType.Date, dateEmployment);
                 var result = cmd.ExecuteNonQuery();
                 if (result != 0)
                 {
@@ -51,7 +54,7 @@ namespace AutoSchoolDiplom.ModalWindow
                     cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, _fullinfoLecturer.Patronymic);
                     cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, _fullinfoLecturer.Phone);
                     cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, _fullinfoLecturer.Email);
-                    cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, _fullinfoLecturer.DateBirth);
+                    cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
                     result = cmd.ExecuteNonQuery();
                 }
                 if (result != 0) { MessageBox.Show("Данные обновлены"); }

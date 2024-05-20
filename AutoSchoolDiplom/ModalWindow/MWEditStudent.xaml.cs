@@ -59,8 +59,7 @@ namespace AutoSchoolDiplom.ModalWindow
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
-            Connection.classGroups.Clear();
-            Connection.cours.Clear();
+            
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -71,18 +70,22 @@ namespace AutoSchoolDiplom.ModalWindow
         {
             try
             {
+                var birth = dpDateBirth.SelectedDate;
+
+                CLassCours cours = cbCours.SelectedItem as CLassCours;
+                ClassGroup group = cbGroup.SelectedItem as ClassGroup;
                 string icon = "C:\\Users\\cloze\\source\\repos\\AutoSchoolDiplom\\AutoSchoolDiplom\\Image\\Icon.png";
 
                 NpgsqlCommand cmd = Connection.GetCommand("UPDATE \"StudentGroup\" SET \"Group\"= @group where \"Student\" = @id");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, _fullinfoStudent.Id);
-                cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, _fullinfoStudent.Group);
+                cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, group.Id);
                 var result = cmd.ExecuteNonQuery();
                 if (result != 0)
                 {
                     cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
                     cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, _fullinfoStudent.Id);
                     cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, icon);
-                    cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, _fullinfoStudent.Cours);
+                    cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours.Id);
                     result = cmd.ExecuteNonQuery();
                     if (result != 0)
                     {
@@ -96,7 +99,7 @@ namespace AutoSchoolDiplom.ModalWindow
                         cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, _fullinfoStudent.Patronymic);
                         cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, _fullinfoStudent.Phone);
                         cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, _fullinfoStudent.Email);
-                        cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, _fullinfoStudent.DateBirth);
+                        cmd.Parameters.AddWithValue("@birth", NpgsqlDbType.Date, birth);
                         result = cmd.ExecuteNonQuery();
                     }
                 }

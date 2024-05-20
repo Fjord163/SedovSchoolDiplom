@@ -161,6 +161,8 @@ namespace AutoSchoolDiplom.Pages
             {
                 Connection.infoStudents.Clear();
                 BindingLvStudents();
+                Connection.classGroups.Clear();
+                Connection.cours.Clear();
             }
         }
     }

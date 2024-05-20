@@ -194,7 +194,7 @@
                         <DatePicker Name="dpDateBirth" 
                                     Margin="5" Padding="5" 
                                     VerticalContentAlignment="Center"
-                                    Text="{Binding DateBirth}"/>
+                                    SelectedDate="{Binding DateBirth}"/>
                     </DockPanel>
 
                     <DockPanel >
@@ -214,8 +214,7 @@
                                Width="110"/>
                         <ComboBox Name="cbCours" 
                                   Margin="5" Padding="5" 
-                                  VerticalContentAlignment="Center"
-                                  Text="{Binding Category}">
+                                  VerticalContentAlignment="Center">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
