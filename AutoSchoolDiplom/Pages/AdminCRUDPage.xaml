@@ -208,7 +208,7 @@
                             </TextBox>
 
                             <ListView Name="lvCoursStudent" Margin="5" Height="110" SelectionChanged="lvCoursStudent_SelectionChanged">
-                                    <ListView.View>
+                                    <ListView.View> 
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="30"></GridViewColumn>
                                             <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Категория" Width="80"></GridViewColumn>

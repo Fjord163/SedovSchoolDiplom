@@ -27,12 +27,12 @@ namespace AutoSchoolDiplom.Pages
         public EntryPage()
         {
             InitializeComponent();
+
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
            Application.Current.MainWindow.WindowState = WindowState.Minimized;
-            
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -73,23 +73,23 @@ namespace AutoSchoolDiplom.Pages
                     switch (Connection.users.Role)
                     {
                         case "Ученик":
-                            NavigationService.Navigate(new AccountStudent());
+                            NavigationService.Navigate(new EditingLecturer());
                             break;
                         case "Инструктор":
-                            NavigationService.Navigate(new AdminCRUDStudent());
+                            NavigationService.Navigate(new EditingInstructor());
                             break;
                         case "Лектор":
-                            NavigationService.Navigate(new AdminCRUDStudent());
+                            NavigationService.Navigate(new EditingLecturer());
                             break;
                         case "Админ":
-                            NavigationService.Navigate(new AdminCRUDStudent());
+                            NavigationService.Navigate(new EditingLecturer());
                             break;
                     }
                 }
             }
             catch
             {
-                MessageBox.Show("Заполните поля");
+                MessageBox.Show("Такого аккаунта не существует");
                 return;
             }   
         }

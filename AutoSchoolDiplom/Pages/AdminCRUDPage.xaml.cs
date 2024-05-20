@@ -86,7 +86,7 @@ namespace AutoSchoolDiplom.Pages
 
         private void btnTransitionInstructor_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AdminCRUDInctructor());
+            NavigationService.Navigate(new EditingInstructor());
             Connection.infoStudents.Clear();
             Connection.classGroups.Clear();
             Connection.cours.Clear();
@@ -94,7 +94,7 @@ namespace AutoSchoolDiplom.Pages
 
         private void btnTransitionLecturer_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AdminCRUDLecturer());
+            NavigationService.Navigate(new EditingLecturer());
             Connection.infoStudents.Clear();
             Connection.classGroups.Clear();
             Connection.cours.Clear();

@@ -1,0 +1,253 @@
+﻿<Window x:Class="AutoSchoolDiplom.ModalWindow.MWAddInstructor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoSchoolDiplom.ModalWindow"
+        mc:Ignorable="d"
+        Title="MWAddInstructor" Height="480" Width="800"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown">
+    <Border CornerRadius="12">
+        <Border CornerRadius="10"
+            BorderThickness="3"
+            Background="White">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#fcdb03" Offset="1"/>
+                    <GradientStop Color="#fab255" Offset="0.75"/>
+                    <GradientStop Color="#fadaaf" Offset="0"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel HorizontalAlignment="Right"
+                            Margin="0 5 5 0">
+                    <Button Name="btnClose"
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="Black"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnClose_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Red"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#ad0303"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <DockPanel>
+                        <Label Content="Логин" 
+                    Width="110" 
+                    Margin="5" 
+                    FontSize="14"></Label>
+                        <TextBox Name="tbLogin" 
+                      Margin="5" 
+                      VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Пароль" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbPass" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Имя" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbFirstName" 
+                                 Margin="5"  
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Фамилия" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbLastName" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Отчество" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbPatronymic" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Телефон" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbPhone" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Email" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbEmail" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Label Content="Стаж вождения" 
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"></Label>
+                        <TextBox Name="tbDrivingExperience" 
+                                 Margin="5" 
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </DockPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="5">
+                            <Label Content="Дата рождения" 
+                                   FontSize="14"/>
+                            <DatePicker Name="dpDateBirth" 
+                                        Margin="5" Padding="5" 
+                                        VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="5">
+                            <Label Content="Дата Приема на работу" 
+                                   FontSize="14"/>
+                            <DatePicker Name="dpDateEmployment" 
+                                        Margin="5" 
+                                        Padding="5" 
+                                        VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <Button Name="btnCreateUser"
+                        BorderThickness="0"
+                        Content="Добавить"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Grid.Row="2"
+                        Click="btnCreateUser_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#d1493d"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#91332a"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="250" Height="40"
+                                    CornerRadius="20"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

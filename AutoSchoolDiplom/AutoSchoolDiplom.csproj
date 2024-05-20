@@ -115,6 +115,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="StudentComboBoxItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -127,19 +128,43 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AccountStudent.xaml">
+    <Page Include="ModalWindow\MWAddInstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdminCRUDInctructor.xaml">
+    <Page Include="ModalWindow\MWAddLecturer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdminCRUDLecturer.xaml">
+    <Page Include="ModalWindow\MWAddStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindow\MWEditInstructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindow\MWEditLecturer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindow\MWEditStudent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdminCRUDPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditingInstructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditingLecturer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditingStudent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,17 +178,35 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\AccountStudent.xaml.cs">
-      <DependentUpon>AccountStudent.xaml</DependentUpon>
+    <Compile Include="ModalWindow\MWAddInstructor.xaml.cs">
+      <DependentUpon>MWAddInstructor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminCRUDInctructor.xaml.cs">
-      <DependentUpon>AdminCRUDInctructor.xaml</DependentUpon>
+    <Compile Include="ModalWindow\MWAddLecturer.xaml.cs">
+      <DependentUpon>MWAddLecturer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminCRUDLecturer.xaml.cs">
-      <DependentUpon>AdminCRUDLecturer.xaml</DependentUpon>
+    <Compile Include="ModalWindow\MWAddStudent.xaml.cs">
+      <DependentUpon>MWAddStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModalWindow\MWEditInstructor.xaml.cs">
+      <DependentUpon>MWEditInstructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModalWindow\MWEditLecturer.xaml.cs">
+      <DependentUpon>MWEditLecturer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModalWindow\MWEditStudent.xaml.cs">
+      <DependentUpon>MWEditStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminCRUDPage.xaml.cs">
       <DependentUpon>AdminCRUDPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditingInstructor.xaml.cs">
+      <DependentUpon>EditingInstructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditingLecturer.xaml.cs">
+      <DependentUpon>EditingLecturer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditingStudent.xaml.cs">
+      <DependentUpon>EditingStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
@@ -224,6 +267,15 @@
   <ItemGroup>
     <Resource Include="Image\key-icon.png" />
     <Resource Include="Image\user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\IconEdit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\IconDelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\IconLvEdit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
