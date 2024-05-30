@@ -143,6 +143,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\AccountInstructor.xaml.cs">
+      <DependentUpon>AccountInstructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AccountLector.xaml.cs">
+      <DependentUpon>AccountLector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AccountStudent.xaml.cs">
+      <DependentUpon>AccountStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ScheduleLector.xaml.cs">
+      <DependentUpon>ScheduleLector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ScheduleStudent.xaml.cs">
+      <DependentUpon>ScheduleStudent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StudentComboBoxItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +195,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AccountInstructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AccountLector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AccountStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EditingInstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,7 +223,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TimeTable.xaml">
+    <Page Include="Pages\ScheduleLector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ScheduleStudent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,9 +262,6 @@
     </Compile>
     <Compile Include="Pages\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\TimeTable.xaml.cs">
-      <DependentUpon>TimeTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -310,6 +338,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\scheduleIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\ProfileIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

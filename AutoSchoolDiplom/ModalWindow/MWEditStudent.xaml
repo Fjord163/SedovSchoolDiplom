@@ -221,9 +221,9 @@
                                         <TextBlock Text="{Binding Category}" />
                                         <TextBlock Text=" " />
                                         <TextBlock Text="{Binding TheoryHours}" />
-                                        <TextBlock Text="ч. " />
+                                        <TextBlock Text="ч. "/>
                                         <TextBlock Text="{Binding DrivingHours}" />
-                                        <TextBlock Text="ч." />
+                                        <TextBlock Text="ч."/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>

@@ -4,6 +4,7 @@ using Npgsql;
 using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,6 +27,7 @@ namespace AutoSchoolDiplom.ModalWindow
     public partial class MWEditStudent : Window
     {
         private FullInfoStudent _fullinfoStudent;
+        public ObservableCollection<string> Programs { get; set; }
         public MWEditStudent(FullInfoStudent fullInfoStudent, List<StudentComboBoxItem> comboBoxItems, StudentComboBoxItem selectedComboBoxItem)
         {
             InitializeComponent();
@@ -33,12 +35,17 @@ namespace AutoSchoolDiplom.ModalWindow
             _fullinfoStudent = fullInfoStudent;
             DataContext = fullInfoStudent;
 
-            cbCours.ItemsSource = comboBoxItems;
+            Programs = new ObservableCollection<string>
+            {
+                $"{selectedComboBoxItem.Category} {selectedComboBoxItem.TheoryHours}ч. {selectedComboBoxItem.DrivingHours}ч."
+            };
+
+            //cbCours.ItemsSource = comboBoxItems;
 
 
-            if (comboBoxItems != null && comboBoxItems.Contains(selectedComboBoxItem)) { 
-                cbCours.SelectedItem = selectedComboBoxItem;
-            }
+            //if (comboBoxItems != null && comboBoxItems.Contains(selectedComboBoxItem)) { 
+            //    cbCours.SelectedItem = selectedComboBoxItem;
+            //}
             BindingcbCours();
             BindingcbGroup();
         }

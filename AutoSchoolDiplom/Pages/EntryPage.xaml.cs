@@ -57,6 +57,7 @@ namespace AutoSchoolDiplom.Pages
 
                     Connection.users = new CLassUser()
                     {
+                        Id = result.GetInt32(0),
                         Login = result.GetString(1),
                         Password = result.GetString(2),
                         FirstName = result.GetString(3),
@@ -72,14 +73,14 @@ namespace AutoSchoolDiplom.Pages
 
                     switch (Connection.users.Role)
                     {
-                        case "Ученик":
-                            NavigationService.Navigate(new EditingLecturer());
+                        case "Студент":
+                            NavigationService.Navigate(new AccountStudent(Connection.users));
                             break;
                         case "Инструктор":
-                            NavigationService.Navigate(new EditingInstructor());
+                            NavigationService.Navigate(new AccountInstructor(Connection.users));
                             break;
                         case "Лектор":
-                            NavigationService.Navigate(new EditingLecturer());
+                            NavigationService.Navigate(new AccountLector(Connection.users));
                             break;
                         case "Админ":
                             NavigationService.Navigate(new EditingLecturer());
