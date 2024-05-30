@@ -233,7 +233,7 @@
 
                 <Button Name="btnEditUser"
                     BorderThickness="0"
-                    Content="Добавить"
+                    Content="Сохранить изменения"
                     Foreground="White"
                     FontSize="12"
                     FontFamily="Montserrat"
