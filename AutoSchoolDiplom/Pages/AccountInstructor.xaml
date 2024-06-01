@@ -42,12 +42,12 @@ BorderThickness="3">
                         </StackPanel>
 
                         <Button Name="btnAccountPage"
-                    Content="Профиль"
-                    Margin="5 2 2 2"
-                    Foreground="Black"
-                    Cursor="Hand"
-                    Background="Transparent"
-                    Click="btnTransitionAccountPage">
+                                Content="Профиль"
+                                Margin="5 2 2 2"
+                                Foreground="Black"
+                                Cursor="Hand"
+                                Background="Transparent"
+                                Click="btnTransitionAccountPage">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>
