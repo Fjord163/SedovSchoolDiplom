@@ -16,5 +16,6 @@ namespace DBConnection
         public TimeSpan Time { get; set; }
         public int Group { get; set; }
         public string NumberGroup { get; set; }
+        public string Office { get; set;}
     }
 }

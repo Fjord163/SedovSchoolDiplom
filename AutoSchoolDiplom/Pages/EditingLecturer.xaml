@@ -280,7 +280,6 @@
                                 <GridView>
                                     <GridViewColumn Header="№" Width="auto" DisplayMemberBinding="{Binding Id}"/>
                                     <GridViewColumn Header="Логин" Width="auto" DisplayMemberBinding="{Binding Login}"/>
-                                    <GridViewColumn Header="Пароль" Width="auto" DisplayMemberBinding="{Binding Password}"/>
                                     <GridViewColumn Header="Фамилия" Width="auto" DisplayMemberBinding="{Binding LastName}"/>
                                     <GridViewColumn Header="Имя" Width="auto" DisplayMemberBinding="{Binding FirstName}"/>
                                     <GridViewColumn Header="Отчество" Width="auto" DisplayMemberBinding="{Binding Patronymic}"/>

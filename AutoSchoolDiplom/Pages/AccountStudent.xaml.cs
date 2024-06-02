@@ -23,13 +23,28 @@ namespace AutoSchoolDiplom.Pages
     public partial class AccountStudent : Page
     {
         public CLassUser _classUser;
+        public FullInfoStudent FullInfoStudent { get; set; }
         public AccountStudent(CLassUser authorizedStudent)
         {
             InitializeComponent();
             _classUser = authorizedStudent;
             DataContext = authorizedStudent;
+            LoadStudentInfo();
         }
-       
+        private void LoadStudentInfo()
+        {
+            var students = Connection.GetFullInfoStudents();
+            FullInfoStudent = students.FirstOrDefault(s => s.Id == _classUser.Id);
+
+            if (FullInfoStudent != null)
+            {
+                DataContext = FullInfoStudent;
+            }
+            else
+            {
+                MessageBox.Show("Информация о студенте не найдена");
+            }
+        }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

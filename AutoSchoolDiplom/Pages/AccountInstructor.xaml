@@ -291,8 +291,21 @@ BorderThickness="3">
                                             </TextBox.Resources>
                                         </TextBox>
                                     </DockPanel>
+                                    <DockPanel Margin="0 5 0 0">
+                                        <TextBlock Text="Стаж вождения" Width="100"></TextBlock>
+                                        <TextBox IsReadOnly="True"
+                                                  BorderBrush="#f9c07a"
+                                                  BorderThickness="1"
+                                                  Name="tbDrivingExperience"
+                                                  Text="{Binding DrivingExperience}">
+                                            <TextBox.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="5"></Setter>
+                                                </Style>
+                                            </TextBox.Resources>
+                                        </TextBox>
+                                    </DockPanel>
 
-                                    
                                 </StackPanel>
                             </Border>
                         </Grid>

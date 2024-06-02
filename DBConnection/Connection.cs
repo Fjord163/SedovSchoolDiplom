@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Npgsql;
 using NpgsqlTypes;
 
@@ -79,6 +80,99 @@ namespace DBConnection
             }
             result.Close();
         }
+        public static List<FullInfoStudent> GetFullInfoStudents()
+        {
+            List<FullInfoStudent> infoStudents = new List<FullInfoStudent>();
+
+            try
+            {
+                NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
+                 "\"User\".\"LastName\" , \"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\"," +
+                 "\"Student\".\"Photo\" ,\"Cours\".\"Category\" ,\"Cours\".\"TheoryHours\" ,\"Cours\".\"DrivingHours\" ,\"Group\".\"NumberGroup\", \"StudentGroup\".\"Student\",  \"StudentGroup\".\"Group\", \"Student\".\"Cours\"" +
+                 "FROM \"User\", \"Student\", \"Cours\", \"StudentGroup\",\"Group\"" +
+                 "WHERE \"User\".\"Id\" = \"Student\".\"Id\" AND \"Student\".\"Cours\" = \"Cours\".\"Id\" AND \"Student\".\"Id\" = \"StudentGroup\".\"Student\"" +
+                 "AND \"StudentGroup\".\"Group\" = \"Group\".\"Id\"");
+                NpgsqlDataReader result = cmd.ExecuteReader();
+
+                if (result.HasRows)
+                {
+                    while (result.Read())
+                    {
+                        infoStudents.Add(new FullInfoStudent(
+                                result.GetInt32(0),
+                                result.GetString(1),
+                                result.GetString(2),
+                                result.GetString(3),
+                                result.GetString(4),
+                                result.GetString(5),
+                                result.GetString(6),
+                                result.GetString(7),
+                                result.GetDateTime(8),
+                                result.GetString(9),
+                                result.GetString(10),
+                                result.GetString(11),
+                                result.GetString(12),
+                                result.GetString(13),
+                                result.GetString(14),
+                                result.GetInt32(15),
+                                result.GetInt32(16),
+                                result.GetInt32(17)
+                            ));
+                    }
+                }
+                result.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка загрузки информации о студентах");
+            }
+
+            return infoStudents;
+        }
+
+        public static List<FullInfoInstructor> GetFullInfoInstructor()
+        {
+            List<FullInfoInstructor> infoInstructors = new List<FullInfoInstructor>();
+
+            try
+            {
+                NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", \"User\".\"LastName\"," +
+               "\"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\", \"Instructor\".\"DateEmployment\", \"Instructor\".\"DrivingExperience\"" +
+               "FROM \"User\", \"Instructor\"" +
+               "WHERE \"User\".\"Id\" = \"Instructor\".\"Id\"");
+                NpgsqlDataReader result = cmd.ExecuteReader();
+
+                if (result.HasRows)
+                {
+                    while (result.Read())
+                    {
+                        infoInstructors.Add(new FullInfoInstructor(
+                                result.GetInt32(0),
+                                result.GetString(1),
+                                result.GetString(2),
+                                result.GetString(3),
+                                result.GetString(4),
+                                result.GetString(5),
+                                result.GetString(6),
+                                result.GetString(7),
+                                result.GetDateTime(8),
+                                result.GetString(9),
+                                result.GetDateTime(10),
+                                result.GetString(11)
+                            ));
+                    }
+
+                }
+                result.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка загрузки информации о студентах");
+            }
+
+            return infoInstructors;
+        }
+
         public static void SelectGroupStudent()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"Student\", \"Group\" FROM \"StudentGroup\"");
@@ -96,6 +190,8 @@ namespace DBConnection
             }
             result.Close();
         }
+        
+
         public static void SelectGroup()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"Group\".\"Id\", \"Group\".\"NumberGroup\", \"Group\".\"Lecturer\"," +

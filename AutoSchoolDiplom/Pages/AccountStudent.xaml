@@ -333,7 +333,7 @@
                                         </TextBox>
                                     </DockPanel>
 
-                                    <!--<DockPanel Margin="0 5 0 0">
+                                    <DockPanel Margin="0 5 0 0">
                                         <TextBlock Text="Категория" Width="100"></TextBlock>
                                         <TextBox IsReadOnly="True"
                                                  BorderBrush="#f9c07a"
@@ -388,7 +388,7 @@
                                                 </Style>
                                             </TextBox.Resources>
                                         </TextBox>
-                                    </DockPanel>-->
+                                    </DockPanel>
                                 </StackPanel>
                             </Border>
                         </Grid>

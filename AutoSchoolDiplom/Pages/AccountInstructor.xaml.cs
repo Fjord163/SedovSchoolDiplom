@@ -22,13 +22,29 @@ namespace AutoSchoolDiplom.Pages
     public partial class AccountInstructor : Page
     {
         public CLassUser _classUser;
+        public FullInfoInstructor FullInfoInstructor { get; set; }
+
         public AccountInstructor(CLassUser authorizedInstructor)
         {
             InitializeComponent();
             _classUser = authorizedInstructor;
             DataContext = authorizedInstructor;
+            LoadStudentInfo();
         }
+        private void LoadStudentInfo()
+        {
+            var instructors = Connection.GetFullInfoInstructor();
+            FullInfoInstructor = instructors.FirstOrDefault(s => s.Id == _classUser.Id);
 
+            if (FullInfoInstructor != null)
+            {
+                DataContext = FullInfoInstructor;
+            }
+            else
+            {
+                MessageBox.Show("Информация о инструкторе не найдена");
+            }
+        }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

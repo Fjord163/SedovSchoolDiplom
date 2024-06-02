@@ -15,7 +15,7 @@ namespace DBConnection
             StartWeek = startWeek;
             EndWeek = endWeek;
         }
-
+        public string DisplayText => $"{NumberWeek} ({StartWeek.ToString("d")} - {EndWeek.ToString("d")})";
         public int Id { get; set; }
         public string NumberWeek { get; set; }
         public DateTime StartWeek { get; set; }

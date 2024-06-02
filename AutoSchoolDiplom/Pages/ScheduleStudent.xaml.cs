@@ -37,9 +37,9 @@ namespace AutoSchoolDiplom.Pages
         }
         public class ScheduleViewModel : INotifyPropertyChanged
         {
-            private string _timeSlotText;
             private ClassNameWeek _selectedWeek;
             private CLassUser _authorizedStudent;
+            private string _studentGroup;
 
             public ObservableCollection<ClassNameWeek> Weeks { get; set; }
             public ObservableCollection<TimeTable> MondaySchedule { get; set; }
@@ -56,20 +56,10 @@ namespace AutoSchoolDiplom.Pages
                 {
                     _selectedWeek = value;
                     OnPropertyChanged();
-                    LoadTimeSlots();
                     LoadFilteredTimetable();
                 }
             }
 
-            public string TimeSlotText
-            {
-                get { return _timeSlotText; }
-                set
-                {
-                    _timeSlotText = value;
-                    OnPropertyChanged();
-                }
-            }
 
             public ScheduleViewModel()
             {
@@ -91,6 +81,16 @@ namespace AutoSchoolDiplom.Pages
                     _authorizedStudent = value;
                     OnPropertyChanged();
                     LoadFilteredTimetable();
+                    LoadStudentGroup();
+                }
+            }
+            public string StudentGroup
+            {
+                get { return _studentGroup; }
+                set
+                {
+                    _studentGroup = value;
+                    OnPropertyChanged();
                 }
             }
 
@@ -125,7 +125,7 @@ namespace AutoSchoolDiplom.Pages
                 {
                     if (SelectedWeek != null && AuthorizedStudent != null)
                     {
-                        string query = "SELECT tl.\"Id\", tl.\"NumberWeek\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\" " +
+                        string query = "SELECT tl.\"Id\", tl.\"NumberWeek\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\" " +
                                        "FROM \"TimetableTheory\" tl " +
                                        "JOIN \"Group\" g ON tl.\"Group\" = g.\"Id\" " +
                                        "JOIN \"StudentGroup\" sg ON g.\"Id\" = sg.\"Group\" " +
@@ -146,7 +146,8 @@ namespace AutoSchoolDiplom.Pages
                                 Weekday = reader.GetString(2),
                                 Time = reader.GetTimeSpan(3),
                                 Group = reader.GetInt32(4),
-                                NumberGroup = reader.GetString(5)
+                                NumberGroup = reader.GetString(5),
+                                Office = reader.GetString(6)
                             };
 
                             switch (timetable.Weekday)
@@ -178,9 +179,9 @@ namespace AutoSchoolDiplom.Pages
                         ClearSchedules();
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
-                    MessageBox.Show("Ошибка загрузки расписания: ");
+                    MessageBox.Show("Ошибка загрузки расписания: " + ex.Message);
                 }
             }
 
@@ -193,16 +194,26 @@ namespace AutoSchoolDiplom.Pages
                 FridaySchedule.Clear();
                 SaturdaySchedule.Clear();
             }
-
-            private void LoadTimeSlots()
+            private void LoadStudentGroup()
             {
-                if (SelectedWeek != null)
+                try
                 {
-                    TimeSlotText = $"{SelectedWeek.StartWeek.ToString("d")} - {SelectedWeek.EndWeek.ToString("d")}";
+                    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Group\".\"NumberGroup\" FROM \"StudentGroup\" " +
+                                                              "JOIN \"Group\" ON \"StudentGroup\".\"Group\" = \"Group\".\"Id\" " +
+                                                              "WHERE \"StudentGroup\".\"Student\" = @StudentId");
+                    cmd.Parameters.AddWithValue("StudentId", AuthorizedStudent.Id);
+                    NpgsqlDataReader result = cmd.ExecuteReader();
+
+                    if (result.HasRows)
+                    {
+                        result.Read();
+                        StudentGroup = result.GetString(0);
+                    }
+                    result.Close();
                 }
-                else
+                catch
                 {
-                    TimeSlotText = string.Empty;
+                    MessageBox.Show("Ошибка загрузки группы студента: ");
                 }
             }
 
@@ -214,140 +225,7 @@ namespace AutoSchoolDiplom.Pages
             }
         }
 
-        //public class ScheduleViewModel : INotifyPropertyChanged
-        //{
-        //    private string _timeSlotText;
-        //    private ClassNameWeek _selectedWeek;
-        //    private CLassUser _authorizedStudent;
 
-        //    public ObservableCollection<ClassNameWeek> Weeks { get; set; }
-        //    public ObservableCollection<TimeTable> Timetable { get; set; }
-
-        //    public ClassNameWeek SelectedWeek
-        //    {
-        //        get { return _selectedWeek; }
-        //        set
-        //        {
-        //            _selectedWeek = value;
-        //            OnPropertyChanged();
-        //            LoadTimeSlots();
-        //            LoadFilteredTimetable();
-        //        }
-        //    }
-
-        //    public string TimeSlotText
-        //    {
-        //        get { return _timeSlotText; }
-        //        set
-        //        {
-        //            _timeSlotText = value;
-        //            OnPropertyChanged();
-        //        }
-        //    }
-
-        //    public ScheduleViewModel()
-        //    {
-        //        Weeks = new ObservableCollection<ClassNameWeek>();
-        //        Timetable = new ObservableCollection<TimeTable>();
-        //        LoadWeeks();
-        //    }
-        //    public CLassUser AuthorizedStudent // Новое свойство
-        //    {
-        //        get { return _authorizedStudent; }
-        //        set
-        //        {
-        //            _authorizedStudent = value;
-        //            OnPropertyChanged();
-        //            LoadFilteredTimetable();
-        //        }
-        //    }
-
-        //    private void LoadWeeks()
-        //    {
-        //        try
-        //        {
-        //            NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"NumberWeek\", \"StartWeek\", \"EndWeek\" FROM \"NameWeek\"");
-        //            NpgsqlDataReader result = cmd.ExecuteReader();
-
-        //            while (result.Read())
-        //            {
-        //                Weeks.Add(new ClassNameWeek(
-        //                            result.GetInt32(0),
-        //                            result.GetString(1),
-        //                            result.GetDateTime(2),
-        //                            result.GetDateTime(3)
-        //                    ));
-        //            }
-
-        //            result.Close();
-        //        }
-        //        catch
-        //        {
-        //            MessageBox.Show("Ошибка загрузки недель: ");
-        //        }
-        //    }
-        //    private void LoadFilteredTimetable()
-        //    {
-        //        try
-        //        {
-        //            if (SelectedWeek != null && AuthorizedStudent != null)
-        //            {
-        //                string query = "SELECT tl.\"Id\", tl.\"NumberWeek\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\" " +
-        //                               "FROM \"TimetableTheory\" tl " +
-        //                               "JOIN \"Group\" g ON tl.\"Group\" = g.\"Id\" " +
-        //                               "JOIN \"StudentGroup\" sg ON g.\"Id\" = sg.\"Group\" " +
-        //                               "WHERE tl.\"NumberWeek\" = @NumberWeek::integer AND sg.\"Student\" = @StudentId::integer";
-
-        //                NpgsqlCommand command = Connection.GetCommand(query);
-        //                command.Parameters.AddWithValue("NumberWeek", SelectedWeek.Id);
-        //                command.Parameters.AddWithValue("StudentId", AuthorizedStudent.Id);
-
-        //                var reader = command.ExecuteReader();
-        //                Timetable.Clear();
-        //                while (reader.Read())
-        //                {
-        //                    Timetable.Add(new TimeTable
-        //                    {
-        //                        Id = reader.GetInt32(0),
-        //                        NumberWeek = reader.GetInt32(1),
-        //                        Weekday = reader.GetString(2),
-        //                        Time = reader.GetTimeSpan(3),
-        //                        Group = reader.GetInt32(4),
-        //                        NumberGroup = reader.GetString(5)
-        //                    });
-        //                }
-        //                reader.Close();
-        //            }
-        //            else
-        //            {
-        //                Timetable.Clear();
-        //            }
-        //        }
-        //        catch
-        //        {
-        //            MessageBox.Show("Ошибка загрузки расписания: ");
-        //        }
-        //    }
-
-        //    private void LoadTimeSlots()
-        //    {
-        //        if (SelectedWeek != null)
-        //        {
-        //            TimeSlotText = $"{SelectedWeek.StartWeek.ToString("d")} - {SelectedWeek.EndWeek.ToString("d")}";
-        //        }
-        //        else
-        //        {
-        //            TimeSlotText = string.Empty;
-        //        }
-        //    }
-
-        //    public event PropertyChangedEventHandler PropertyChanged;
-
-        //    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //    {
-        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
@@ -366,6 +244,11 @@ namespace AutoSchoolDiplom.Pages
         private void btnTransitionSchedulePage(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Вы уже находитесь на данной странице");
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
