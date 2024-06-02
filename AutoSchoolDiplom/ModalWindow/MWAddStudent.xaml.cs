@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static MaterialDesignThemes.Wpf.Theme;
+using BCrypt.Net;
 
 namespace AutoSchoolDiplom.ModalWindow
 {
@@ -38,6 +39,7 @@ namespace AutoSchoolDiplom.ModalWindow
                 ClassGroup group = cbGroup.SelectedItem as ClassGroup;
                 var login = tbLogin.Text.Trim();
                 var password = tbPass.Text.Trim();
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 var firstName = tbFirstName.Text.Trim();
                 var lastName = tbLastName.Text.Trim();
                 var patronymic = tbPatronymic.Text.Trim();
@@ -50,7 +52,7 @@ namespace AutoSchoolDiplom.ModalWindow
                 NpgsqlCommand cmd = Connection.GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
                      "values (@login, @password, @firstName, @lastName, @patronymic, @phone, @email, @dateBirth, @role) returning \"Id\"");
                 cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
-                cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+                cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, hashedPassword);
                 cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
                 cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
                 cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, patronymic);

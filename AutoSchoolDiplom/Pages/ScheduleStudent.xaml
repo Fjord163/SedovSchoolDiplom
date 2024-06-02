@@ -242,7 +242,85 @@
                             
                         </Grid>
                         
-                        <ListView Name="lvStudent"
+                        
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <GroupBox Header="Понедельник" Grid.Row="0" Grid.Column="0">
+                                <ListView Name="MondayListView" ItemsSource="{Binding MondaySchedule}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="День недели" DisplayMemberBinding="{Binding Weekday}" Width="auto"/>
+                                            <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+
+                            <GroupBox Header="Вторник" Grid.Row="0" Grid.Column="1">
+                                <ListView Name="TuesdayListView" ItemsSource="{Binding TuesdaySchedule}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="День недели" DisplayMemberBinding="{Binding Weekday}" Width="auto"/>
+                                            <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+
+                            <GroupBox Header="Среда" Grid.Row="0" Grid.Column="2">
+                                <ListView Name="WednesdayListView" ItemsSource="{Binding WednesdaySchedule}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="День недели" DisplayMemberBinding="{Binding Weekday}" Width="auto"/>
+                                            <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+
+                            <GroupBox Header="Четверг" Grid.Row="1" Grid.Column="0">
+                                <ListView Name="ThursdayListView" ItemsSource="{Binding ThursdaySchedule}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="День недели" DisplayMemberBinding="{Binding Weekday}" Width="auto"/>
+                                            <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+
+                            <GroupBox Header="Пятница" Grid.Row="1" Grid.Column="1">
+                                <ListView Name="FridayListView" ItemsSource="{Binding FridaySchedule}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="День недели" DisplayMemberBinding="{Binding Weekday}" Width="auto"/>
+                                            <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+
+                            <GroupBox Header="Суббота" Grid.Row="1" Grid.Column="2">
+                                <ListView Name="SaturdayListView" ItemsSource="{Binding SaturdaySchedule}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="День недели" DisplayMemberBinding="{Binding Weekday}" Width="auto"/>
+                                            <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+                        </Grid>
+                        <!--<ListView Name="lvStudent"
                                   Background="#50FFFFFF"
                                   Grid.Row="2"
                                   Grid.RowSpan="2"
@@ -256,7 +334,7 @@
                                     <GridViewColumn Header="Номер группы" DisplayMemberBinding="{Binding NumberGroup}" Width="auto"/>
                                 </GridView>
                             </ListView.View>
-                        </ListView>
+                        </ListView>-->
                     </Grid>
                 </Border>
             </Grid>
