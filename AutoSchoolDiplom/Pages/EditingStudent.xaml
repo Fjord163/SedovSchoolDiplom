@@ -287,20 +287,7 @@
                                     <GridViewColumn Header="Почта" Width="auto" DisplayMemberBinding="{Binding Email}"/>
                                     <GridViewColumn Header="Дата рождения" Width="auto" DisplayMemberBinding="{Binding DateBirth, StringFormat=dd.MM.yyyy}"/>
                                     <GridViewColumn Header="№ Группы" Width="auto" DisplayMemberBinding="{Binding NumberGroup}"/>
-                                    <GridViewColumn Header="Программа обуч." Width="auto">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Category}" />
-                                                    <TextBlock Text=" " />
-                                                    <TextBlock Text="{Binding TheoryHours}" />
-                                                    <TextBlock Text="ч. " />
-                                                    <TextBlock Text="{Binding DrivingHours}" />
-                                                    <TextBlock Text="ч." />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                    <GridViewColumn Header="Программа обуч." Width="auto" DisplayMemberBinding="{Binding DisplayCours}"/>
                                     <GridViewColumn Width="auto">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>

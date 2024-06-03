@@ -98,7 +98,7 @@ namespace AutoSchoolDiplom.Pages
             {
                 try
                 {
-                    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"NumberWeek\", \"StartWeek\", \"EndWeek\" FROM \"NameWeek\"");
+                    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"NumberWeek\", \"StartWeek\", \"EndWeek\" FROM \"NameWeek\" ORDER BY \"Id\" ASC");
                     NpgsqlDataReader result = cmd.ExecuteReader();
 
                     while (result.Read())

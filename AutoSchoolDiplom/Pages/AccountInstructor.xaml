@@ -255,7 +255,7 @@ BorderThickness="3">
                                                BorderBrush="#f9c07a"
                                                BorderThickness="1"
                                                Name="tbDateBirth"
-                                               Text="{Binding DateBirth}">
+                                               Text="{Binding DateBirth, StringFormat=dd.MM.yyyy}">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"></Setter>
@@ -297,7 +297,7 @@ BorderThickness="3">
                                                   BorderBrush="#f9c07a"
                                                   BorderThickness="1"
                                                   Name="tbDrivingExperience"
-                                                  Text="{Binding DrivingExperience}">
+                                                  Text="{Binding DrivingExperience, StringFormat='{}{0} (лет.)'}">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"></Setter>

@@ -8,8 +8,6 @@ namespace DBConnection
 {
     public class TimeTable
     {
-
-
         public int Id { get; set; }
         public int NumberWeek { get; set; }
         public string Weekday { get; set; }

@@ -27,6 +27,7 @@ namespace AutoSchoolDiplom.ModalWindow
     public partial class MWEditStudent : Window
     {
         private FullInfoStudent _fullinfoStudent;
+        private FullInfoStudent _student;
         public ObservableCollection<string> Programs { get; set; }
         public MWEditStudent(FullInfoStudent fullInfoStudent, List<StudentComboBoxItem> comboBoxItems, StudentComboBoxItem selectedComboBoxItem)
         {
@@ -34,18 +35,12 @@ namespace AutoSchoolDiplom.ModalWindow
 
             _fullinfoStudent = fullInfoStudent;
             DataContext = fullInfoStudent;
-
             Programs = new ObservableCollection<string>
             {
                 $"{selectedComboBoxItem.Category} {selectedComboBoxItem.TheoryHours}ч. {selectedComboBoxItem.DrivingHours}ч."
             };
 
-            //cbCours.ItemsSource = comboBoxItems;
 
-
-            //if (comboBoxItems != null && comboBoxItems.Contains(selectedComboBoxItem)) { 
-            //    cbCours.SelectedItem = selectedComboBoxItem;
-            //}
             BindingcbCours();
             BindingcbGroup();
         }
@@ -56,6 +51,7 @@ namespace AutoSchoolDiplom.ModalWindow
             cbCours.SetBinding(ItemsControl.ItemsSourceProperty, binding);
             Connection.SelectCoursStudent();
         }
+
         public void BindingcbGroup()
         {
             Binding binding = new Binding();

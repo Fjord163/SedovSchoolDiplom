@@ -354,7 +354,7 @@
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn Header="Время занятия" DisplayMemberBinding="{Binding Time}" Width="auto"/>
-                                            <GridViewColumn Header="Кабинет" DisplayMemberBinding="{Binding Office}" Width="auto"/>
+                                            <GridViewColumn Header="Кабинет" DisplayMemberBinding="{Binding Office}" Width="auto"/> 
                                         </GridView>
                                     </ListView.View>
                                 </ListView>

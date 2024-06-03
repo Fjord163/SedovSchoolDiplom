@@ -296,7 +296,7 @@
                                                  BorderBrush="#f9c07a"
                                                  BorderThickness="1"
                                                  Name="tbDateBirth"
-                                                 Text="{Binding DateBirth}">
+                                                 Text="{Binding DateBirth, StringFormat=dd.MM.yyyy}">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"></Setter>

@@ -30,7 +30,7 @@ namespace DBConnection
             Group = group;
             Cours = cours;
         }
-
+        public string DisplayCours => $"{Category} {TheoryHours} ч. {DrivingHours} ч.";
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }

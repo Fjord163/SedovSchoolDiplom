@@ -8,6 +8,7 @@ namespace DBConnection
 {
     public class CLassCours
     {
+        public CLassCours() { }
         public CLassCours(int id, string category, string theoryHours, string drivingHours)
         {
             Id = id;

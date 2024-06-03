@@ -87,11 +87,11 @@ namespace DBConnection
             try
             {
                 NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
-                 "\"User\".\"LastName\" , \"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\"," +
-                 "\"Student\".\"Photo\" ,\"Cours\".\"Category\" ,\"Cours\".\"TheoryHours\" ,\"Cours\".\"DrivingHours\" ,\"Group\".\"NumberGroup\", \"StudentGroup\".\"Student\",  \"StudentGroup\".\"Group\", \"Student\".\"Cours\"" +
-                 "FROM \"User\", \"Student\", \"Cours\", \"StudentGroup\",\"Group\"" +
-                 "WHERE \"User\".\"Id\" = \"Student\".\"Id\" AND \"Student\".\"Cours\" = \"Cours\".\"Id\" AND \"Student\".\"Id\" = \"StudentGroup\".\"Student\"" +
-                 "AND \"StudentGroup\".\"Group\" = \"Group\".\"Id\"");
+                    "\"User\".\"LastName\" , \"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\"," +
+                    "\"Student\".\"Photo\" ,\"Cours\".\"Category\" ,\"Cours\".\"TheoryHours\" ,\"Cours\".\"DrivingHours\" ,\"Group\".\"NumberGroup\", \"StudentGroup\".\"Student\",  \"StudentGroup\".\"Group\", \"Student\".\"Cours\"" +
+                    "FROM \"User\", \"Student\", \"Cours\", \"StudentGroup\",\"Group\"" +
+                    "WHERE \"User\".\"Id\" = \"Student\".\"Id\" AND \"Student\".\"Cours\" = \"Cours\".\"Id\" AND \"Student\".\"Id\" = \"StudentGroup\".\"Student\"" +
+                    "AND \"StudentGroup\".\"Group\" = \"Group\".\"Id\"");
                 NpgsqlDataReader result = cmd.ExecuteReader();
 
                 if (result.HasRows)
@@ -137,9 +137,9 @@ namespace DBConnection
             try
             {
                 NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", \"User\".\"LastName\"," +
-               "\"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\", \"Instructor\".\"DateEmployment\", \"Instructor\".\"DrivingExperience\"" +
-               "FROM \"User\", \"Instructor\"" +
-               "WHERE \"User\".\"Id\" = \"Instructor\".\"Id\"");
+                "\"User\".\"Patronymic\", \"User\".\"Phone\" , \"User\".\"Email\" , \"User\".\"DateBirth\" , \"User\".\"Role\", \"Instructor\".\"DateEmployment\", \"Instructor\".\"DrivingExperience\"" +
+                "FROM \"User\", \"Instructor\"" +
+                "WHERE \"User\".\"Id\" = \"Instructor\".\"Id\"");
                 NpgsqlDataReader result = cmd.ExecuteReader();
 
                 if (result.HasRows)
@@ -173,6 +173,7 @@ namespace DBConnection
             return infoInstructors;
         }
 
+       
         public static void SelectGroupStudent()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"Student\", \"Group\" FROM \"StudentGroup\"");
