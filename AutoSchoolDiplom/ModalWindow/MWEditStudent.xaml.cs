@@ -74,6 +74,8 @@ namespace AutoSchoolDiplom.ModalWindow
             try
             {
                 var birth = dpDateBirth.SelectedDate;
+                var password = tbPass.Text.Trim();
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
                 CLassCours cours = cbCours.SelectedItem as CLassCours;
                 ClassGroup group = cbGroup.SelectedItem as ClassGroup;
@@ -96,7 +98,7 @@ namespace AutoSchoolDiplom.ModalWindow
                        "\"Patronymic\"= @patronymic, \"Phone\"= @phone, \"Email\"= @email, \"DateBirth\"= @birth where \"Id\" = @id");
                         cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, _fullinfoStudent.Id);
                         cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, _fullinfoStudent.Login);
-                        cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, _fullinfoStudent.Password);
+                        cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, hashedPassword);
                         cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, _fullinfoStudent.FirstName);
                         cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, _fullinfoStudent.LastName);
                         cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, _fullinfoStudent.Patronymic);
