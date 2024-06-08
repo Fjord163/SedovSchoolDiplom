@@ -38,8 +38,8 @@ namespace AutoSchoolDiplom.Pages
         }
         private void EnsureScheduleData()
         {
-            DateTime startDate = DateTime.Now.Date.AddDays(1); // Получаем завтрашнюю дату
-            int daysToShow = 6; // Количество дней для отображения
+            DateTime startDate = DateTime.Now.Date; 
+            int daysToShow = 6; 
             DateTime endDateToDelete = startDate.AddDays(-1);
 
             List<DateTime> dates = new List<DateTime>();
@@ -70,7 +70,6 @@ namespace AutoSchoolDiplom.Pages
                 {
                     foreach (var time in times)
                     {
-                        // Проверяем, существует ли запись
                         string checkSql = "SELECT COUNT(*) FROM \"Schedule\" WHERE \"Date\" = @Date AND \"Time\" = @Time AND \"InstructorId\" = @InstructorId";
                         using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkSql, conn))
                         {
@@ -80,7 +79,6 @@ namespace AutoSchoolDiplom.Pages
                             long count = (long)checkCommand.ExecuteScalar();
                             if (count == 0)
                             {
-                                // Проверяем, существует ли такой InstructorId
                                 string checkInstructorSql = "SELECT COUNT(*) FROM \"Instructor\" WHERE \"Id\" = @InstructorId";
                                 using (NpgsqlCommand checkInstructorCommand = new NpgsqlCommand(checkInstructorSql, conn))
                                 {
@@ -88,7 +86,6 @@ namespace AutoSchoolDiplom.Pages
                                     long instructorCount = (long)checkInstructorCommand.ExecuteScalar();
                                     if (instructorCount > 0)
                                     {
-                                        // Вставляем новую запись
                                         string insertSql = "INSERT INTO \"Schedule\" (\"Date\", \"Time\", \"IsBooked\", \"StudentId\", \"InstructorId\") VALUES (@Date, @Time, @IsBooked, @StudentId, @InstructorId)";
                                         using (NpgsqlCommand insertCommand = new NpgsqlCommand(insertSql, conn))
                                         {
@@ -102,7 +99,6 @@ namespace AutoSchoolDiplom.Pages
                                     }
                                     else
                                     {
-                                        // Инструктор не найден, обработка ошибки или логгирование
                                         MessageBox.Show($"Инструктор с ID {StudentInstructorId} не найден.");
                                     }
                                 }
@@ -170,7 +166,7 @@ namespace AutoSchoolDiplom.Pages
         }
         private void PopulateCalendarGrid()
         {
-            DateTime startDate = DateTime.Now.Date.AddDays(1);
+            DateTime startDate = DateTime.Now.Date;
             int daysToShow = 6;
 
             CalendarGrid.Children.Clear();
