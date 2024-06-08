@@ -178,7 +178,6 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
                             <RowDefinition/>
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
@@ -263,7 +262,7 @@
                             <!--Кнопка закрыть страницу-->
                         </Grid>
 
-                        <Grid Grid.Row="2" x:Name="ScheduleGrid">
+                        <Grid Grid.Row="1" x:Name="ScheduleGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>

@@ -14,7 +14,7 @@ namespace DBConnection
             StartDate = startDate;
             EndDate = endDate;
         }
-        public string DisplayText => $"{WeekNumber} ({StartDate.ToString("d")} - {EndDate.ToString("d")})";
+        public string DisplayText => $"Неделя {WeekNumber} ({StartDate.ToString("d")} - {EndDate.ToString("d")})";
         public int WeekNumber { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

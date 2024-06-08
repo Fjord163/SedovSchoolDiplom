@@ -303,11 +303,11 @@ namespace AutoSchoolDiplom.Pages
 
         private void btnTransitionSchedulePage(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ScheduleStudent(_currentUser));
+            NavigationService.Navigate(new AccountStudent(_currentUser));
         }
         private void btnTransmitionAccountPage(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AccountStudent(_currentUser));
+            NavigationService.Navigate(new ScheduleStudent(_currentUser));
         }
         private void btnTransmitionRecordDrivingPage(object sender, RoutedEventArgs e)
         {
