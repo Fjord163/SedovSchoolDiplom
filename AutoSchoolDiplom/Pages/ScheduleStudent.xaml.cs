@@ -49,17 +49,7 @@ namespace AutoSchoolDiplom.Pages
             public ObservableCollection<TimeTable> FridaySchedule { get; set; }
             public ObservableCollection<TimeTable> SaturdaySchedule { get; set; }
 
-            public ClassNameWeek SelectedWeek
-            {
-                get { return _selectedWeek; }
-                set
-                {
-                    _selectedWeek = value;
-                    OnPropertyChanged();
-                    LoadFilteredTimetable();
-                }
-            }
-
+           
 
             public ScheduleViewModel()
             {
@@ -96,43 +86,50 @@ namespace AutoSchoolDiplom.Pages
 
             private void LoadWeeks()
             {
-                try
-                {
-                    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"NumberWeek\", \"StartWeek\", \"EndWeek\" FROM \"NameWeek\" ORDER BY \"Id\" ASC");
-                    NpgsqlDataReader result = cmd.ExecuteReader();
+                DateTime startOfYear = new DateTime(DateTime.Now.Year, 1, 1);
+                DateTime endOfYear = new DateTime(DateTime.Now.Year, 12, 31);
+                int weekNumber = 1;
+                DateTime currentStart = startOfYear;
 
-                    while (result.Read())
+                while (currentStart <= endOfYear)
+                {
+                    DateTime currentEnd = currentStart.AddDays(6);
+                    if (currentEnd > endOfYear)
                     {
-                        Weeks.Add(new ClassNameWeek(
-                                    result.GetInt32(0),
-                                    result.GetString(1),
-                                    result.GetDateTime(2),
-                                    result.GetDateTime(3)
-                            ));
+                        currentEnd = endOfYear;
                     }
 
-                    result.Close();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка загрузки недель: ");
+                    Weeks.Add(new ClassNameWeek(weekNumber, currentStart, currentEnd));
+
+                    weekNumber++;
+                    currentStart = currentEnd.AddDays(1);
                 }
             }
-
+            public ClassNameWeek SelectedWeek
+            {
+                get { return _selectedWeek; }
+                set
+                {
+                    _selectedWeek = value;
+                    OnPropertyChanged();
+                    LoadFilteredTimetable();
+                }
+            }
             private void LoadFilteredTimetable()
             {
                 try
                 {
                     if (SelectedWeek != null && AuthorizedStudent != null)
                     {
-                        string query = "SELECT tl.\"Id\", tl.\"NumberWeek\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\" " +
+                        string query = "SELECT tl.\"Id\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\", tl.\"Date\" " +
                                        "FROM \"TimetableTheory\" tl " +
                                        "JOIN \"Group\" g ON tl.\"Group\" = g.\"Id\" " +
                                        "JOIN \"StudentGroup\" sg ON g.\"Id\" = sg.\"Group\" " +
-                                       "WHERE tl.\"NumberWeek\" = @NumberWeek::integer AND sg.\"Student\" = @StudentId::integer";
+                                       "WHERE sg.\"Student\" = @StudentId AND tl.\"Date\" BETWEEN @StartDate AND @EndDate";
 
                         NpgsqlCommand command = Connection.GetCommand(query);
-                        command.Parameters.AddWithValue("NumberWeek", SelectedWeek.Id);
+                        command.Parameters.AddWithValue("StartDate", SelectedWeek.StartDate);
+                        command.Parameters.AddWithValue("EndDate", SelectedWeek.EndDate);
                         command.Parameters.AddWithValue("StudentId", AuthorizedStudent.Id);
 
                         var reader = command.ExecuteReader();
@@ -142,12 +139,12 @@ namespace AutoSchoolDiplom.Pages
                             var timetable = new TimeTable
                             {
                                 Id = reader.GetInt32(0),
-                                NumberWeek = reader.GetInt32(1),
-                                Weekday = reader.GetString(2),
-                                Time = reader.GetTimeSpan(3),
-                                Group = reader.GetInt32(4),
-                                NumberGroup = reader.GetString(5),
-                                Office = reader.GetString(6)
+                                Weekday = reader.GetString(1),
+                                Time = reader.GetTimeSpan(2),
+                                Group = reader.GetInt32(3),
+                                NumberGroup = reader.GetString(4),
+                                Office = reader.GetString(5),
+                                Date = reader.GetDateTime(6)
                             };
 
                             switch (timetable.Weekday)
@@ -246,9 +243,9 @@ namespace AutoSchoolDiplom.Pages
             MessageBox.Show("Вы уже находитесь на данной странице");
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnTransmitionRecordDrivingPage(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new RecordDriving(_viewModel.AuthorizedStudent));
         }
     }
 }

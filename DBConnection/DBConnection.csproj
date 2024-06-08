@@ -109,32 +109,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountInfoStudent.cs" />
-    <Compile Include="ClassCar.cs" />
     <Compile Include="ClassCategory.cs" />
-    <Compile Include="ClassColorCar.cs" />
     <Compile Include="CLassCours.cs" />
-    <Compile Include="ClassDrivingLesson.cs" />
     <Compile Include="ClassExam.cs" />
     <Compile Include="ClassGroup.cs" />
     <Compile Include="ClassLecturer.cs" />
-    <Compile Include="ClassModelCar.cs" />
     <Compile Include="ClassNameWeek.cs" />
     <Compile Include="ClassNumberGroup.cs" />
-    <Compile Include="ClassNumberWeek.cs" />
-    <Compile Include="ClassOrder.cs" />
     <Compile Include="ClassResultExam.cs" />
-    <Compile Include="ClassService.cs" />
-    <Compile Include="ClassServices.cs" />
-    <Compile Include="ClassStampCar.cs" />
-    <Compile Include="ClassStatusPayment.cs" />
     <Compile Include="ClassStudentGroup.cs" />
     <Compile Include="CLassUser.cs" />
-    <Compile Include="ClassWeekday.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="FullInfoInstructor.cs" />
     <Compile Include="FullInfoLecturer.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="ScheduleGroupStudent.cs" />
+    <Compile Include="SheduleItem.cs" />
     <Compile Include="StudentData.cs" />
     <Compile Include="TimeTable.cs" />
     <Compile Include="User.cs" />

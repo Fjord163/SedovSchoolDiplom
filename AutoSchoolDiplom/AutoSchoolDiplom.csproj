@@ -156,6 +156,9 @@
     <Compile Include="Pages\AccountStudent.xaml.cs">
       <DependentUpon>AccountStudent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RecordDriving.xaml.cs">
+      <DependentUpon>RecordDriving.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ScheduleLector.xaml.cs">
       <DependentUpon>ScheduleLector.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EntryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecordDriving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,6 +361,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\broom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\drivingRecordIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

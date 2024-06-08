@@ -27,7 +27,6 @@ namespace AutoSchoolDiplom.Pages
             public EntryPage()
             {
                 InitializeComponent();
-
             }
 
             private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -42,61 +41,61 @@ namespace AutoSchoolDiplom.Pages
 
             private void btnLogIn_Click(object sender, RoutedEventArgs e)
             {
-            try
-            {
-                NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"Login\", \"Password\", \"FirstName\",\"LastName\",\"Patronymic\",\"Phone\",\"Email\", \"DateBirth\", \"Role\" FROM \"User\"" +
-                        "WHERE \"Login\" = @log");
-                cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
-                NpgsqlDataReader result = cmd.ExecuteReader();
-
-
-                if (result.HasRows)
+                try
                 {
-                    result.Read();
+                    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"Login\", \"Password\", \"FirstName\",\"LastName\",\"Patronymic\",\"Phone\",\"Email\", \"DateBirth\", \"Role\" FROM \"User\"" +
+                            "WHERE \"Login\" = @log");
+                    cmd.Parameters.AddWithValue("@log", NpgsqlDbType.Varchar, tbLogin.Text.Trim());
+                    NpgsqlDataReader result = cmd.ExecuteReader();
 
-                    var storedPasswordHash = result.GetString(2);
 
-                    if (BCrypt.Net.BCrypt.Verify(pbPassword.Password.Trim(), storedPasswordHash))
+                    if (result.HasRows)
                     {
-                        Connection.users = new CLassUser()
+                        result.Read();
+
+                        var storedPasswordHash = result.GetString(2);
+
+                        if (BCrypt.Net.BCrypt.Verify(pbPassword.Password.Trim(), storedPasswordHash))
                         {
-                            Id = result.GetInt32(0),
-                            Login = result.GetString(1),
-                            Password = storedPasswordHash,
-                            FirstName = result.GetString(3),
-                            LastName = result.GetString(4),
-                            Patronymic = result.GetString(5),
-                            Phone = result.GetString(6),
-                            Email = result.GetString(7),
-                            DateBirth = result.GetDateTime(8),
-                            Role = result.GetString(9)
-                        };
-                        result.Close();
+                            Connection.users = new CLassUser()
+                            {
+                                Id = result.GetInt32(0),
+                                Login = result.GetString(1),
+                                Password = storedPasswordHash,
+                                FirstName = result.GetString(3),
+                                LastName = result.GetString(4),
+                                Patronymic = result.GetString(5),
+                                Phone = result.GetString(6),
+                                Email = result.GetString(7),
+                                DateBirth = result.GetDateTime(8),
+                                Role = result.GetString(9)
+                            };
+                            result.Close();
 
 
-                        switch (Connection.users.Role)
-                        {
-                            case "Студент":
-                                NavigationService.Navigate(new AccountStudent(Connection.users));
-                                break;
-                            case "Инструктор":
-                                NavigationService.Navigate(new AccountInstructor(Connection.users));
-                                break;
-                            case "Лектор":
-                                NavigationService.Navigate(new AccountLector(Connection.users));
-                                break;
-                            case "Админ":
-                                NavigationService.Navigate(new EditingLecturer());
-                                break;
+                            switch (Connection.users.Role)
+                            {
+                                case "Студент":
+                                    NavigationService.Navigate(new AccountStudent(Connection.users));
+                                    break;
+                                case "Инструктор":
+                                    NavigationService.Navigate(new AccountInstructor(Connection.users));
+                                    break;
+                                case "Лектор":
+                                    NavigationService.Navigate(new AccountLector(Connection.users));
+                                    break;
+                                case "Админ":
+                                    NavigationService.Navigate(new EditingLecturer());
+                                    break;
+                            }
                         }
                     }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Такого аккаунта не существует");
-                return;
-            }
+                catch
+                {
+                    MessageBox.Show("Такого аккаунта не существует");
+                    return;
+                }
             }
         }
 }

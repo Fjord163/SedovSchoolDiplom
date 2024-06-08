@@ -8,17 +8,15 @@ namespace DBConnection
 {
     public class ClassNameWeek
     {
-        public ClassNameWeek(int id, string numberWeek, DateTime startWeek, DateTime endWeek)
+        public ClassNameWeek( int weekNumber, DateTime startDate, DateTime endDate)
         {
-            Id = id;
-            NumberWeek = numberWeek;
-            StartWeek = startWeek;
-            EndWeek = endWeek;
+            WeekNumber = weekNumber;
+            StartDate = startDate;
+            EndDate = endDate;
         }
-        public string DisplayText => $"{NumberWeek} ({StartWeek.ToString("d")} - {EndWeek.ToString("d")})";
-        public int Id { get; set; }
-        public string NumberWeek { get; set; }
-        public DateTime StartWeek { get; set; }
-        public DateTime EndWeek { get; set; }
+        public string DisplayText => $"{WeekNumber} ({StartDate.ToString("d")} - {EndDate.ToString("d")})";
+        public int WeekNumber { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
