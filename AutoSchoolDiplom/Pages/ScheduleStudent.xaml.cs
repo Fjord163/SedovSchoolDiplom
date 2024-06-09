@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -34,6 +35,7 @@ namespace AutoSchoolDiplom.Pages
             _viewModel = new ScheduleViewModel();
             DataContext = _viewModel;
             _viewModel.AuthorizedStudent = authorizedStudent;
+            _viewModel.MarkCurrentWeek();
         }
         public class ScheduleViewModel : INotifyPropertyChanged
         {
@@ -60,6 +62,7 @@ namespace AutoSchoolDiplom.Pages
                 ThursdaySchedule = new ObservableCollection<TimeTable>();
                 FridaySchedule = new ObservableCollection<TimeTable>();
                 SaturdaySchedule = new ObservableCollection<TimeTable>();
+                
                 LoadWeeks();
             }
 
@@ -121,7 +124,7 @@ namespace AutoSchoolDiplom.Pages
                 {
                     if (SelectedWeek != null && AuthorizedStudent != null)
                     {
-                        string query = "SELECT tl.\"Id\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\", tl.\"Date\" " +
+                        string query = "SELECT tl.\"Id\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\", tl.\"Date\" " +
                                        "FROM \"TimetableTheory\" tl " +
                                        "JOIN \"Group\" g ON tl.\"Group\" = g.\"Id\" " +
                                        "JOIN \"StudentGroup\" sg ON g.\"Id\" = sg.\"Group\" " +
@@ -139,32 +142,32 @@ namespace AutoSchoolDiplom.Pages
                             var timetable = new TimeTable
                             {
                                 Id = reader.GetInt32(0),
-                                Weekday = reader.GetString(1),
-                                Time = reader.GetTimeSpan(2),
-                                Group = reader.GetInt32(3),
-                                NumberGroup = reader.GetString(4),
-                                Office = reader.GetString(5),
-                                Date = reader.GetDateTime(6)
+                                Time = reader.GetTimeSpan(1),
+                                Group = reader.GetInt32(2),
+                                NumberGroup = reader.GetString(3),
+                                Office = reader.GetString(4),
+                                Date = reader.GetDateTime(5),
+                                Weekday = reader.GetDateTime(5).DayOfWeek.ToString()
                             };
 
                             switch (timetable.Weekday)
                             {
-                                case "Понедельник":
+                                case "Monday":
                                     MondaySchedule.Add(timetable);
                                     break;
-                                case "Вторник":
+                                case "Tuesday":
                                     TuesdaySchedule.Add(timetable);
                                     break;
-                                case "Среда":
+                                case "Wednesday":
                                     WednesdaySchedule.Add(timetable);
                                     break;
-                                case "Четверг":
+                                case "Thursday":
                                     ThursdaySchedule.Add(timetable);
                                     break;
-                                case "Пятница":
+                                case "Friday":
                                     FridaySchedule.Add(timetable);
                                     break;
-                                case "Суббота":
+                                case "Saturday":
                                     SaturdaySchedule.Add(timetable);
                                     break;
                             }
@@ -213,6 +216,19 @@ namespace AutoSchoolDiplom.Pages
                     MessageBox.Show("Ошибка загрузки группы студента: ");
                 }
             }
+
+            public void MarkCurrentWeek()
+            {
+                DateTime currentDate = DateTime.Today;
+                var currentWeek = Weeks.FirstOrDefault(week => currentDate >= week.StartDate && currentDate <= week.EndDate);
+                if (currentWeek != null)
+                {
+                    currentWeek.IsCurrentWeek = true;
+                    SelectedWeek = currentWeek;
+                }
+            }
+
+          
 
             public event PropertyChangedEventHandler PropertyChanged;
 

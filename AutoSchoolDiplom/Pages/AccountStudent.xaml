@@ -141,11 +141,11 @@
                                             <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Left"/>
                                         </Border>
-                                        <Image Source="/Image/drivingRecordIcon.png"
+                                         <Image Source="/Image/Car.png"
                                                 Stretch="None"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Center"
-                                                Margin="10,0,0,0"/>
+                                                Margin="7,0,0,0"/>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">

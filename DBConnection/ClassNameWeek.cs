@@ -14,9 +14,18 @@ namespace DBConnection
             StartDate = startDate;
             EndDate = endDate;
         }
-        public string DisplayText => $"Неделя {WeekNumber} ({StartDate.ToString("d")} - {EndDate.ToString("d")})";
+        public string DisplayText
+        {
+            get
+            {
+                string displayText = $"Неделя {WeekNumber} ({StartDate.ToString("d")} - {EndDate.ToString("d")})";
+                return IsCurrentWeek ? "* " + displayText : displayText;
+            }
+        }
+            
         public int WeekNumber { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public bool IsCurrentWeek { get; set; }
     }
 }

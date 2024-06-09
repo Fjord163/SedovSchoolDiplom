@@ -156,6 +156,9 @@
     <Compile Include="Pages\AccountStudent.xaml.cs">
       <DependentUpon>AccountStudent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\InstructorRecordsDriving.xaml.cs">
+      <DependentUpon>InstructorRecordsDriving.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RecordDriving.xaml.cs">
       <DependentUpon>RecordDriving.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,9 @@
     </Compile>
     <Compile Include="Pages\ScheduleStudent.xaml.cs">
       <DependentUpon>ScheduleStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentRecordsDriving.xaml.cs">
+      <DependentUpon>StudentRecordsDriving.xaml</DependentUpon>
     </Compile>
     <Compile Include="StudentComboBoxItem.cs" />
     <Page Include="MainWindow.xaml">
@@ -230,6 +236,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\InstructorRecordsDriving.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RecordDriving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +249,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ScheduleStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StudentRecordsDriving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -364,6 +378,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\drivingRecordIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Car.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

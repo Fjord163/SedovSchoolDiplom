@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ScheduleLector">
 
-    <!--<Border CornerRadius="12">
+    <Border CornerRadius="12">
         <Border CornerRadius="10"
   BorderThickness="3">
             <Border.BorderBrush>
@@ -70,11 +70,9 @@
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="Border" Property="Background" Value="#80FFFFFF"/>
-                                            --><!-- Полупрозрачный белый --><!--
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="False">
                                             <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                            --><!-- Прозрачный фон --><!--
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -110,11 +108,9 @@
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="Border" Property="Background" Value="#80FFFFFF"/>
-                                            --><!-- Полупрозрачный белый --><!--
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="False">
                                             <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                            --><!-- Прозрачный фон --><!--
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -189,7 +185,6 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            --><!--Кнопка свернуть страницу--><!--
                             <Button Name="btnClose"
                           BorderThickness="0"
                           Content="X"
@@ -220,7 +215,6 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            --><!--Кнопка закрыть страницу--><!--
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -256,10 +250,10 @@
                             </Grid>
                         </Grid>
 
-                        <Grid Grid.Row="2" Margin="5">
+                        <Grid Grid.Row="2" >
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="1.5*" />
+                                <RowDefinition Height="1.5*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -380,5 +374,5 @@
                 </Border>
             </Grid>
         </Border>
-    </Border>-->
+    </Border>
 </Page>

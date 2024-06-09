@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Mail;
+using System.Net;
 
 namespace AutoSchoolDiplom.Pages
 {
@@ -25,6 +27,7 @@ namespace AutoSchoolDiplom.Pages
         private List<SheduleItem> scheduleItems;
         private int StudentInstructorId;
         private CLassUser _currentUser;
+        private string _classGroup;
 
         private string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=1234;Database=SchoolSedov";
         public RecordDriving(CLassUser authorizedStudent)
@@ -49,16 +52,15 @@ namespace AutoSchoolDiplom.Pages
             }
 
             List<string> times = new List<string>();
-            for (int i = 0; i < 8; i++) // 8 временных слотов с 10:00 до 17:00
+            for (int i = 0; i < 10; i++) 
             {
-                times.Add($"{10 + i}:00");
+                times.Add($"{8 + i}:00");
             }
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
 
-                // Удаляем старые записи
                 string deleteSql = "DELETE FROM \"Schedule\" WHERE \"Date\" < @EndDateToDelete";
                 using (NpgsqlCommand deleteCommand = new NpgsqlCommand(deleteSql, conn))
                 {
@@ -178,7 +180,7 @@ namespace AutoSchoolDiplom.Pages
                 CalendarGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
                 CalendarGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             }
@@ -205,9 +207,9 @@ namespace AutoSchoolDiplom.Pages
                 Grid.SetColumn(dayHeader, i);
                 CalendarGrid.Children.Add(dayHeader);
 
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 10; j++)
                 {
-                    string time = $"{10 + j}:00";
+                    string time = $"{8 + j}:00";
                     SheduleItem item = scheduleItems.FirstOrDefault(si => si.Date == date && si.Time == time);
 
                     Button timeButton = new Button
@@ -220,7 +222,7 @@ namespace AutoSchoolDiplom.Pages
                     if (isWeekend)
                     {
                         timeButton.IsEnabled = false;
-                        timeButton.ToolTip = "Этот временной слот недоступен в выходные";
+                        timeButton.ToolTip = "Этот слот недоступен в выходные";
                     }
                     else
                     {
@@ -292,6 +294,12 @@ namespace AutoSchoolDiplom.Pages
                         command.ExecuteNonQuery();
                     }
                 }
+                string instructorEmail = GetInstructorEmail(instructorId);
+
+                string message = GenerateEmailMessage(_currentUser.FirstName, _currentUser.LastName, item.Date, item.Time);
+
+                SendEmail(instructorEmail, "Запись на вождение", message);
+
                 return true;
             }
             catch (Exception ex)
@@ -299,6 +307,49 @@ namespace AutoSchoolDiplom.Pages
                 MessageBox.Show("Ошибка при обновлении данных: " + ex.Message);
                 return false;
             }
+        }
+
+        public void SendEmail(string recipientEmail, string subject, string body)
+        {
+            string senderEmail = "clozed2003@mail.ru";
+            string senderPassword = "9GzmiBHUTChEJ199VbkZ";
+
+            MailMessage mail = new MailMessage(senderEmail, recipientEmail);
+            mail.Subject = subject;
+            mail.Body = body;
+
+            SmtpClient smtpClient = new SmtpClient("smtp.mail.ru", 587);
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
+
+            try
+            {
+                smtpClient.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при отправке письма: " + ex.Message);
+            }
+        }
+
+        public string GetInstructorEmail(int instructorId)
+        {
+            try
+            {
+                string email = Connection.GetInstructorEmailById(instructorId);
+                return email;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при получении адреса электронной почты инструктора: " + ex.Message);
+                return null;
+            }
+        }
+        public string GenerateEmailMessage(string studentFirstName, string studentLastName, DateTime date, string time)
+        {
+            string message = $"{studentFirstName} {studentLastName} записался на занятие:\nДата: {date:dd.MM.yyyy}\nВремя: {time}";
+            return message;
         }
 
         private void btnTransitionSchedulePage(object sender, RoutedEventArgs e)

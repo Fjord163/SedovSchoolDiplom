@@ -35,177 +35,193 @@ namespace AutoSchoolDiplom.Pages
             _viewModel = new ScheduleViewModel();
             _user = authorizedLecturer;
             DataContext = _viewModel;
+            _viewModel.MarkCurrentWeek();
         }
 
         public class ScheduleViewModel : INotifyPropertyChanged
         {
-            //private ClassNameWeek _selectedWeek;
-            //private ClassGroup _selectedGroup;
+            private ClassNameWeek _selectedWeek;
+            private ClassGroup _selectedGroup;
 
-            //public ObservableCollection<ClassNameWeek> Weeks { get; set; }
-            //public ObservableCollection<ClassGroup> Groups { get; set; }
-            //public ObservableCollection<TimeTable> MondaySchedule { get; set; }
-            //public ObservableCollection<TimeTable> TuesdaySchedule { get; set; }
-            //public ObservableCollection<TimeTable> WednesdaySchedule { get; set; }
-            //public ObservableCollection<TimeTable> ThursdaySchedule { get; set; }
-            //public ObservableCollection<TimeTable> FridaySchedule { get; set; }
-            //public ObservableCollection<TimeTable> SaturdaySchedule { get; set; }
+            public ObservableCollection<ClassNameWeek> Weeks { get; set; }
+            public ObservableCollection<ClassGroup> Groups { get; set; }
+            public ObservableCollection<TimeTable> MondaySchedule { get; set; }
+            public ObservableCollection<TimeTable> TuesdaySchedule { get; set; }
+            public ObservableCollection<TimeTable> WednesdaySchedule { get; set; }
+            public ObservableCollection<TimeTable> ThursdaySchedule { get; set; }
+            public ObservableCollection<TimeTable> FridaySchedule { get; set; }
+            public ObservableCollection<TimeTable> SaturdaySchedule { get; set; }
 
-            //public ClassGroup SelectedGroup
-            //{
-            //    get { return _selectedGroup; }
-            //    set
-            //    {
-            //        _selectedGroup = value;
-            //        OnPropertyChanged();
-            //        LoadFilteredTimetable();
-            //    }
-            //}
+            public ClassGroup SelectedGroup
+            {
+                get { return _selectedGroup; }
+                set
+                {
+                    _selectedGroup = value;
+                    OnPropertyChanged();
+                    LoadFilteredTimetable();
+                }
+            }
 
-            //public ClassNameWeek SelectedWeek
-            //{
-            //    get { return _selectedWeek; }
-            //    set
-            //    {
-            //        _selectedWeek = value;
-            //        OnPropertyChanged();
-            //        LoadFilteredTimetable();
-            //    }
-            //}
+            public ClassNameWeek SelectedWeek
+            {
+                get { return _selectedWeek; }
+                set
+                {
+                    _selectedWeek = value;
+                    OnPropertyChanged();
+                    LoadFilteredTimetable();
+                }
+            }
 
-            //public ScheduleViewModel()
-            //{
-            //    Weeks = new ObservableCollection<ClassNameWeek>();
-            //    Groups = new ObservableCollection<ClassGroup>();
-            //    MondaySchedule = new ObservableCollection<TimeTable>();
-            //    TuesdaySchedule = new ObservableCollection<TimeTable>();
-            //    WednesdaySchedule = new ObservableCollection<TimeTable>();
-            //    ThursdaySchedule = new ObservableCollection<TimeTable>();
-            //    FridaySchedule = new ObservableCollection<TimeTable>();
-            //    SaturdaySchedule = new ObservableCollection<TimeTable>();
+            public ScheduleViewModel()
+            {
+                Weeks = new ObservableCollection<ClassNameWeek>();
+                Groups = new ObservableCollection<ClassGroup>();
+                MondaySchedule = new ObservableCollection<TimeTable>();
+                TuesdaySchedule = new ObservableCollection<TimeTable>();
+                WednesdaySchedule = new ObservableCollection<TimeTable>();
+                ThursdaySchedule = new ObservableCollection<TimeTable>();
+                FridaySchedule = new ObservableCollection<TimeTable>();
+                SaturdaySchedule = new ObservableCollection<TimeTable>();
 
-            //    LoadWeeks();
-            //    LoadGroups();
-            //}
+                LoadWeeks();
+                LoadGroups();
+            }
 
-            //private void LoadWeeks()
-            //{
-            //    NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\", \"NumberWeek\", \"StartWeek\", \"EndWeek\" FROM \"NameWeek\" ORDER BY \"Id\" ASC");
-            //    NpgsqlDataReader result = cmd.ExecuteReader();
+            private void LoadWeeks()
+            {
+                DateTime startOfYear = new DateTime(DateTime.Now.Year, 1, 1);
+                DateTime endOfYear = new DateTime(DateTime.Now.Year, 12, 31);
+                int weekNumber = 1;
+                DateTime currentStart = startOfYear;
 
-            //    while (result.Read())
-            //    {
-            //        Weeks.Add(new ClassNameWeek(
-            //                    result.GetInt32(0),
-            //                    result.GetString(1),
-            //                    result.GetDateTime(2),
-            //                    result.GetDateTime(3)
-            //            ));
-            //    }
+                while (currentStart <= endOfYear)
+                {
+                    DateTime currentEnd = currentStart.AddDays(6);
+                    if (currentEnd > endOfYear)
+                    {
+                        currentEnd = endOfYear;
+                    }
 
-            //    result.Close();
-            //}
+                    Weeks.Add(new ClassNameWeek(weekNumber, currentStart, currentEnd));
 
-            //private void LoadGroups()
-            //{
-            //    NpgsqlCommand cmd = Connection.GetCommand("SELECT g.\"Id\", g.\"NumberGroup\", g.\"Lecturer\", u.\"FirstName\", u.\"LastName\", u.\"Patronymic\" FROM \"Group\" g, \"Lecturer\" l, \"User\" u " +
-            //        "WHERE g.\"Lecturer\" = l.\"Id\" AND l.\"Id\" = u.\"Id\"");
-            //    NpgsqlDataReader result = cmd.ExecuteReader();
+                    weekNumber++;
+                    currentStart = currentEnd.AddDays(1);
+                }
+            }
 
-            //    while (result.Read())
-            //    {
-            //        Groups.Add(new ClassGroup(
-            //                    result.GetInt32(0),
-            //                    result.GetString(1),
-            //                    result.GetInt32(2),
-            //                    result.GetString(3),
-            //                    result.GetString(4),
-            //                    result.GetString(5)
-            //            ));
-            //    }
+            private void LoadGroups()
+            {
+                NpgsqlCommand cmd = Connection.GetCommand("SELECT g.\"Id\", g.\"NumberGroup\", g.\"Lecturer\", u.\"FirstName\", u.\"LastName\", u.\"Patronymic\" FROM \"Group\" g, \"Lecturer\" l, \"User\" u " +
+                    "WHERE g.\"Lecturer\" = l.\"Id\" AND l.\"Id\" = u.\"Id\"");
+                NpgsqlDataReader result = cmd.ExecuteReader();
 
-            //    result.Close();
-            //}
+                while (result.Read())
+                {
+                    Groups.Add(new ClassGroup(
+                                result.GetInt32(0),
+                                result.GetString(1),
+                                result.GetInt32(2),
+                                result.GetString(3),
+                                result.GetString(4),
+                                result.GetString(5)
+                        ));
+                }
 
-            //private void LoadFilteredTimetable()
-            //{
-            //    if (SelectedWeek != null)
-            //    {
-            //        string query = "SELECT tl.\"Id\", tl.\"NumberWeek\", tl.\"Weekday\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\" " +
-            //                       "FROM \"TimetableTheory\" tl " +
-            //                       "JOIN \"Group\" g ON tl.\"Group\" = g.\"Id\" " +
-            //                       "WHERE tl.\"NumberWeek\" = @NumberWeek";
+                result.Close();
+            }
 
-            //        if (SelectedGroup != null)
-            //        {
-            //            query += " AND g.\"Id\" = @GroupName";
-            //        }
+            private void LoadFilteredTimetable()
+            {
+                if (SelectedWeek != null)
+                {
+                    string query = "SELECT tl.\"Id\", tl.\"Time\", tl.\"Group\", g.\"NumberGroup\", tl.\"Office\", tl.\"Date\" " +
+                                   "FROM \"TimetableTheory\" tl " +
+                                   "JOIN \"Group\" g ON tl.\"Group\" = g.\"Id\" " +
+                                   "WHERE tl.\"Date\" BETWEEN @StartDate AND @EndDate";
 
-            //        NpgsqlCommand command = Connection.GetCommand(query);
-            //        command.Parameters.AddWithValue("NumberWeek", SelectedWeek.Id);
+                    if (SelectedGroup != null)
+                    {
+                        query += " AND g.\"Id\" = @GroupName";
+                    }
 
-            //        if (SelectedGroup != null)
-            //        {
-            //            command.Parameters.AddWithValue("GroupName", SelectedGroup.Id);
-            //        }
+                    NpgsqlCommand command = Connection.GetCommand(query);
+                    command.Parameters.AddWithValue("StartDate", SelectedWeek.StartDate);
+                    command.Parameters.AddWithValue("EndDate", SelectedWeek.EndDate);
 
-            //        var reader = command.ExecuteReader();
+                    if (SelectedGroup != null)
+                    {
+                        command.Parameters.AddWithValue("GroupName", SelectedGroup.Id);
+                    }
 
-            //        ClearSchedules();
+                    var reader = command.ExecuteReader();
 
-            //        while (reader.Read())
-            //        {
-            //            var timetable = new TimeTable
-            //            {
-            //                Id = reader.GetInt32(0),
-            //                NumberWeek = reader.GetInt32(1),
-            //                Weekday = reader.GetString(2),
-            //                Time = reader.GetTimeSpan(3),
-            //                Group = reader.GetInt32(4),
-            //                NumberGroup = reader.GetString(5),
-            //                Office = reader.GetString(6)
-            //            };
+                    ClearSchedules();
 
-            //            switch (timetable.Weekday)
-            //            {
-            //                case "Понедельник":
-            //                    MondaySchedule.Add(timetable);
-            //                    break;
-            //                case "Вторник":
-            //                    TuesdaySchedule.Add(timetable);
-            //                    break;
-            //                case "Среда":
-            //                    WednesdaySchedule.Add(timetable);
-            //                    break;
-            //                case "Четверг":
-            //                    ThursdaySchedule.Add(timetable);
-            //                    break;
-            //                case "Пятница":
-            //                    FridaySchedule.Add(timetable);
-            //                    break;
-            //                case "Суббота":
-            //                    SaturdaySchedule.Add(timetable);
-            //                    break;
-            //            }
-            //        }
+                    while (reader.Read())
+                    {
+                        var timetable = new TimeTable
+                        {
+                            Id = reader.GetInt32(0),
+                            Time = reader.GetTimeSpan(1),
+                            Group = reader.GetInt32(2),
+                            NumberGroup = reader.GetString(3),
+                            Office = reader.GetString(4),
+                            Date = reader.GetDateTime(5),
+                            Weekday = reader.GetDateTime(5).DayOfWeek.ToString()
+                        };
 
-            //        reader.Close();
-            //    }
-            //    else
-            //    {
-            //        ClearSchedules();
-            //    }
-            //}
+                        switch (timetable.Weekday)
+                        {
+                            case "Monday":
+                                MondaySchedule.Add(timetable);
+                                break;
+                            case "Tuesday":
+                                TuesdaySchedule.Add(timetable);
+                                break;
+                            case "Wednesday":
+                                WednesdaySchedule.Add(timetable);
+                                break;
+                            case "Thursday":
+                                ThursdaySchedule.Add(timetable);
+                                break;
+                            case "Friday":
+                                FridaySchedule.Add(timetable);
+                                break;
+                            case "Saturday":
+                                SaturdaySchedule.Add(timetable);
+                                break;
+                        }
+                    }
 
-            //private void ClearSchedules()
-            //{
-            //    MondaySchedule.Clear();
-            //    TuesdaySchedule.Clear();
-            //    WednesdaySchedule.Clear();
-            //    ThursdaySchedule.Clear();
-            //    FridaySchedule.Clear();
-            //    SaturdaySchedule.Clear();
-            //}
+                    reader.Close();
+                }
+                else
+                {
+                    ClearSchedules();
+                }
+            }
+
+            private void ClearSchedules()
+            {
+                MondaySchedule.Clear();
+                TuesdaySchedule.Clear();
+                WednesdaySchedule.Clear();
+                ThursdaySchedule.Clear();
+                FridaySchedule.Clear();
+                SaturdaySchedule.Clear();
+            }
+            public void MarkCurrentWeek()
+            {
+                DateTime currentDate = DateTime.Today;
+                var currentWeek = Weeks.FirstOrDefault(week => currentDate >= week.StartDate && currentDate <= week.EndDate);
+                if (currentWeek != null)
+                {
+                    currentWeek.IsCurrentWeek = true;
+                    SelectedWeek = currentWeek;
+                }
+            }
 
             public event PropertyChangedEventHandler PropertyChanged;
 
@@ -238,7 +254,7 @@ namespace AutoSchoolDiplom.Pages
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            //cbGroup.Text = null;
+            cbGroup.Text = null;
         }
     }
 }

@@ -16,6 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static MaterialDesignThemes.Wpf.Theme;
 using BCrypt.Net;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Net;
 
 namespace AutoSchoolDiplom.ModalWindow
 {

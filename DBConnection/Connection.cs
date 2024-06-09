@@ -41,7 +41,28 @@ namespace DBConnection
         public static ObservableCollection<User> user { get; set; } = new ObservableCollection<User>();
         public static ObservableCollection<ClassGroup> classGroups { get; set; } = new ObservableCollection<ClassGroup>();
         public static ObservableCollection<ClassStudentGroup> studentGroups { get; set; } = new ObservableCollection<ClassStudentGroup>();
+        public static string GetInstructorEmailById(int instructorId)
+        {
+            string email = null;
+            try
+            {
+                NpgsqlCommand cmd = GetCommand("SELECT \"Email\" FROM \"User\" WHERE \"Id\" = @InstructorId");
+                cmd.Parameters.AddWithValue("@InstructorId", instructorId);
+                NpgsqlDataReader result = cmd.ExecuteReader();
 
+                if (result.HasRows)
+                {
+                    result.Read();
+                    email = result.GetString(result.GetOrdinal("Email"));
+                }
+                result.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при получении адреса электронной почты инструктора: " + ex.Message);
+            }
+            return email;
+        }
         public static void SelectInfoStudent()
         {
             NpgsqlCommand cmd = GetCommand("SELECT \"User\".\"Id\", \"User\".\"Login\", \"User\".\"Password\", \"User\".\"FirstName\", " +
