@@ -59,5 +59,10 @@ namespace AutoSchoolDiplom.Pages
         {
             MessageBox.Show("Вы уже находитесь на данной странице");
         }
+
+        private void btnTransmitionRecordsPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new InstructorRecordsDriving(_classUser));
+        }
     }
 }

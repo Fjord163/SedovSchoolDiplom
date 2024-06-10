@@ -22,9 +22,7 @@ using System.Windows.Shapes;
 
 namespace AutoSchoolDiplom.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для StudentRecordsDriving.xaml
-    /// </summary>
+
     public partial class StudentRecordsDriving : Page
     {
         private CLassUser _currentUser;

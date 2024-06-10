@@ -14,6 +14,8 @@ namespace DBConnection
         public string Time { get; set; }
         public int InstructorId { get; set; }
         public string Instructor { get; set; }
-
+        public int StudentId { get; set; }
+        public string Student { get; set; }
+        
     }
 }
