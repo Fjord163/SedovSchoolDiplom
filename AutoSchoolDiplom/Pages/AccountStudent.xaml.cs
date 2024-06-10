@@ -69,5 +69,10 @@ namespace AutoSchoolDiplom.Pages
         {
             NavigationService.Navigate(new RecordDriving(_classUser));
         }
+
+        private void btnTransmitionStudentRecordsDrivingPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new StudentRecordsDriving(_classUser));
+        }
     }
 }

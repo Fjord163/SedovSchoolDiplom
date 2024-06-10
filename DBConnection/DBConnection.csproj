@@ -120,6 +120,7 @@
     <Compile Include="ClassStudentGroup.cs" />
     <Compile Include="CLassUser.cs" />
     <Compile Include="Connection.cs" />
+    <Compile Include="DrivingRecord.cs" />
     <Compile Include="FullInfoInstructor.cs" />
     <Compile Include="FullInfoLecturer.cs" />
     <Compile Include="Group.cs" />

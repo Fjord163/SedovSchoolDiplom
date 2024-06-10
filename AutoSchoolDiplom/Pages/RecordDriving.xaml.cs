@@ -352,11 +352,11 @@ namespace AutoSchoolDiplom.Pages
             return message;
         }
 
-        private void btnTransitionSchedulePage(object sender, RoutedEventArgs e)
+        private void btnTransitionAccountPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AccountStudent(_currentUser));
         }
-        private void btnTransmitionAccountPage(object sender, RoutedEventArgs e)
+        private void btnTransitionSchedulePage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ScheduleStudent(_currentUser));
         }
@@ -371,6 +371,11 @@ namespace AutoSchoolDiplom.Pages
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void btnTransmitionStudentRecordsDrivingPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new StudentRecordsDriving(_currentUser));
         }
     }
 }

@@ -147,6 +147,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModalWindow\ConfirmCancelDialog.xaml.cs">
+      <DependentUpon>ConfirmCancelDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AccountInstructor.xaml.cs">
       <DependentUpon>AccountInstructor.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModalWindow\ConfirmCancelDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModalWindow\MWAddInstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -381,6 +388,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\IconRecords.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
