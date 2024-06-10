@@ -69,54 +69,6 @@ namespace AutoSchoolDiplom.Pages
             }
         }
 
-        //private void CancelLesson_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Button button = (Button)sender;
-        //    if (button.DataContext is DrivingRecord record)
-        //    {
-        //        ConfirmCancelDialog confirmDialog = new ConfirmCancelDialog(_currentUser, record);
-        //        confirmDialog.Owner = Window.GetWindow(this);  // Set the owner to the main window
-        //        confirmDialog.ShowDialog();
-
-        //        if (confirmDialog.IsConfirmed)
-        //        {
-        //            string message = confirmDialog.Message;
-        //            try
-        //            {
-        //                NpgsqlCommand cmd = Connection.GetCommand("SELECT \"Id\" FROM \"Schedule\" WHERE \"Date\" = @Date AND \"Time\" = @Time AND \"InstructorId\" = @InstructorId ");
-        //                cmd.Parameters.AddWithValue("@Date", record.Date);
-        //                cmd.Parameters.AddWithValue("@Time", record.Time);
-        //                cmd.Parameters.AddWithValue("@InstructorId", record.InstructorId);
-
-        //                int scheduleId = (int)cmd.ExecuteScalar();
-        //                if (scheduleId != 0)
-        //                {
-        //                    cmd = Connection.GetCommand("UPDATE \"Schedule\" SET \"IsBooked\" = false, \"StudentId\" = NULL WHERE \"Id\" = @ScheduleId");
-        //                    cmd.Parameters.AddWithValue("@ScheduleId", scheduleId);
-        //                    int rowsAffected = cmd.ExecuteNonQuery();
-        //                    if (rowsAffected > 0)
-        //                    {
-        //                        SendEmailToInstructor(record.InstructorId, message);
-        //                        MessageBox.Show("Занятие успешно отменено. Сообщение отправлено.");
-        //                        LoadDrivingRecords();
-        //                    }
-        //                    else
-        //                    {
-        //                        MessageBox.Show("Не удалось отменить занятие.");
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    MessageBox.Show("Не удалось найти соответствующую запись в расписании.");
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MessageBox.Show("Ошибка при отмене занятия: " + ex.Message);
-        //            }
-        //        }
-        //    }
-        //}
         private void CancelLesson_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
