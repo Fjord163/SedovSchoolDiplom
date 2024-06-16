@@ -26,7 +26,7 @@ namespace AutoSchoolDiplom
         {
             InitializeComponent();
 
-            Connection.Connect("localhost", "5432", "postgres", "1234", "SchoolSedov");
+            Connection.Connect("localhost", "5432", "postgres", "1234", "Test");
 
             AppFrame.Navigate(new EntryPage());
         }

@@ -29,7 +29,6 @@ namespace AutoSchoolDiplom.Pages
         private CLassUser _currentUser;
         private string _classGroup;
 
-        private string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=1234;Database=SchoolSedov";
         public RecordDriving(CLassUser authorizedStudent)
         {
             InitializeComponent();
@@ -105,58 +104,6 @@ namespace AutoSchoolDiplom.Pages
             {
                 MessageBox.Show("Ошибка при обеспечении данных расписания: " + ex.Message);
             }
-            //using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
-            //{
-            //    conn.Open();
-
-            //    string deleteSql = "DELETE FROM \"Schedule\" WHERE \"Date\" < @EndDateToDelete";
-            //    using (NpgsqlCommand deleteCommand = new NpgsqlCommand(deleteSql, conn))
-            //    {
-            //        deleteCommand.Parameters.AddWithValue("@EndDateToDelete", endDateToDelete);
-            //        deleteCommand.ExecuteNonQuery();
-            //    }
-
-            //    foreach (var date in dates)
-            //    {
-            //        foreach (var time in times)
-            //        {
-            //            string checkSql = "SELECT COUNT(*) FROM \"Schedule\" WHERE \"Date\" = @Date AND \"Time\" = @Time AND \"InstructorId\" = @InstructorId";
-            //            using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkSql, conn))
-            //            {
-            //                checkCommand.Parameters.AddWithValue("@Date", date);
-            //                checkCommand.Parameters.AddWithValue("@Time", time);
-            //                checkCommand.Parameters.AddWithValue("@InstructorId", StudentInstructorId);
-            //                long count = (long)checkCommand.ExecuteScalar();
-            //                if (count == 0)
-            //                {
-            //                    string checkInstructorSql = "SELECT COUNT(*) FROM \"Instructor\" WHERE \"Id\" = @InstructorId";
-            //                    using (NpgsqlCommand checkInstructorCommand = new NpgsqlCommand(checkInstructorSql, conn))
-            //                    {
-            //                        checkInstructorCommand.Parameters.AddWithValue("@InstructorId", StudentInstructorId);
-            //                        long instructorCount = (long)checkInstructorCommand.ExecuteScalar();
-            //                        if (instructorCount > 0)
-            //                        {
-            //                            string insertSql = "INSERT INTO \"Schedule\" (\"Date\", \"Time\", \"IsBooked\", \"StudentId\", \"InstructorId\") VALUES (@Date, @Time, @IsBooked, @StudentId, @InstructorId)";
-            //                            using (NpgsqlCommand insertCommand = new NpgsqlCommand(insertSql, conn))
-            //                            {
-            //                                insertCommand.Parameters.AddWithValue("@Date", date);
-            //                                insertCommand.Parameters.AddWithValue("@Time", time);
-            //                                insertCommand.Parameters.AddWithValue("@IsBooked", false);
-            //                                insertCommand.Parameters.AddWithValue("@StudentId", DBNull.Value);
-            //                                insertCommand.Parameters.AddWithValue("@InstructorId", StudentInstructorId);
-            //                                insertCommand.ExecuteNonQuery();
-            //                            }
-            //                        }
-            //                        else
-            //                        {
-            //                            MessageBox.Show($"Инструктор с ID {StudentInstructorId} не найден.");
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
         }
         private void LoadStudentInstructor()
         {
@@ -207,35 +154,6 @@ namespace AutoSchoolDiplom.Pages
             {
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
             }
-            //try
-            //{
-            //    using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
-            //    {
-            //        conn.Open();
-            //        string sql = "SELECT * FROM \"Schedule\" WHERE \"InstructorId\" = @InstructorId";
-            //        using (NpgsqlCommand command = new NpgsqlCommand(sql, conn))
-            //        {
-            //            command.Parameters.AddWithValue("@InstructorId", StudentInstructorId);
-            //            using (NpgsqlDataReader reader = command.ExecuteReader())
-            //            {
-            //                while (reader.Read())
-            //                {
-            //                    scheduleItems.Add(new SheduleItem
-            //                    {
-            //                        Id = reader.GetInt32(0),
-            //                        Date = reader.GetDateTime(1),
-            //                        Time = reader.GetString(2),
-            //                        IsBooked = reader.GetBoolean(3)
-            //                    });
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
-            //}
         }
         private void PopulateCalendarGrid()
         {
@@ -373,34 +291,6 @@ namespace AutoSchoolDiplom.Pages
                 MessageBox.Show("Ошибка при обновлении данных: " + ex.Message);
                 return false;
             }
-            //try
-            //{
-            //    using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
-            //    {
-            //        conn.Open();
-            //        string sql = "UPDATE \"Schedule\" SET \"IsBooked\" = @IsBooked, \"StudentId\" = @StudentId, \"InstructorId\" = @InstructorId WHERE \"Id\" = @Id";
-            //        using (NpgsqlCommand command = new NpgsqlCommand(sql, conn))
-            //        {
-            //            command.Parameters.AddWithValue("@IsBooked", item.IsBooked);
-            //            command.Parameters.AddWithValue("@StudentId", studentId);
-            //            command.Parameters.AddWithValue("@InstructorId", instructorId);
-            //            command.Parameters.AddWithValue("@Id", item.Id);
-            //            command.ExecuteNonQuery();
-            //        }
-            //    }
-            //    string instructorEmail = GetInstructorEmail(instructorId);
-
-            //    string message = GenerateEmailMessage(_currentUser.FirstName, _currentUser.LastName, item.Date, item.Time);
-
-            //    SendEmail(instructorEmail, "Запись на вождение", message);
-
-            //    return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Ошибка при обновлении данных: " + ex.Message);
-            //    return false;
-            //}
         }
 
         public void SendEmail(string recipientEmail, string subject, string body)
