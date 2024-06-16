@@ -165,5 +165,11 @@ namespace AutoSchoolDiplom.Pages
                 Connection.cours.Clear();
             }
         }
+
+        private void btnTimetableForming_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new FormingTimeTable());
+            Connection.infoStudents.Clear();
+        }
     }
 }

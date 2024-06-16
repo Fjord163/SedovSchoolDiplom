@@ -37,13 +37,10 @@ namespace AutoSchoolDiplom.ModalWindow
             _fullinfoStudent = fullInfoStudent;
             DataContext = fullInfoStudent;
             Instructors = new ObservableCollection<Instructor>();
-            Programs = new ObservableCollection<string>
-            {
-                $"{selectedComboBoxItem.Category} {selectedComboBoxItem.TheoryHours}ч. {selectedComboBoxItem.DrivingHours}ч."
-            };
+
 
             LoadInstructors();
-            BindingcbCours();
+            //BindingcbCours();
             BindingcbGroup();
         }
         private void LoadInstructors()
@@ -64,13 +61,13 @@ namespace AutoSchoolDiplom.ModalWindow
             reader.Close();
             cbInstructor.ItemsSource = Instructors;
         }
-        public void BindingcbCours()
-        {
-            Binding binding = new Binding();
-            binding.Source = Connection.cours;
-            cbCours.SetBinding(ItemsControl.ItemsSourceProperty, binding);
-            Connection.SelectCoursStudent();
-        }
+        //public void BindingcbCours()
+        //{
+        //    Binding binding = new Binding();
+        //    binding.Source = Connection.cours;
+        //    cbCours.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+        //    Connection.SelectCoursStudent();
+        //}
 
         public void BindingcbGroup()
         {
@@ -98,7 +95,7 @@ namespace AutoSchoolDiplom.ModalWindow
                 var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 Instructor instructor = cbInstructor.SelectedItem as Instructor;
 
-                CLassCours cours = cbCours.SelectedItem as CLassCours;
+                //CLassCours cours = cbCours.SelectedItem as CLassCours;
                 ClassGroup group = cbGroup.SelectedItem as ClassGroup;
                 string icon = "C:\\Users\\cloze\\source\\repos\\AutoSchoolDiplom\\AutoSchoolDiplom\\Image\\Icon.png";
 
@@ -111,7 +108,7 @@ namespace AutoSchoolDiplom.ModalWindow
                     cmd = Connection.GetCommand("UPDATE \"Student\" SET \"Photo\"= @photo, \"Cours\" = @cours where \"Id\" = @id");
                     cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, _fullinfoStudent.Id);
                     cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, icon);
-                    cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, cours.Id);
+                    cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, _fullinfoStudent.Cours);
                     result = cmd.ExecuteNonQuery();
                     if (result != 0)
                     {

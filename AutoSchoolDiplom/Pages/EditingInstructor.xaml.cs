@@ -142,5 +142,11 @@ namespace AutoSchoolDiplom.Pages
                 BindingLvInstructors();
             }
         }
+
+        private void btnTimetableForming_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new FormingTimeTable());
+            Connection.infoInstructors.Clear();
+        }
     }
 }

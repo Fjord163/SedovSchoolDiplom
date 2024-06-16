@@ -150,6 +150,9 @@
     <Compile Include="ModalWindow\ConfirmCancelDialog.xaml.cs">
       <DependentUpon>ConfirmCancelDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModalWindow\MWTimetableAdd.xaml.cs">
+      <DependentUpon>MWTimetableAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AccountInstructor.xaml.cs">
       <DependentUpon>AccountInstructor.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     </Compile>
     <Compile Include="Pages\AccountStudent.xaml.cs">
       <DependentUpon>AccountStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormingTimeTable.xaml.cs">
+      <DependentUpon>FormingTimeTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\InstructorRecordsDriving.xaml.cs">
       <DependentUpon>InstructorRecordsDriving.xaml</DependentUpon>
@@ -215,6 +221,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ModalWindow\MWTimetableAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AccountInstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EntryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormingTimeTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

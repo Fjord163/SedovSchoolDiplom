@@ -125,6 +125,7 @@
     <Compile Include="FullInfoLecturer.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Instructor.cs" />
+    <Compile Include="Office.cs" />
     <Compile Include="ScheduleGroupStudent.cs" />
     <Compile Include="SheduleItem.cs" />
     <Compile Include="StudentData.cs" />

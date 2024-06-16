@@ -15,6 +15,6 @@ namespace DBConnection
         public string Office { get; set;}
         public DateTime Date { get; set; }
         public string Weekday { get; set; }
-
+        public int DayOfWeek { get; set; }
     }
 }

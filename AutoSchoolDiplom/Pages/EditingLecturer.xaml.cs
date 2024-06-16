@@ -146,5 +146,11 @@ namespace AutoSchoolDiplom.Pages
             ModalWindow.MWEditLecturer mwEditLecturer = new ModalWindow.MWEditLecturer(lecturer);
             mwEditLecturer.ShowDialog();
         }
+
+        private void btnTimetableForming_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new FormingTimeTable());
+            Connection.infoLecturers.Clear();
+        }
     }
 }

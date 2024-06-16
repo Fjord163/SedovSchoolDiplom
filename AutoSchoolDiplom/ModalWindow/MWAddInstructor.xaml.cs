@@ -54,7 +54,6 @@ namespace AutoSchoolDiplom.ModalWindow
                 NpgsqlCommand cmd = Connection.GetCommand("insert into \"User\" (\"Login\", \"Password\", \"FirstName\", \"LastName\", \"Patronymic\", \"Phone\", \"Email\", \"DateBirth\", \"Role\")" +
                      "values (@login, @password, @firstName, @lastName, @patronymic, @phone, @email, @dateBirth, @role) returning \"Id\"");
                 cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
-                cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, login);
                 cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, hashedPassword);
                 cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, firstName);
                 cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, lastName);
