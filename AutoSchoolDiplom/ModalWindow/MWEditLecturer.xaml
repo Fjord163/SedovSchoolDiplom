@@ -95,6 +95,7 @@
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="3"/>
+                                
                             </Style>
                         </TextBox.Resources>
                     </TextBox>
@@ -108,7 +109,8 @@
                     <TextBox Name="tbFirstName" 
                              Margin="5"  
                              VerticalContentAlignment="Center"
-                             Text="{Binding FirstName}">
+                             Text="{Binding FirstName}"
+                             TextChanged="TextBox_TextChanged">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -125,7 +127,8 @@
                     <TextBox Name="tbLastName" 
                              Margin="5" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding LastName}">
+                             Text="{Binding LastName}"
+                             TextChanged="TextBox_TextChanged">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -142,7 +145,8 @@
                     <TextBox Name="tbPatronymic" 
                              Margin="5" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding Patronymic}">
+                             Text="{Binding Patronymic}"
+                             TextChanged="TextBox_TextChanged">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -159,7 +163,8 @@
                     <TextBox Name="tbPhone" 
                              Margin="5" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding Phone}">
+                             Text="{Binding Phone}"
+                             PreviewTextInput="tbPhone_PreviewTextInput">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="3"/>

@@ -160,7 +160,8 @@
                         <TextBox Name="tbPhone" 
                                  Margin="5" 
                                  VerticalContentAlignment="Center"
-                                 Text="{Binding Phone}">
+                                 Text="{Binding Phone}"
+                                 PreviewTextInput="tbPhone_PreviewTextInput">
                             <TextBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="3"/>
@@ -193,7 +194,8 @@
                         <TextBox Name="tbDrivingExperience" 
                                  Margin="5" 
                                  VerticalContentAlignment="Center"
-                                 Text="{Binding DrivingExperience}">
+                                 Text="{Binding DrivingExperience}"
+                                 PreviewTextInput="tbDrivingExperience_PreviewTextInput">
                             <TextBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="3"/>
