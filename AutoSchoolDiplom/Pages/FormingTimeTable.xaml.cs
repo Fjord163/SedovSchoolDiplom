@@ -278,5 +278,12 @@ namespace AutoSchoolDiplom.Pages
                 _viewModel.LoadFilteredTimetable();
             }
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.users = null;
+
+            NavigationService.Navigate(new EntryPage());
+        }
     }
 }

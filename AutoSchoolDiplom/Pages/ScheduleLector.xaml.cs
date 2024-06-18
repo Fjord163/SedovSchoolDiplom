@@ -256,5 +256,12 @@ namespace AutoSchoolDiplom.Pages
         {
             cbGroup.Text = null;
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.users = null;
+
+            NavigationService.Navigate(new EntryPage());
+        }
     }
 }

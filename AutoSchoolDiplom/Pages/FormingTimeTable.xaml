@@ -8,317 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FormingTimeTable">
 
-    <!--<Border CornerRadius="12">
-        <Border CornerRadius="10"
-         BorderThickness="3">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#fcdb03" Offset="1"/>
-                    <GradientStop Color="#fab255" Offset="0.75"/>
-                    <GradientStop Color="#fadaaf" Offset="0"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0" 
-                     CornerRadius="8 0 0 8" 
-                     BorderThickness="0 0 0.2 0"
-                     BorderBrush="Black">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,4" EndPoint="0.4,0">
-                            <GradientStop Color="#dec476" Offset="1"/>
-                            <GradientStop Color="#fab255" Offset="0.75"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-
-                    <StackPanel>
-                        <StackPanel Margin="0 0 0 20">
-                            <Image Source="/Image/Logo_Sedov_School.png" Height="70"/>
-                        </StackPanel>
-
-                        <Button Name="btnEditLecturer"
-                             Content="Лектора"
-                             Margin="5 2 2 2"
-                             Foreground="Black"
-                             Cursor="Hand"
-                             Background="Transparent"
-                             Click="btnEditLecturer_Click">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="Border"
-                                             Width="200"
-                                             Height="40"
-                                             Padding="30 2 2 2"
-                                             BorderThickness="3 0 0 0"
-                                             BorderBrush="#d1493d"
-                                             Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"/>
-                                        </Border>
-                                        <Image Source="/Image/IconEdit.png"
-                                            Stretch="None"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="10,0,0,0"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="Border" Property="Background" Value="#80FFFFFF"/>
-                                            --><!-- Полупрозрачный белый --><!--
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="False">
-                                            <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                            --><!-- Прозрачный фон --><!--
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                        <Button Name="btnEditStudent"
-                             Content="Ученики"
-                             Margin="5 2 2 2"
-                             Foreground="Black"
-                             Cursor="Hand"
-                             Background="Transparent"
-                             Click="btnEditStudent_Click">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="Border"
-                                             Width="200"
-                                             Height="40"
-                                             Padding="30 2 2 2"
-                                             BorderThickness="3 0 0 0"
-                                             BorderBrush="#d1493d"
-                                             Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center"
-                                                           HorizontalAlignment="Left"/>
-                                        </Border>
-                                        <Image Source="/Image/IconEdit.png"
-                                            Stretch="None"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="10,0,0,0"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="Border" Property="Background" Value="#80FFFFFF"/>
-                                            --><!-- Полупрозрачный белый --><!--
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="False">
-                                            <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                            --><!-- Прозрачный фон --><!--
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                        <Button Name="btnEditInstructor"
-                             Content="Инструктор"
-                             Margin="5 2 2 2"
-                             Foreground="Black"
-                             Cursor="Hand"
-                             Background="Transparent"
-                             Click="btnEditInstructor_Click">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="Border"
-                                             Width="200"
-                                             Height="40"
-                                             Padding="30 2 2 2"
-                                             BorderThickness="3 0 0 0"
-                                             BorderBrush="#d1493d"
-                                             Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center"
-                                                           HorizontalAlignment="Left"/>
-                                        </Border>
-                                        <Image Source="/Image/IconEdit.png"
-                                            Stretch="None"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="10,0,0,0"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="Border" Property="Background" Value="#80FFFFFF"/>
-                                            --><!-- Полупрозрачный белый --><!--
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="False">
-                                            <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                            --><!-- Прозрачный фон --><!--
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Column="1" CornerRadius="0 8 8 0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,4" EndPoint="0.4,0">
-                            <GradientStop Color="#dec476" Offset="1"/>
-                            <GradientStop Color="#fab255" Offset="0.75"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="25"/>
-                                <ColumnDefinition Width="25"/>
-                                <ColumnDefinition Width="5"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Button Name="btnMinimize"
-                                 BorderThickness="0"
-                                 Content="-"
-                                 Foreground="Black"
-                                 FontSize="16"
-                                 FontFamily="Montserrat"
-                                 Cursor="Hand"
-                                 Grid.Column="1"
-                                 Click="btnMinimize_Click">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="#ffed00"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#278BEF"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="18" Height="18"
-                                             CornerRadius="9"
-                                             Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center"
-                                                           HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Button Name="btnClose"
-                                 BorderThickness="0"
-                                 Content="X"
-                                 Foreground="Black"
-                                 FontSize="12"
-                                 FontFamily="Montserrat"
-                                 Cursor="Hand"
-                                 Grid.Column="2"
-                                 Click="btnClose_Click">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="Red"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#ad0303"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="18" Height="18"
-                                             CornerRadius="9"
-                                             Background="{TemplateBinding Background}">
-                                            <ContentPresenter VerticalAlignment="Center"
-                                                           HorizontalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-                        
-                        <Grid Grid.Row="2">
-                            <StackPanel Margin="10">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel>
-                                        <TextBlock Text="Выберите группу:" Margin="0 0 0 2"/>
-                                        <ComboBox x:Name="cbGroups" 
-                                                  DisplayMemberPath="NumberGroup" 
-                                                  SelectedValuePath="Id" 
-                                                  />
-                                    </StackPanel>
-
-                                    <StackPanel  Grid.Column="1">
-                                        <TextBlock Text="Выберите группу:" Margin="0 0 0 2"/>
-                                        <ComboBox x:Name="cbOffice" 
-                                           
-                                          SelectedIndex="0" 
-                                          DisplayMemberPath="Name" 
-                                          SelectedValuePath="Name"
-                                         />
-                                    </StackPanel>
-                                </Grid>
-                                <TextBlock Text="Выберите дни недели для создания расписания:" 
-                                           Margin="0 0 0 10"/>
-                                <ListBox x:Name="lbDaysOfWeek" 
-                                         SelectionMode="Multiple">
-                                    <ListBoxItem Content="Понедельник"/>
-                                    <ListBoxItem Content="Вторник"/>
-                                    <ListBoxItem Content="Среда"/>
-                                    <ListBoxItem Content="Четверг"/>
-                                    <ListBoxItem Content="Пятница"/>
-                                    <ListBoxItem Content="Суббота"/>
-                                </ListBox>
-                                <TextBlock Text="Выберите время для создания расписания:" 
-                                           Margin="0 10 0 10"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Начало:" 
-                                               VerticalAlignment="Center"/>
-                                    <ComboBox x:Name="cbStartTime" 
-                                              SelectedIndex="0" Margin="5">
-                                        <ComboBoxItem Content="08:00"/>
-                                        <ComboBoxItem Content="09:00"/>
-                                        <ComboBoxItem Content="10:00"/>
-                                        <ComboBoxItem Content="11:00"/>
-                                        <ComboBoxItem Content="12:00"/>
-                                        <ComboBoxItem Content="13:00"/>
-                                        <ComboBoxItem Content="14:00"/>
-                                        <ComboBoxItem Content="15:00"/>
-                                        <ComboBoxItem Content="16:00"/>
-                                        <ComboBoxItem Content="17:00"/>
-                                    </ComboBox>
-                                </StackPanel>
-                                <Button Content="Сгенерировать расписание" Click="GenerateScheduleButton_Click" HorizontalAlignment="Center" Margin="0 20 0 0"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
-    </Border>-->
-
     <Border CornerRadius="12">
         <Border CornerRadius="10"
 BorderThickness="3">
@@ -537,6 +226,7 @@ BorderThickness="3">
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="25"/>
                                 <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="25"/>
                                 <ColumnDefinition Width="5"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Расписание"
@@ -555,7 +245,7 @@ BorderThickness="3">
                         FontSize="16"
                         FontFamily="Montserrat"
                         Cursor="Hand"
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Click="btnMinimize_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
@@ -585,7 +275,7 @@ BorderThickness="3">
                         FontSize="12"
                         FontFamily="Montserrat"
                         Cursor="Hand"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Click="btnClose_Click">
                                 <Button.Style>
                                     <Style TargetType="Button">
@@ -604,6 +294,33 @@ BorderThickness="3">
                                     Background="{TemplateBinding Background}">
                                             <ContentPresenter VerticalAlignment="Center"
                                                   HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Name="btnExit"
+                                    BorderThickness="0"
+                                    Content=""
+                                    Foreground="Black"
+                                    FontSize="16"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    Grid.Column="1"
+                                    Click="btnExit_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#278BEF"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="18" Height="18" CornerRadius="9" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"  HorizontalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>

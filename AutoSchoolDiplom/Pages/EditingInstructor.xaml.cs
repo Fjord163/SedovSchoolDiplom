@@ -148,5 +148,12 @@ namespace AutoSchoolDiplom.Pages
             NavigationService.Navigate(new FormingTimeTable());
             Connection.infoInstructors.Clear();
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.users = null;
+
+            NavigationService.Navigate(new EntryPage());
+        }
     }
 }

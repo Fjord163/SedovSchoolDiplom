@@ -172,5 +172,12 @@ namespace AutoSchoolDiplom.Pages
             MessageBox.Show("Вы уже находитесь на данной странице");
 
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.users = null;
+
+            NavigationService.Navigate(new EntryPage());
+        }
     }
 }

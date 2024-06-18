@@ -105,6 +105,24 @@ namespace AutoSchoolDiplom.Pages
                 MessageBox.Show("Ошибка при обеспечении данных расписания: " + ex.Message);
             }
         }
+
+        private int GetStudentBookingsCountForDay(int studentId, DateTime date)
+        {
+            try
+            {
+                string sql = "SELECT COUNT(*) FROM \"Schedule\" WHERE \"StudentId\" = @StudentId AND \"Date\" = @Date";
+                NpgsqlCommand command = Connection.GetCommand(sql);
+                command.Parameters.AddWithValue("@StudentId", studentId);
+                command.Parameters.AddWithValue("@Date", date);
+                long count = (long)command.ExecuteScalar();
+                return (int)count;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при проверке количества записей: " + ex.Message);
+                return 0;
+            }
+        }
         private void LoadStudentInstructor()
         {
             try
@@ -233,11 +251,18 @@ namespace AutoSchoolDiplom.Pages
                 {
                     if (!item.IsBooked)
                     {
+                        int studentId = _currentUser.Id;
+                        int instructorId = StudentInstructorId;
+
+                        if (GetStudentBookingsCountForDay(studentId, item.Date) >= 2)
+                        {
+                            MessageBox.Show("Вы уже записаны на два занятия в этот день.");
+                            return;
+                        }
+
                         MessageBoxResult result = MessageBox.Show($"Вы хотите записаться на занятие {item.Date:dd.MM.yyyy} в {item.Time}?", "Запись на занятие", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
-                            int studentId = _currentUser.Id;
-                            int instructorId = StudentInstructorId;
                             if (studentId != 0 && instructorId != 0)
                             {
                                 item.IsBooked = true;
@@ -264,6 +289,7 @@ namespace AutoSchoolDiplom.Pages
                     MessageBox.Show("Не удалось найти информацию о выбранном временном слоте.");
                 }
             }
+          
         }
 
         private bool UpdateScheduleItem(SheduleItem item, int studentId, int instructorId)
@@ -360,6 +386,13 @@ namespace AutoSchoolDiplom.Pages
         private void btnTransmitionStudentRecordsDrivingPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new StudentRecordsDriving(_currentUser));
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.users = null;
+
+            NavigationService.Navigate(new EntryPage());
         }
     }
 }
