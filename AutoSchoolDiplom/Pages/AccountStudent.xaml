@@ -325,13 +325,13 @@
                                     CornerRadius="15"
                                     Padding="5 100 5 5">
                                 <StackPanel Width="240">
-                                    <DockPanel>
-                                        <TextBlock Text="Имя" Width="100"></TextBlock>
+                                    <DockPanel >
+                                        <TextBlock Text="Фамилия" Width="100"></TextBlock>
                                         <TextBox IsReadOnly="True"
                                                  BorderBrush="#f9c07a"
                                                  BorderThickness="1"
-                                                 Name="tbFirstName"
-                                                 Text="{Binding FirstName}">
+                                                 Name="tbaLastName"
+                                                 Text="{Binding LastName}">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"></Setter>
@@ -339,14 +339,13 @@
                                             </TextBox.Resources>
                                         </TextBox>
                                     </DockPanel>
-
                                     <DockPanel Margin="0 5 0 0">
-                                        <TextBlock Text="Фамилия" Width="100"></TextBlock>
+                                        <TextBlock Text="Имя" Width="100"></TextBlock>
                                         <TextBox IsReadOnly="True"
                                                  BorderBrush="#f9c07a"
                                                  BorderThickness="1"
-                                                 Name="tbaLastName"
-                                                 Text="{Binding LastName}">
+                                                 Name="tbFirstName"
+                                                 Text="{Binding FirstName}">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"></Setter>

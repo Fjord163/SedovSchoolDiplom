@@ -49,7 +49,7 @@ namespace DBConnection
         public int Student { get; set; }
         public int Group { get; set; }
         public int Cours { get; set; }
-
+        public int InstructorId { get; set; }
 
     }
 }

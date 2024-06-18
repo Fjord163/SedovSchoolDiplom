@@ -109,7 +109,8 @@
                             <TextBox Name="tbFirstName" 
                              Margin="5"  
                              VerticalContentAlignment="Center"
-                             Text="{Binding FirstName}">
+                             Text="{Binding FirstName}"
+                                     TextChanged="TextBox_TextChanged">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
@@ -126,7 +127,8 @@
                             <TextBox Name="tbLastName" 
                              Margin="5" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding LastName}">
+                             Text="{Binding LastName}"
+                                     TextChanged="TextBox_TextChanged">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
@@ -143,7 +145,8 @@
                             <TextBox Name="tbPatronymic" 
                              Margin="5" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding Patronymic}">
+                             Text="{Binding Patronymic}"
+                                     TextChanged="TextBox_TextChanged">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
@@ -160,7 +163,8 @@
                             <TextBox Name="tbPhone" 
                              Margin="5" 
                              VerticalContentAlignment="Center"
-                             Text="{Binding Phone}">
+                             Text="{Binding Phone}"
+                                     PreviewTextInput="tbPhone_PreviewTextInput">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
@@ -207,23 +211,30 @@
                                       VerticalContentAlignment="Center" DisplayMemberPath="NumberGroup"
                                       Text="{Binding NumberGroup}"/>
                         </DockPanel>
-                      
+                    <StackPanel Grid.Row="1">
+                        <!-- Other fields -->
+
                         <DockPanel>
                             <Label Content="Инструктор" 
-                                   Width="110" 
-                                   Margin="5" 
-                                   FontSize="14"/>
-                        <ComboBox Name="cbInstructor" 
-                                      Margin="5" 
-                                      VerticalContentAlignment="Center" 
-                                      Text="{Binding Instructor}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding FullName}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
+                               Width="110" 
+                               Margin="5" 
+                               FontSize="14"/>
+                            <ComboBox Name="cbInstructor" 
+                                  Margin="5" 
+                                  VerticalContentAlignment="Center"
+                                   DisplayMemberPath="FullName" 
+                                    SelectedValuePath="Id"
+                                      SelectedValue="{Binding InstructorId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Visibility="Collapsed"
+                                     Width="300">
+                                
                             </ComboBox>
+                            <Button Name="btnAssignInstructor" 
+                                Content="Назначить Инструктора" 
+                                Margin="5" 
+                                Click="btnAssignInstructor_Click"/>
                         </DockPanel>
+                    </StackPanel>
                 </StackPanel>
 
                     <Button Name="btnEditUser"

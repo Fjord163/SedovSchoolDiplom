@@ -69,7 +69,7 @@ namespace AutoSchoolDiplom.Pages
         }
         private void btnTransitionPageEditLecturer_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditingInstructor());
+            NavigationService.Navigate(new EditingLecturer());
             Connection.infoStudents.Clear();
         }
         private void btnTransitionPageEditStudent_Click(object sender, RoutedEventArgs e)
@@ -88,58 +88,56 @@ namespace AutoSchoolDiplom.Pages
             if (res == false)
             {
                 Connection.infoStudents.Clear();
+                Connection.cours.Clear();
+                Connection.classGroups.Clear();
                 BindingLvStudents();
             }
         }
         private void DeleteItemLvStudent(object sender, RoutedEventArgs e)
         {
-            try
+
+            FullInfoStudent student = (sender as Button)?.DataContext as FullInfoStudent;
+
+
+            NpgsqlCommand cmd = Connection.GetCommand("DELETE FROM \"StudentInstructor\" WHERE \"Student\" = @studentId");
+            cmd.Parameters.AddWithValue("@studentId", NpgsqlDbType.Integer, student.Id);
+            cmd.ExecuteNonQuery();
+
+            cmd = Connection.GetCommand("DELETE FROM \"StudentGroup\" WHERE \"Student\" = @id returning \"Student\"");
+            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Student);
+            cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, student.Group);
+            var result = cmd.ExecuteNonQuery();
+            if (result != 0)
             {
-                FullInfoStudent student = (sender as Button)?.DataContext as FullInfoStudent;
 
-                NpgsqlCommand cmd = Connection.GetCommand("DELETE FROM \"StudentGroup\" WHERE \"Student\" = @id returning \"Student\"");
+                cmd = Connection.GetCommand("DELETE FROM \"Student\" WHERE \"Id\" = @id returning \"Id\"");
                 cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Student);
-                cmd.Parameters.AddWithValue("@group", NpgsqlDbType.Integer, student.Group);
-                var result = cmd.ExecuteScalar();
-                if (result != null)
+                cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, student.Photo);
+                cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, student.Cours);
+                result = cmd.ExecuteNonQuery();
+                if (result != 0)
                 {
-                    int IdStudent = student.Student = (int)result;
-
-                    cmd = Connection.GetCommand("DELETE FROM \"Student\" WHERE \"Id\" = @id returning \"Id\"");
-                    cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Student);
-                    cmd.Parameters.AddWithValue("@photo", NpgsqlDbType.Varchar, student.Photo);
-                    cmd.Parameters.AddWithValue("@cours", NpgsqlDbType.Integer, student.Cours);
+                    cmd = Connection.GetCommand("DELETE FROM \"User\" WHERE \"Id\" = @id");
+                    cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, student.Id);
+                    cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, student.Login);
+                    cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, student.Password);
+                    cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, student.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, student.LastName);
+                    cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, student.Patronymic);
+                    cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, student.Phone);
+                    cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, student.Email);
+                    cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, student.DateBirth);
+                    cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, student.Role);
                     result = cmd.ExecuteNonQuery();
-                    if (result != null)
-                    {
-                        cmd = Connection.GetCommand("DELETE FROM \"User\" WHERE \"Id\" = @id");
-                        cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, IdStudent);
-                        cmd.Parameters.AddWithValue("@login", NpgsqlDbType.Varchar, student.Login);
-                        cmd.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, student.Password);
-                        cmd.Parameters.AddWithValue("@firstName", NpgsqlDbType.Varchar, student.FirstName);
-                        cmd.Parameters.AddWithValue("@lastName", NpgsqlDbType.Varchar, student.LastName);
-                        cmd.Parameters.AddWithValue("@patronymic", NpgsqlDbType.Varchar, student.Patronymic);
-                        cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Varchar, student.Phone);
-                        cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Varchar, student.Email);
-                        cmd.Parameters.AddWithValue("@dateBirth", NpgsqlDbType.Date, student.DateBirth);
-                        cmd.Parameters.AddWithValue("@role", NpgsqlDbType.Varchar, student.Role);
-                        result = cmd.ExecuteNonQuery();
-                    }
-                    if (result != null)
-                    {
-                        Connection.infoStudents.Remove(lvStudent.SelectedItem as FullInfoStudent);
-                        Connection.infoStudents.Clear();
-                        BindingLvStudents();
-                    }
-                    if (result == null) { MessageBox.Show("Данные не удалены"); }
+                    Connection.infoStudents.Remove(lvStudent.SelectedItem as FullInfoStudent);
+                    Connection.infoStudents.Clear();
+                    BindingLvStudents();
+                    if (result == 0) { MessageBox.Show("Данные не удалены"); }
                     else { MessageBox.Show("Данные удалены"); }
                 }
-            } 
-            catch 
-            {
-                MessageBox.Show("Произошла ошибка");
             }
         }
+
         private void EditItemLvStudent(object sender, RoutedEventArgs e)
         {
             var comboBoxItems = Connection.infoStudents.Select(ul => new StudentComboBoxItem
